@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf8">
+        <meta name="viewport" content="width=device-width">
+        <title>The simplest CORS example</title>
+        <style>
+            .data {
+                color:green;
+            }
+        </style>
+        
+        <script>
+            function getRemoteData() {
+                var rserver = document.getElementById('remote').value;
+                
+                var req = new XMLHttpRequest();
+                
+                req.onreadystatechange = function() {
+                    if(this.readyState == 4) {
+                        if(this.status == 200) {
+                            var obj = JSON.parse(this.responseText);
+                            document.getElementById('name').textContent = obj.name;
+                            document.getElementById('surname').textContent = obj.surname;
+                        }
+                        else {
+                                document.getElementsByTagName("p")[0].innerHTML = "There has been an error";
+                        }
+                    }
+                }
+                
+                req.open('GET', rserver, true);  
+                req.send();     
+            }
+        </script>
+    </head>
+    
+    <body>
+        <label>Server: <input type=url id="remote" size="40" value="http://localhost:8001/cors"></label>
+        <input type=button value="Get Data" onclick="getRemoteData()"><br>
+        <span>Name: </span><span class=data id="name"></span><br>
+        <span>Surname: </span><span class=data id="surname"></span><br>
+        <p style="color: red"></p>
+    </body>
+</html>

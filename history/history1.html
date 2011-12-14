@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+            
+        <script>
+            function goToImage() {
+                document.querySelector('img').src = 'imgs/burger' + document.getElementById('pn').value + '.png';
+            }
+        </script>
+    </head>
+    
+    <body>
+        <p>This is page 1</p>
+        
+        <label>Page: <input type=number id="pn"></label>
+        <input type=button value="Show Burger" onclick="goToImage()">
+         
+        <div>   
+        <img src="" alt="image">
+        </div>
+    </body>
+</html>

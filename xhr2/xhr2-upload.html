@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>XHR2 - Upload</title>
+		<script>
+			window.URL = window.URL || window.webkitURL;
+			window.BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;
+		
+		
+			function fileSelected(files) {
+				document.getElementById('size').textContent = files[0].size;
+			}
+			
+			function doUploadFile() {
+				uploadFile(document.forms[0]['myfile'].files[0]);
+			}
+			
+			function uploadFile(file) {
+				var req = new XMLHttpRequest();
+				
+				req.onload = function() {
+					if(this.status == 200) {
+						document.querySelector('p').textContent = 'File has been uploaded ok';
+					}
+					else {
+						document.querySelectorAll('p')[1].textContent = 'HTTP Error: ' + this.statusText;
+					}
+				}
+				
+				req.onerror = function() {
+					document.querySelectorAll('p')[1].textContent = 'There has been an error';
+				}
+				
+				var progressBar = document.querySelector('progress');
+				req.upload.onprogress = function(e) {
+					if (e.lengthComputable) {
+						progressBar.value = (e.loaded / e.total) * 100;
+						progressBar.textContent = progressBar.value; // Fallback for unsupported browsers.
+					}
+				};
+				
+				req.open('POST','upload');
+				req.send(file);
+			}
+		</script>
+	</head>
+
+	<body>
+		<form name="myForm">
+			<label>Choose File: <input type=file name="myfile" onchange="fileSelected(this.files)"></label><br>
+			<p><span>File Size: </span><span id="size"></span></p>
+			<input type=button value="Upload Attachment" onclick="doUploadFile()">
+		</form>
+		
+		<progress min="0" max="100" value="0">0% complete</progress>
+		
+		<p></p>
+		<p style="color:red"></p>
+	</body>
+</html>

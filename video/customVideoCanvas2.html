@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Video with custom controls</title>
+<script>
+
+	function eleVideo() {
+		return document.getElementById('myvideo');
+	}
+
+	function eleCanvas() {
+		return document.getElementById('myCanvas');
+	}
+	
+	function play() {
+		// alert('play');
+		
+		var video = eleVideo();
+		video.volume = document.getElementById('volume').value / 10.0;
+		video.play();
+
+		video.playbackRate = video.defaultPlaybackRate;
+
+		video.style.opacity = "1.0";
+
+		hidePlay();
+	}
+
+	function hidePlay() {
+		eleCanvas().style.display = 'none';
+	}
+
+	function pause() {
+		eleVideo().pause();
+
+		eleVideo().style.opacity = "0.60";
+	}
+
+	function restart() {
+		pause();
+		var video = eleVideo(); 
+		if(video.startTime) {
+			video.currentTime = video.startTime;
+		}
+		else {
+			video.currentTime = 0.0;
+		}
+		play();
+
+		// alert('restarted');
+	}	
+
+	function volume(theVolume) {
+		var video = eleVideo();
+		video.volume = theVolume.value / 10.0;
+	}
+
+	function putPlayerBar() {
+		var canvas = eleCanvas();
+		var video = eleVideo();
+		
+		canvas.style.position = 'absolute';
+		canvas.style.top = (video.videoHeight / 2 - canvas.height / 2) + 'px';
+		canvas.style.left = (video.videoWidth / 2) + 'px';
+
+		document.getElementById('progress').style.width = video.videoWidth + 'px';
+	}
+
+	function showPlayerBar() {
+		var canvas = eleCanvas();
+		canvas.style.display = '';
+	}
+
+	function updateProgress() {
+		var progress = document.getElementById('progress');
+		
+		var video = eleVideo();
+
+		progress.value = (video.currentTime / video.duration) * 100.0; 
+		
+	}
+
+	function seek() {
+		var progress = document.getElementById('progress');
+
+		eleVideo().currentTime = eleVideo().duration * progress.value / 100.0;
+	}
+
+	function fastForward() {
+		eleVideo().playbackRate = eleVideo().playbackRate * 2;
+		showPlayerBar();
+	}
+
+	function rewind() {
+		eleVideo().playbackRate = -2.5;
+		showPlayerBar();
+	}
+
+	function hideLoading() {
+		document.getElementById('loadingMsg').style.visibility = 'hidden';
+	}
+</script>
+</head>
+<body>
+	<section id="s1">
+		<div id="mydiv">
+			<video loop preload="metadata" id="myvideo" onloadedmetadata="putPlayerBar()" 
+				onloadeddata="showPlayerBar();hideLoading();" onended="showPlayerBar()"
+				ontimeupdate="updateProgress()" 
+				onpause="showPlayerBar()"
+				onplaying="hidePlay()">
+				<p>Video Not Supported</p>
+				<source src="video/video.webm">
+				<source src="video/billyBrowsers.m4v">
+				<source src="video/billyBrowsers.ogg">
+			</video>
+			
+			<div id="loadingMsg" style="position:relative; bottom:50px; left:50px">
+				<p>Loading...</p>
+			</div>
+			<div style="position: relative;bottom: 0px; left: 0px;">			
+			<label><input name="progress" id="progress" max="100.0" min="0.0" step="1.0" value="0.0" type="range" onchange="seek()"></label>
+			</div>
+		</div>
+	</section>
+<div>
+
+<canvas style="display: none" id="myCanvas" width="40" height="40" role="playerBar" onclick="play()">
+</canvas>
+
+<script>
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
+
+ctx.fillStyle = "rgb(200,0,0)";
+ctx.beginPath();
+ctx.moveTo(0,0);
+ctx.lineTo(0,40);
+ctx.lineTo(20,20);
+ctx.lineTo(0,0);
+ctx.fill();
+
+</script>
+</div>
+
+<div>
+	<input type="button" onclick="pause()" value="pause">
+	<input type="button" onclick="restart()" value="restart">
+	<label>Volume<input id="volume" max="10.0" min="0.0" step="1.0" value="3.0" name="volume" type="range" onchange="volume(this)"></label>
+</div>
+	
+	<div>
+		<input type="button" value="FF" onclick="fastForward()">
+	</div>
+</body>
+</html>

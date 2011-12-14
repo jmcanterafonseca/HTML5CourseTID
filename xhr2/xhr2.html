@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf8">
+        <meta name="viewport" content="width=device-width">
+        <title>XHR2 in action</title>
+        <style>
+        </style>
+        
+        <script>
+            window.URL = window.URL || window.webkitURL;
+	    window.BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;
+            
+            function setBlobAsImage(b) {
+                var  objectURL = window.URL.createObjectURL(b);
+                var img = document.getElementsByTagName("img")[0];
+                img.onload = function(e) {
+                    window.URL.revokeObjectURL(objectURL);
+                }
+                img.src = objectURL;
+            }
+            
+            function getRemoteFile(m) {
+                document.getElementsByTagName("img")[0].src = '';
+                document.getElementById('ctype').textContent = '';
+                document.getElementsByTagName("p")[0].innerHTML = '';
+                
+                var req = new XMLHttpRequest();
+                
+                req.onreadystatechange = function() {
+                    if(this.readyState == this.HEADERS_RECEIVED) {
+                        if(this.status == 200) {
+                           document.getElementById('ctype').textContent = this.getResponseHeader('Content-Type'); 
+                        }
+                    }
+                }
+                
+                req.onload = function() {
+                        if(this.status == 200) {
+                            window.console.log('Everything is ok');
+                            
+                            if(this.responseType == 'blob') {
+                                setBlobAsImage(this.response);
+                            }
+                            else if(this.responseType == 'arraybuffer') {
+                                var bb = new BlobBuilder();
+                                bb.append(this.response);
+                                
+                                var theImg = bb.getBlob(this.getResponseHeader('Content-Type'));
+                                
+                                setBlobAsImage(theImg);
+                            }
+                        }
+                        else {
+                                document.getElementsByTagName("p")[0].innerHTML = "There has been an HTTP error: " + this.statusText;
+                        }
+                }
+                
+                req.onprogress = function(e) {
+                    window.console.log('Progress event received: ' + e.loaded + "/" + e.total);
+                }
+                
+                req.onerror = function() {
+                    document.getElementsByTagName("p")[0].innerHTML = "There has been an error in the request";
+                }
+                
+                req.open('GET', document.getElementById('res').value);
+                req.responseType = m;
+                req.send();     
+            }
+        </script>
+    </head>
+    
+    <body>
+        <input type=text size=20 id="res" value="architecture.png"><br>
+        <input type=button value="Get Data as Array Buffer" onclick="getRemoteFile('arraybuffer')"><br>
+        <input type=button value="Get Data as Blob" onclick="getRemoteFile('blob')"><br>
+        
+        <span>Content Type: </span> <span style="color:green" id="ctype"></span><br>
+        
+        <img src="" id="myimage>">
+        
+        <p style="color: red"></p>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+            
+        <script>
+        
+            var burgers = ['Ham','Cheese','Double Cheese'];
+            
+            function goToImage() {
+                var val = document.getElementById('pn').value;
+                
+               setImage(val);
+                
+                window.history.pushState({number: val}, "Burger " + val, val);
+            }
+            
+            function setImage(v) {
+                document.getElementById('pn').value = v;
+                document.querySelector('img').src = 'imgs/burger' + v + '.png';
+                document.querySelector('figcaption').textContent = burgers[v - 1];
+            }
+            
+            window.onpopstate = function(e) {
+                if(e.state) {
+                    var v = e.state.number;
+                    setImage(v);
+                }
+                else {
+                       document.getElementById('pn').value = '';
+                       document.querySelector('img').src = null;
+                       document.querySelector('caption').textContent = '';
+                }
+            }
+        </script>
+    </head>
+    
+    <body>
+        <p>This is index page</p>
+        
+        <label>Burger Number: <input type=number id="pn"></label>
+        <input type=button value="Show" onclick="goToImage()">
+         
+        <figure style="margin:10px">
+            <img src="" alt="image">
+            <figcaption></figcaption>
+        </figure>
+    </body>
+</html>

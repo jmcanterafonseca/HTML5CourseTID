@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Indexed DB</title>
+        
+        <script src="idb.js"></script>
+    </head>
+    
+    <body>
+        <input type=button value="Open/Create DB" onclick="createDB()"><br>
+        <input type=button value="Delete DB" onclick="deleteDB()"><br>
+        <input type=button value="Create Obj Store" onclick="createObjStore()"><br>
+        <input type=button value="Delete Objects" onclick="deleteObjects()"><br>
+        <input type=button value="Load Objects" onclick="save()"><br>
+        <input type="button" value="List by Name" onclick="listByName()"><br>
+        
+        
+        <label>DNI:<input type=text size=12 id="cdni"></label>
+        <input type=button value="Get Data" onclick="getData()"><br>
+        <label>Name:<input type=text size=10 id="cname"></label>
+        <input type="button" value="Find by Name" onclick="doFindByName()"><br>
+        
+        <p id="msg"></p>
+        <p style="color: red" id="error"></p>
+    </body>
+</html>

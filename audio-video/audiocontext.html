@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <meta name="viewport" content="width=device-width">
+        <title>Audio Context example</title>
+    </head>
+    
+    <body>
+        <script>
+        var context;
+        
+        window.AudioContext = window.webkitAudioContext || window.AudioContext;
+        
+        window.addEventListener('load', init, false);
+        
+        var niceAudioBuffer = null;
+        
+        function init() {
+          try {
+            context = new AudioContext();
+          }
+          catch(e) {
+            alert('Web Audio API is not supported in this browser');
+          }
+        }
+        
+        function loadNiceSound(url,done) {
+            var request = new XMLHttpRequest();
+            request.open('GET', url, true);
+            request.responseType = 'arraybuffer';
+
+            request.onload = function(e) {
+              context.decodeAudioData(e.target.response, function(buffer) {
+                window.console.log('Audio has been decoded');
+                done(buffer);
+              }, function() { window.console.log('Error has happened'); } );
+            }
+            request.send();
+        }
+        
+        function playSound(buffer,time) {
+             var source = context.createBufferSource();  // creates a sound source
+             source.buffer = buffer;                     // tell the source which sound to play
+             source.connect(context.destination);       // connect the source to the context's destination (the speakers)
+             source.noteOn(time);
+        }
+        
+        function play() {
+                loadNiceSound('nicesound.ogg', function(niceAudioBuffer) {;
+                    playSound(niceAudioBuffer,2);          
+            });
+        }
+        
+        </script>
+        
+        <input type="button" value="Play Sound" onclick="play()">
+    </body>
+</html>

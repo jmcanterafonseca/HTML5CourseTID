@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>File System API Experiment</title>
+		<script>
+			window.URL = window.URL || window.webkitURL;
+			window.BlobBuilder = window.MozBlobBuilder || window.WebKitBlobBuilder || window.BlobBuilder;
+		
+		
+			function fileSelected(files) {
+				document.getElementById('size').textContent = files[0].size;
+			}
+
+			function imageSelected(files) {
+				var  objectURL = window.URL.createObjectURL(files[0]);
+				var img = document.getElementsByTagName("img")[0];
+				img.onload = function(e) {
+					window.URL.revokeObjectURL(objectURL);
+				}
+				img.src = objectURL;
+			}
+
+			function imageSelected2(files)  {
+				var imageType = /image.*/;
+				var pbar = document.querySelector('progress');
+				pbar.value = 0;
+				
+				if(files[0].type.match(imageType)) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						var img = document.getElementsByTagName("img")[0];
+						img.src = e.target.result;
+					}
+					
+					reader.onprogress = function(evt) {
+						window.console.log('Progress event received: ' + evt.loaded + " : " + evt.total);
+						var loaded = (evt.loaded / evt.total);
+						pbar.value = loaded * 100;
+						pbar.textContent = pbar.value;
+					}
+					
+					reader.onloadend = function() {
+						document.getElementById('pbar').value = 100;
+					}
+					
+					reader.readAsDataURL(files[0]);
+				}
+			}
+			
+			window.onload = function() {
+				var filedrop = document.querySelector('#dropzone');
+				filedrop.addEventListener('drop',dropHandler,false);
+				filedrop.addEventListener('dragover',dragHandler,false);
+				filedrop.addEventListener('dragleave',dragHandler,false);
+			}
+			
+			function dropHandler(e) {
+				dragHandler(e);
+				imageSelected(e.dataTransfer.files);
+			}
+			
+			function dragHandler(e) {
+				e.stopPropagation();
+				e.preventDefault();
+				e.target.className = (e.type == "dragover" ? "hover" : "");
+			}
+		</script>
+		
+		<style>
+			#dropzone {
+				font-weight: bold;
+				text-align: center;
+				padding: 1em 0;
+				margin: 1em 0;
+				color: #555;
+				border: 2px dashed #555;
+				border-radius: 7px;
+				cursor: default;
+			}
+
+			#dropzone.hover {
+				color: #f00;
+				border-color: #f00;
+				border-style: solid;
+				box-shadow: inset 0 3px 4px #888;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form name="myForm">
+			<label>Choose File: <input type=file name="myfile" onchange="fileSelected(this.files)"></label><br>
+			<p><span>File Size: </span><span id="size"></span></p>
+			
+			<label>Choose Image: <input type=file name="myimg" onchange="imageSelected(this.files)"></label><br>
+			<label>Choose Another Image: <input type=file name="myimg3" onchange="imageSelected2(this.files)"></label>
+			
+			<br>
+			<progress style="width:50%; margin: 0px auto" id="pbar"  min="0" max="100" value="0">0% complete</progress>
+		</form>
+		<span id="pbar" style="background-color: red; width:40px;height:40px"></span><br>
+		<div id="dropzone">
+		</div>
+		
+		<img src="" id="theImg" alt="Selected Image"><br>
+	</body>
+</html>

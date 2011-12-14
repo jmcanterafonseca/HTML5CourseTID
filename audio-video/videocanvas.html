@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Video Capture in a Canvas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    
+    <body>
+        <div>
+        <video src="video.webm" onloadedmetadata="setupCanvas(event)" controls autoplay muted loop>
+            <p>Perhaps WebM is not supported on your browser</p>
+        </video>
+        
+        <img src="" alt="resized" width="100">
+        </div>
+        
+        <input type=button value="Capture" onclick="capture()"><br>
+        <canvas width=300 height=300></canvas>
+        
+        <script>
+            function setupCanvas(e) {
+                var video = e.target;
+                var canvas = document.querySelector('canvas');
+                
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                    
+                window.console.log(video.videoWidth);
+                window.console.log(video.videoHeight);
+            }
+        
+        
+            function capture() {
+                var video = document.querySelector('video');
+                var canvas = document.querySelector('canvas');
+                var ctx = canvas.getContext("2d");
+                
+                // window.console.log(video.videoHeight);
+                
+                ctx.drawImage(video,0,0,canvas.width,canvas.height);
+                
+                document.querySelector("img").src = canvas.toDataURL();
+            }
+        </script>
+    </body>
+</html>

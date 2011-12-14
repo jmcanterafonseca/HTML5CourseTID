@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Web Socket Example</title>
+        
+        <script>
+            var ws;
+            
+            if(window.MozWebSocket) {
+                window.console.log("Mozilla's WebSocket is present")
+                window.WebSocket = window.MozWebSocket;
+            }
+            
+            function ele(id) {
+                return document.getElementById(id);
+            }
+            
+            window.addEventListener("load",function() { setupWS() });
+            
+            function send() {
+                var data =  ele('sent').value;
+                window.console.log('Send: ' + data);
+                ws.send(data);
+                ele('sent').value = '';
+            }
+            
+            function closeConn() {
+                window.console.log('About to closing the connection');
+                ws.close();
+            }
+            
+            function ondatareceived(d) {
+                ele('rec').value += ('\n' + d);
+            }
+            
+            function setupWS() {
+                ws = new WebSocket('ws://' + window.location.host + ':' + '8081');
+                
+                ws.onopen = function() {
+                    window.console.log('WS has been opened');
+                };
+                
+                ws.onerror = function() {
+                    window.console.log('Error!!!');
+                };
+                
+                ws.onclose = function(e) {
+                    window.console.log('WS has been closed');
+                     ele('rec').value += ('\n' + 'Connection has been closed');
+                };
+                
+                ws.onmessage = function(e) {
+                    window.console.log('Data received');
+                    
+                    ondatareceived(e.data);
+                };
+            }
+        </script>
+    </head>
+    
+    <body>
+        <label>Data Sent</label><br>
+            <textarea id="sent" rows=10 cols=80></textarea><br>
+    
+        <input type=button value="Send" onclick="send()">
+        <input type=button value="Close" onclick="closeConn()">    
+        <br>
+            
+        <label>Data Received</label><br>
+            <textarea id="rec" rows=10 cols=80> </textarea>
+    </body>
+</html>
