@@ -1,7 +1,7 @@
 var out;
 
 function setValue() {
-  out = getElementById('result2');
+  out = document.getElementById('result2');
   if(out) {
     out.value = 'The script has been loaded';
   }
