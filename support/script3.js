@@ -1,7 +1,6 @@
 var out;
 
 function setValue() {
-  alert('here we are');
   out = document.getElementById('result2');
   if(out) {
     out.value = 'The script has been loaded';

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+
+  <body>
+    <h1>iFrame 1</h1>
+    <p></p>
+
+    <script>
+      parent.postMessage({
+        data: 'Im here'
+      }, '*');
+
+      window.addEventListener('message', function(e) {
+        document.querySelector('p').textContent = 'Message from: ' + e.source + ' : ' + e.data;
+      });
+    </script>
+  </body>
+</html>
