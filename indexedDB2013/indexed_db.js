@@ -107,7 +107,7 @@ var DatabaseMod = {
 
     alert('here')
 
-    var req = store.openCursor(null, 'next');
+    var req = store.openCursor();
 
     alert('here')
 
