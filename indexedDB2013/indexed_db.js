@@ -4,6 +4,9 @@ function debug(value) {
   document.getElementById('result').innerHTML += '<br>' + value;
 }
 
+// IndexedDB example
+// Check http://www.w3.org/TR/2013/CR-IndexedDB-20130704/
+
 var DatabaseMod = {
   _STORE_NAME: 'Employees',
   // IndexedDB API
@@ -28,6 +31,21 @@ var DatabaseMod = {
     document.getElementById('listRecords').addEventListener('click', this);
 
     this._table = document.querySelector('table');
+  },
+
+  _renderObj: function(obj) {
+    if(obj) {
+      var row = document.createElement('tr');
+      var col1 = document.createElement('td');
+      var col2 = document.createElement('td');
+      row.appendChild(col1);
+      row.appendChild(col2);
+
+      col1.textContent = obj.ssn;
+      col2.textContent = obj.name;
+
+      this._table.appendChild(row);
+    }
   },
 
   init: function() {
@@ -105,33 +123,15 @@ var DatabaseMod = {
 
     var store = transaction.objectStore(this._STORE_NAME);
 
-    alert('here')
-
-    var req = store.openCursor(null, 'next');
-
-    alert('here')
+    var req = store.openCursor();
 
     req.onsuccess = function() {
       var cursor = req.result;
-      var cursorReq = cursor.next();
-      cursorReq.onsuccess = function() {
-        var obj = cursorReq.value;
-        if(obj) {
-          var row = document.createElement('tr');
-          var col1 = document.createElement('td');
-          var col2 = document.createElement('td');
-          row.appendChild(col1);
-          row.appendChild(col2);
-
-          col1.textContent = obj.ssn;
-          col2.textContent = obj.name;
-
-          this._table.appendChild(row);
-
-          cursor.next();
-        }
+      if(cursor) {
+        this._renderObj(cursor.value);
+        cursor.continue();
       }
-    }
+    }.bind(this)
 
     req.onerror = function() {
       debug('Error in cursor: ', req.error.name);
