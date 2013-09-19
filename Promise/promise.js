@@ -55,7 +55,6 @@ var Rest = (function() {
     function urlResolver(url, promiseResolution) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url);
-        xhr.send();
 
         xhr.onload = function() {
             promiseResolution.finished(xhr.response);
