@@ -121,11 +121,11 @@ var DatabaseMod = {
     var store = transaction.objectStore(this._STORE_NAME);
 
     var req = store.openCursor();
-    
+
     req.onsuccess = function() {
       var cursor = req.result;
       if(cursor) {
-        _renderObj(cursor.value);
+        this._renderObj(cursor.value);
         cursor.continue();
       }
     }
