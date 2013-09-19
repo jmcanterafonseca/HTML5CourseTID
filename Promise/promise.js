@@ -10,13 +10,13 @@ function Promise(resolver) {
     var doneCb;
     var promiseResolution = {
         finished: function(response) {
-            if(typeof thenCb === 'function') {
+            if (typeof thenCb === 'function') {
                 var nextPromise = thenCb(response);
                 nextPromise._then(thenPromise._then);
                 nextPromise._done(thenPromise._done);
                 nextPromise._run();
             }
-            else if(typeof doneCb === 'function') {
+            else if (typeof doneCb === 'function') {
                 window.setTimeout(function() { doneCb(response); });
             }
         }
@@ -26,26 +26,26 @@ function Promise(resolver) {
         thenCb = callback;
         thenPromise = new Promise();
         return thenPromise;
-    }
+    };
 
     this.done = function(callback) {
         doneCb = callback;
         window.setTimeout(callback);
-    }
+    };
 
     this._then = function(cb) {
         thenCb = cb;
-    }
+    };
 
     this._done = function(cb) {
         doneCb = cb;
-    }
+    };
 
     this._run = function() {
-        if(resolver) {
+        if (resolver) {
              window.setTimeout(resolver.bind(null, promiseResolution));
         }
-    }
+    };
 
     this._run();
 }
@@ -54,12 +54,12 @@ function Promise(resolver) {
 var Rest = (function() {
     function urlResolver(url, promiseResolution) {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", url);
-        xhr.send()
+        xhr.open('GET', url);
+        xhr.send();
 
         xhr.onload = function() {
             promiseResolution.finished(xhr.response);
-        }
+        };
 
         xhr.send();
     }
@@ -70,6 +70,6 @@ var Rest = (function() {
         load: function(url) {
             return new Promise(urlResolver.bind(null, url));
         }
-    }
+    };
     return new Rest();
 })();
