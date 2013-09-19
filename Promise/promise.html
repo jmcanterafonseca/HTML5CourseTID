@@ -3,7 +3,10 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <script src="promise.js"></script>
+    <script>
+      document.getElementById('scr').src += ('?t=' + Date.getTime());
+    </script>
+    <script id="scr" src="promise.js"></script>
 
     <script>
       function run() {
