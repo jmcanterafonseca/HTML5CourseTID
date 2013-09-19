@@ -65,7 +65,7 @@ var Rest = (function() {
         xhr.send();
     }
 
-    function Rest() {}
+    function Rest() {}   
 
     Rest.prototype = {
         load: function(url) {
