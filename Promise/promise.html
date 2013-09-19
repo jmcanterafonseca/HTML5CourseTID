@@ -4,9 +4,8 @@
   <head>
     <meta charset="UTF-8">
     <script>
-      document.getElementById('scr').src += ('?t=' + Date.getTime());
+      document.write('<script src="promise.js' + '?t=' + Date.getTime() + '"' + "></script>");
     </script>
-    <script id="scr" src="promise.js"></script>
 
     <script>
       function run() {
