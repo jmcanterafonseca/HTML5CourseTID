@@ -64,6 +64,9 @@ var Rest = (function() {
 
         xhr.send();
     }
+
+    function Rest() {}
+
     Rest.prototype = {
         load: function(url) {
             return new Promise(urlResolver.bind(null, url));
