@@ -53,6 +53,7 @@ function Promise(resolver) {
 
 var Rest = (function() {
     function urlResolver(url, promiseResolution) {
+        // 
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url);
 
