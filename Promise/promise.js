@@ -54,8 +54,7 @@ function Promise(resolver) {
 var Rest = (function() {
     function urlResolver(url, promiseResolution) {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", url)
-        xhr.responseType = "json"
+        xhr.open("GET", url);
         xhr.send()
 
         xhr.onload = function() {
@@ -65,7 +64,7 @@ var Rest = (function() {
         xhr.send();
     }
 
-    function Rest() {}   
+    function Rest() {}
 
     Rest.prototype = {
         load: function(url) {
