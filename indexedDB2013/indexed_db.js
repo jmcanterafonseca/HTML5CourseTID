@@ -30,6 +30,21 @@ var DatabaseMod = {
     this._table = document.querySelector('table');
   },
 
+  _renderObj: function(obj) {
+    if(obj) {
+      var row = document.createElement('tr');
+      var col1 = document.createElement('td');
+      var col2 = document.createElement('td');
+      row.appendChild(col1);
+      row.appendChild(col2);
+
+      col1.textContent = obj.ssn;
+      col2.textContent = obj.name;
+
+      this._table.appendChild(row);
+    }
+  },
+
   init: function() {
     if(document.readyState === 'interactive') {
       this._doInit();
@@ -105,31 +120,13 @@ var DatabaseMod = {
 
     var store = transaction.objectStore(this._STORE_NAME);
 
-    alert('here')
-
     var req = store.openCursor();
-
-    alert('here')
-
+    
     req.onsuccess = function() {
       var cursor = req.result;
-      var cursorReq = cursor.next();
-      cursorReq.onsuccess = function() {
-        var obj = cursorReq.value;
-        if(obj) {
-          var row = document.createElement('tr');
-          var col1 = document.createElement('td');
-          var col2 = document.createElement('td');
-          row.appendChild(col1);
-          row.appendChild(col2);
-
-          col1.textContent = obj.ssn;
-          col2.textContent = obj.name;
-
-          this._table.appendChild(row);
-
-          cursor.next();
-        }
+      if(cursor) {
+        _renderObj(cursor.value);
+        cursor.continue();
       }
     }
 
