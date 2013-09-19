@@ -4,6 +4,9 @@ function debug(value) {
   document.getElementById('result').innerHTML += '<br>' + value;
 }
 
+// IndexedDB example
+// Check http://www.w3.org/TR/2013/CR-IndexedDB-20130704/
+
 var DatabaseMod = {
   _STORE_NAME: 'Employees',
   // IndexedDB API
