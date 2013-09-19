@@ -128,7 +128,7 @@ var DatabaseMod = {
         this._renderObj(cursor.value);
         cursor.continue();
       }
-    }
+    }.bind(this)
 
     req.onerror = function() {
       debug('Error in cursor: ', req.error.name);
