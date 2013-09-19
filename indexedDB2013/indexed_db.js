@@ -49,7 +49,7 @@ var DatabaseMod = {
   },
 
   init: function() {
-    if(document.readyState === 'interactive') {
+    if(document.readyState !== 'loading') {
       this._doInit();
     }
     else {
