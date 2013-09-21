@@ -1,6 +1,6 @@
 'use strict';
 
-function ObjectExecutor(db, items) {
+function ObjectExecutor(items, db) {
   var CHUNK_SIZE = 5;
   var self = this;
   var myItems = items;
