@@ -21,7 +21,7 @@ function Promise(resolver) {
                 }
                 // nextPromise._resolve();
             }
-            var theDoneCb = doneCb || nextPromise._done;
+            var theDoneCb = doneCb;
             if (typeof theDoneCb === 'function') {
                 window.setTimeout(function() { theDoneCb(response); });
             }
