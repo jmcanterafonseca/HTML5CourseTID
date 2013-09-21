@@ -54,7 +54,7 @@
         else {
           document.addEventListener('script_loaded', function scrl() {
             document.removeEventListener('script_loaded', scrl);
-            doRun(e.target);
+            doRun(e.target.id);
           });
         }
 /*
