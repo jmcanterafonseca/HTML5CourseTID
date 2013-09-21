@@ -15,12 +15,15 @@ function Promise(resolver) {
             if (typeof thenCb === 'function') {
                 var nextPromise = thenCb(response);
 
-                nextPromise._then = thenPromise._then;
-                nextPromise._done = thenPromise._done;
+                if(thenPromise) {
+                  nextPromise._then = thenPromise._then;
+                  nextPromise._done = thenPromise._done;
+                }
                 // nextPromise._resolve();
             }
-            else if (typeof doneCb === 'function') {
-                window.setTimeout(function() { doneCb(response); });
+            if (typeof doneCb === 'function') {
+                var theDoneCb = doneCb || nextPromise._done;
+                window.setTimeout(function() { theDoneCb(response); });
             }
         }
     };
