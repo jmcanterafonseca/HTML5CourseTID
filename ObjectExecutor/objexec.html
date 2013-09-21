@@ -55,6 +55,7 @@
             var progress = document.querySelector('progress');
             progress.value = 0;
             progress.max = numItems;
+            document.querySelector('p').textContent = '';
             var total = 0;
 
             var executor = new ObjectExecutor(data, database);
