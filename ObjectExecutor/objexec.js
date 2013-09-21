@@ -4,6 +4,7 @@ function ObjectExecutor(items, db) {
   var CHUNK_SIZE = 5;
   var self = this;
   var myItems = items;
+  var totalItems = items.length;
   var transaction;
   var next = 0;
   var numResponses = 0;
@@ -13,7 +14,7 @@ function ObjectExecutor(items, db) {
     transaction = db.transaction('theStore', 'readwrite');
     var store = transaction.objectStore('theStore');
     var start = next;
-    for(var j = start; j < start + CHUNK_SIZE; j++) {
+    for(var j = start; j < start + CHUNK_SIZE && j < totalItems; j++) {
       var req = store.put(myItems[next++]);
       req.onsuccess = onRecordAdded;
       req.onerror = onRecordError;
