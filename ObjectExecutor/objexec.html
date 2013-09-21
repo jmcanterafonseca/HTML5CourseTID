@@ -10,12 +10,13 @@
       'use strict';
 
       var database;
-      var data = [];
+      var data;
       var numItems;
       var TOTAL_ITEMS = 5001;
 
       function prepare(cb) {
         function fillData() {
+         data = [];
          numItems = document.querySelector('input[name="numObjs"]').value || TOTAL_ITEMS;
           for (var j = 1; j <= numItems; j++) {
             data.push({ id: j });
