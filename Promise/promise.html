@@ -5,15 +5,18 @@
     <meta charset="UTF-8">
 
     <script>
-      var ele = document.createElement('script');
-      ele.src = 'promise.js?t=' + Date.now();
       var loaded = false;
-      ele.onload = function() {
-        loaded = true;
-        var ev = new CustomEvent('script_loaded');
-        document.dispatchEvent(ev);
+      
+      function loadScript() {
+        var ele = document.createElement('script');
+        ele.src = 'promise.js?t=' + Date.now();
+        ele.onload = function() {
+          loaded = true;
+          var ev = new CustomEvent('script_loaded');
+          document.dispatchEvent(ev);
+        }
+        document.head.appendChild(ele);
       }
-      document.head.appendChild(ele);
 
       function doRun() {
         Rest.load('http://jsbin.com/canvas/73/source?t=' + Date.now()).done(function(response) {
@@ -50,6 +53,7 @@
         }); */
       }
     </script>
+    <script>loadScript();</script>
   </head>
 
   <body>
