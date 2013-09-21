@@ -10,7 +10,7 @@
       var database;
       var data = [];
 
-      function prepare() {
+      function prepare(cb) {
         function fillData() {
           for (var j = 0; j < 133; j++) {
             data.push({ id: j });
@@ -26,6 +26,7 @@
 
         req.onsuccess = function() {
           datababase = req.result;
+          cb();
         }
 
         req.onerror = function() {
