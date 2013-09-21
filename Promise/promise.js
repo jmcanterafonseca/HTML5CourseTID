@@ -21,8 +21,8 @@ function Promise(resolver) {
                 }
                 // nextPromise._resolve();
             }
-            if (typeof doneCb === 'function') {
-                var theDoneCb = doneCb || nextPromise._done;
+            var theDoneCb = doneCb || nextPromise._done;
+            if (typeof theDoneCb === 'function') {
                 window.setTimeout(function() { theDoneCb(response); });
             }
         }
