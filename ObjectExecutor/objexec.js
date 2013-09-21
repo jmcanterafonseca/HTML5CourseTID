@@ -15,14 +15,13 @@ function ObjectExecutor(items, db) {
     var store = transaction.objectStore('theStore');
     var start = next;
     for(var j = start; j < start + CHUNK_SIZE && j < totalItems; j++) {
-      var req = store.put(myItems[next++]);
+      var req = store.put(myItems[j]);
       req.onsuccess = onRecordAdded;
       req.onerror = onRecordError;
     }
   }
 
   function onRecordAdded() {
-    numResponses++;
     if(typeof self.onrecordadded === 'function') {
       window.setTimeout(self.onrecordadded);
     }
@@ -30,6 +29,8 @@ function ObjectExecutor(items, db) {
   }
 
   function continueCb() {
+    numResponses++;
+    next++;
     if(numResponses === CHUNK_SIZE && next < myItems.length) {
       numResponses = 0;
       doTheWork();
