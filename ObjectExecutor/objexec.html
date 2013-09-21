@@ -19,18 +19,22 @@
 
         fillData();
 
+        window.console.log('Data filled');
+
         var req = window.indexedDB.open('ObjectExecutor', 2.0);
         req.onupgradeneeded = function() {
+          window.console.log('On upgrade needed');
           req.result.createObjectStore('theStore', {keyPath: 'id'});
         }
 
         req.onsuccess = function() {
+          window.console.log('On success');
           database = req.result;
           cb();
         }
 
         req.onerror = function() {
-          window.console.log('Error!!!', req.error.name);
+          window.console.error('Error!!!', req.error.name);
         }
       }
     </script>
