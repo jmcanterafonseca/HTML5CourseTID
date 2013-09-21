@@ -36,6 +36,8 @@ function Promise(resolver) {
 
     this.done = function(callback) {
         doneCb = callback;
+        childPromise = new Promise();
+        childPromise._done = doneCb;
     };
 
     Object.defineProperty(this, '_then', {
