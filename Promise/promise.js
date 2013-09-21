@@ -8,16 +8,16 @@
 function Promise(resolver) {
     var thenCb;
     var doneCb;
-    var thenPromise;
+    var childPromise;
 
     var promiseResolution = {
         finished: function(response) {
             if (typeof thenCb === 'function') {
-                var nextPromise = thenCb(response);
+                var thenPromise = thenCb(response);
 
-                if(thenPromise) {
-                  nextPromise._then = thenPromise._then;
-                  nextPromise._done = thenPromise._done;
+                if(childPromise) {
+                  thenPromise._then = childPromise._then;
+                  thenPromise._done = childPromise._done;
                 }
                 // nextPromise._resolve();
             }
@@ -30,8 +30,8 @@ function Promise(resolver) {
 
     this.then = function(callback) {
         thenCb = callback;
-        thenPromise = new Promise();
-        return thenPromise;
+        childPromise = new Promise();
+        return childPromise;
     };
 
     this.done = function(callback) {
