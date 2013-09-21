@@ -54,7 +54,7 @@
               window.console.log('Task finished successfully');
             }
             executor.onrecordadded = function() {
-              progress.setValue(++total);
+              progress.value(++total);
             }
             executor.onerror = function() {
               window.console.error('Error while adding record');
