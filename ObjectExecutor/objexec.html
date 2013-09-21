@@ -31,7 +31,9 @@
         req.onsuccess = function() {
           window.console.log('On success');
           database = req.result;
-          cb();
+          var clearTrans = database.transaction('theStore', 'readwrite');
+          var clearReq = clearTrans.objectStore('theStore').clear();
+          req.onsuccess = cb;
         }
 
         req.onerror = function() {
