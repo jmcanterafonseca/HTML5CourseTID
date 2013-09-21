@@ -56,7 +56,7 @@
         }).then(function(response) {
           window.console.log('Second of the third response', response);
           return Rest.load(resource3 + '?t=' + Date.now());
-        }).then(function(response) {
+        }).done(function(response) {
           window.console.log('And now done', response);
         });
       }
