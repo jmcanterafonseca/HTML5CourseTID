@@ -35,7 +35,7 @@ function Promise(resolver) {
         doneCb = callback;
     };
 
-    Object.createProperty(this, '_then', {
+    Object.defineProperty(this, '_then', {
       get: function() {
         return thenCb;
       },
@@ -45,7 +45,7 @@ function Promise(resolver) {
       }
     });
 
-    Object.createProperty(this, '_done', {
+    Object.defineProperty(this, '_done', {
       get: function() {
         return doneCb;
       },
