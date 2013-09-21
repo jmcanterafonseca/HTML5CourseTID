@@ -9,10 +9,11 @@
     <script>
       var database;
       var data = [];
+      var TOTAL_ITEMS = 5000;
 
       function prepare(cb) {
         function fillData() {
-          for (var j = 0; j < 3; j++) {
+          for (var j = 0; j < TOTAL_ITEMS; j++) {
             data.push({ id: j });
           }
         }
@@ -46,6 +47,7 @@
         prepare(function() {
             window.console.log('Prepare Cb executed');
             var progress = document.querySelector('progress');
+            progress.max = TOTAL_ITEMS;
             var total = 0;
 
             var executor = new ObjectExecutor(data, database);
@@ -69,6 +71,6 @@
   <body>
     <h1>Object Executor Pattern</h1>
     <button id="b" onclick="run()">Run</button><br>
-    <progress value="0" max="133" style="width:400px"></progress>
+    <progress value="0" style="width:400px"></progress>
   </body>
 </html>
