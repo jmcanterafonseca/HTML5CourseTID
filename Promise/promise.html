@@ -6,7 +6,7 @@
 
     <script>
       var loaded = false;
-      
+
       function loadScript() {
         var ele = document.createElement('script');
         ele.src = 'promise.js?t=' + Date.now();
@@ -18,30 +18,46 @@
         document.head.appendChild(ele);
       }
 
-      function doRun() {
-        Rest.load('http://jsbin.com/canvas/73/source?t=' + Date.now()).done(function(response) {
+      function doRun(target) {
+        if(target === 'b1') {
+          doRun1();
+        }
+        else if(target === 'b2') {
+            doRun2();
+        }
+        else if(target === 'b3') {
+          doRun3();
+        }
+      }
+
+      function doRun1() {
+        var resource = 'http://jsbin.com/canvas/73/source';
+        Rest.load(resource + '?t=' + Date.now()).done(function(response) {
           window.console.log('Response: ', response);
         });
       }
 
-      function run() {
+      function doRun2() {
+        var resource2 = 'http://jsbin.com/canvas/74/source';
+        Rest.load(resource + '?t=' + Date.now()).then(function(response) {
+          window.console.log('Another Response: ', response);
+          return Rest.load(resource2 + '?t=' + Date.now());
+        }).done(function(response) {
+          window.console.log('And now done', response);
+        });
+      }
+
+      function run(e) {
         if(loaded) {
-          doRun();
+          doRun(e.target);
         }
         else {
           document.addEventListener('script_loaded', function scrl() {
             document.removeEventListener('script_loaded', scrl);
-            doRun();
+            doRun(e.target);
           });
         }
 /*
-        Rest.load('').then(function(response) {
-          window.console.log('Another Response: ', response);
-          return Rest.load('');
-        }).done(function(response) {
-          window.console.log('And now done', response);
-        });
-
         Rest.load('').then(function(response) {
           window.console.log('Third Response', response);
           return Rest.load('');
@@ -59,6 +75,8 @@
   <body>
     <p id="result"></p>
 
-    <button id="openDB" type=button onclick="run()">Run</button>
+    <button id="b1" type=button onclick="run(event)">Run 1</button>
+    <button id="b2" type=button onclick="run(event)">Run 2</button>
+    <button id="b3" type=button onclick="run(event)">Run 3</button>
   </body>
 </html>
