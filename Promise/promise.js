@@ -17,7 +17,7 @@ function Promise(resolver) {
 
                 nextPromise._then = thenPromise._then;
                 nextPromise._done = thenPromise._done;
-                nextPromise._resolve();
+                // nextPromise._resolve();
             }
             else if (typeof doneCb === 'function') {
                 window.setTimeout(function() { doneCb(response); });
