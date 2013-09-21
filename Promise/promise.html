@@ -49,7 +49,7 @@
 
       function run(e) {
         if(loaded) {
-          doRun(e.target);
+          doRun(e.target.id);
         }
         else {
           document.addEventListener('script_loaded', function scrl() {
