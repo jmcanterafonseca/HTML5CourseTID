@@ -7,6 +7,8 @@
     <script src="objexec.js?t=9192345775678"></script>
 
     <script>
+      'use strict';
+      
       var database;
       var data = [];
       var numItems;
@@ -15,7 +17,7 @@
       function prepare(cb) {
         function fillData() {
          numItems = document.querySelector('input[name="numObjs"]').value || TOTAL_ITEMS;
-          for (var j = 1; j <= items; j++) {
+          for (var j = 1; j <= numItems; j++) {
             data.push({ id: j });
           }
         }
