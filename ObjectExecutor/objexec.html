@@ -8,7 +8,7 @@
 
     <script>
       'use strict';
-      
+
       var database;
       var data = [];
       var numItems;
@@ -60,6 +60,7 @@
             var executor = new ObjectExecutor(data, database);
 
             executor.onfinish = function() {
+              document.querySelector('p').textContent = 'Finished!!!';
               window.console.log('Task finished successfully');
             }
             executor.onrecordadded = function() {
@@ -80,5 +81,6 @@
     <label>Num Objs: </label><input type=number name="numObjs" size="10"></input></label><br>
     <button type="button" id="b" onclick="run()">Run</button><br>
     <progress value="0" style="width:400px"></progress>
+    <p style="color: red"></p>
   </body>
 </html>
