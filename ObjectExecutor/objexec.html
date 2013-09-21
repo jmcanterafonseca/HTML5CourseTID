@@ -33,7 +33,7 @@
           database = req.result;
           var clearTrans = database.transaction('theStore', 'readwrite');
           var clearReq = clearTrans.objectStore('theStore').clear();
-          req.onsuccess = cb;
+          clearReq.onsuccess = cb;
         }
 
         req.onerror = function() {
