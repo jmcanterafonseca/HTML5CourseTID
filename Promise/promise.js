@@ -19,7 +19,12 @@ function Promise(resolver) {
           }
           if (thenCbs.length > 0) {
               var thenPromise = thenCbs.shift()(response);
-              thenPromise._setResolutionCb(promiseResolution.finished);
+              if (typeof thenPromise._setResolutionCb === 'function' ) {
+                thenPromise._setResolutionCb(promiseResolution.finished);
+              }
+              else {
+                throw new Error('A then callback must return a Promise');
+              }
           }
           else if (typeof doneCb === 'function') {
               window.setTimeout(function() { doneCb(response); });
