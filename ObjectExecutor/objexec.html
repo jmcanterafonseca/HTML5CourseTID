@@ -62,6 +62,7 @@
 
             executor.onfinish = function() {
               document.querySelector('p').textContent = 'Finished!!!';
+              database.close();
               window.console.log('Task finished successfully');
             }
             executor.onrecordadded = function() {
