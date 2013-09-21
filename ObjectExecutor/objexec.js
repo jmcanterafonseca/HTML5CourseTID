@@ -23,7 +23,7 @@ function ObjectExecutor(items, db) {
 
   function onRecordAdded() {
     if(typeof self.onrecordadded === 'function') {
-      window.setTimeout(self.onrecordadded);
+      window.setTimeout(self.onrecordadded, 300);
     }
     continueCb();
   }
