@@ -13,13 +13,13 @@ function Promise(resolver) {
 
     var promiseResolution = {
         finished: function(response) {
-          if(typeof resolutionCb === 'function') {
+          if (typeof resolutionCb === 'function') {
             resolutionCb(response);
             return;
           }
           if (thenCbs.length > 0) {
               var thenPromise = thenCbs.shift()(response);
-              thenPromise._setResolutionCb(this.finished);
+              thenPromise._setResolutionCb(promiseResolution.finished);
           }
           else if (typeof doneCb === 'function') {
               window.setTimeout(function() { doneCb(response); });
