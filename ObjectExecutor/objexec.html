@@ -25,7 +25,7 @@
         }
 
         req.onsuccess = function() {
-          datababase = req.result;
+          database = req.result;
           cb();
         }
 
@@ -38,7 +38,7 @@
     <script>
       function run() {
         window.console.log('Running');
-        
+
         prepare(function() {
            var progress = document.querySelector('progress');
             var total = 0;
