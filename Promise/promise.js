@@ -8,58 +8,37 @@
 function Promise(resolver) {
     var thenCb;
     var doneCb;
-    var childPromise;
+    var resolutionCb;
+    var thenCbs = [];
 
     var promiseResolution = {
         finished: function(response) {
-            if (typeof thenCb === 'function') {
-                var thenPromise = thenCb(response);
-
-                if(childPromise) {
-                  thenPromise._then = childPromise._then;
-                  thenPromise._done = childPromise._done;
-                }
-                // nextPromise._resolve();
-            }
-            var theDoneCb = doneCb;
-            if (typeof theDoneCb === 'function') {
-                window.setTimeout(function() { theDoneCb(response); });
-            }
+          if(typeof resolutionCb === 'function') {
+            resolutionCb(response);
+            return;
+          }
+          if (thenCbs.length > 0) {
+              var thenPromise = thenCbs.shift()(response);
+              thenPromise._setResolutionCb(this.finished);
+          }
+          else if (typeof doneCb === 'function') {
+              window.setTimeout(function() { doneCb(response); });
+          }
         }
     };
 
+    this._setResolutionCb = function(f) {
+      resolutionCb = f;
+    };
+
     this.then = function(callback) {
-        thenCb = callback;
-        childPromise = new Promise();
-        return childPromise;
+        thenCbs.push(callback);
+        return this;
     };
 
     this.done = function(callback) {
         doneCb = callback;
-        if(!childPromise) {
-          childPromise = new Promise();
-          childPromise._done = doneCb;
-        }
     };
-
-    Object.defineProperty(this, '_then', {
-      get: function() {
-        return thenCb;
-      },
-
-      set: function(v) {
-        thenCb = v;
-      }
-    });
-
-    Object.defineProperty(this, '_done', {
-      get: function() {
-        return doneCb;
-      },
-      set: function(v) {
-        doneCb = v;
-      }
-    });
 
     this._resolve = function() {
         if (resolver) {
