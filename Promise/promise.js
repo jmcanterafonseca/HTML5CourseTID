@@ -9,13 +9,14 @@ function Promise(resolver) {
     var thenCb;
     var doneCb;
     var thenPromise;
-    
+
     var promiseResolution = {
         finished: function(response) {
             if (typeof thenCb === 'function') {
                 var nextPromise = thenCb(response);
-                nextPromise._then(thenPromise._then);
-                nextPromise._done(thenPromise._done);
+
+                nextPromise._then = thenPromise._then;
+                nextPromise._done = thenPromise._done;
                 nextPromise._resolve();
             }
             else if (typeof doneCb === 'function') {
@@ -34,13 +35,24 @@ function Promise(resolver) {
         doneCb = callback;
     };
 
-    this._then = function(cb) {
-        thenCb = cb;
-    };
+    Object.createProperty(this, '_then', {
+      get: function() {
+        return thenCb;
+      },
 
-    this._done = function(cb) {
-        doneCb = cb;
-    };
+      set: function(v) {
+        thenCb = v;
+      }
+    });
+
+    Object.createProperty(this, '_done', {
+      get: function() {
+        return doneCb;
+      },
+      set: function(v) {
+        doneCb = v;
+      }
+    });
 
     this._resolve = function() {
         if (resolver) {
