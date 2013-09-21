@@ -52,15 +52,15 @@ function ObjectExecutor(db, items) {
   }
 
   this.hold = function() {
-
+    // TODO: Implement me
   }
 
   this.finish  = function() {
-
+    // TODO: Implement me
   }
 
   this.resume = function() {
-
+    // TODO: Implement me
   }
 }
 

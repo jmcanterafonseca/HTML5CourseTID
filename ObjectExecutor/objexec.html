@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
 
-    <script src="objexec.js"></script>
+    <script src="objexec.js?t=123456"></script>
 
     <script>
       var database;
@@ -44,12 +44,14 @@
         window.console.log('Running');
 
         prepare(function() {
-           var progress = document.querySelector('progress');
+            window.console.log('Prepare Cb executed');
+            var progress = document.querySelector('progress');
             var total = 0;
 
             var executor = new ObjectExecutor(data, database);
 
             executor.onfinish = function() {
+              window.console.log('Task finished successfully');
             }
             executor.onrecordadded = function() {
               progress.setValue(++total);
@@ -57,6 +59,8 @@
             executor.onerror = function() {
               window.console.error('Error while adding record');
             }
+
+            executor.start();
         });
       }
     </script>
