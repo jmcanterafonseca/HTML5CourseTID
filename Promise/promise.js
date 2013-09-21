@@ -14,7 +14,7 @@ function Promise(resolver) {
                 var nextPromise = thenCb(response);
                 nextPromise._then(thenPromise._then);
                 nextPromise._done(thenPromise._done);
-                nextPromise._run();
+                nextPromise._resolve();
             }
             else if (typeof doneCb === 'function') {
                 window.setTimeout(function() { doneCb(response); });
@@ -40,13 +40,14 @@ function Promise(resolver) {
         doneCb = cb;
     };
 
-    this._run = function() {
+    this._resolve = function() {
         if (resolver) {
-             window.setTimeout(resolver.bind(null, promiseResolution));
+            window.console.log('Promise resolution launched!!');
+            window.setTimeout(resolver.bind(null, promiseResolution));
         }
     };
 
-    this._run();
+    this._resolve();
 }
 
 
