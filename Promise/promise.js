@@ -19,7 +19,8 @@ function Promise(resolver) {
           }
           if (thenCbs.length > 0) {
               var thenPromise = thenCbs.shift()(response);
-              if (typeof thenPromise._setResolutionCb === 'function' ) {
+              if (thenPromise &&
+                      typeof thenPromise._setResolutionCb === 'function' ) {
                 thenPromise._setResolutionCb(promiseResolution.finished);
               }
               else {
