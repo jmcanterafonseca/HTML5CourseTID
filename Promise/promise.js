@@ -30,7 +30,6 @@ function Promise(resolver) {
 
     this.done = function(callback) {
         doneCb = callback;
-        window.setTimeout(callback);
     };
 
     this._then = function(cb) {
@@ -53,7 +52,7 @@ function Promise(resolver) {
 
 var Rest = (function() {
     function urlResolver(url, promiseResolution) {
-        // 
+        //
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url);
 
