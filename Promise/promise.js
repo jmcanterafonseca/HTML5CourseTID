@@ -8,6 +8,8 @@
 function Promise(resolver) {
     var thenCb;
     var doneCb;
+    var thenPromise;
+    
     var promiseResolution = {
         finished: function(response) {
             if (typeof thenCb === 'function') {
