@@ -13,6 +13,7 @@
         var ev = new CustomEvent('script_loaded');
         document.dispatchEvent(ev);
       }
+      document.head.appendChild(ele);
 
       function doRun() {
         Rest.load('http://jsbin.com/canvas/73/source').done(function(response) {
