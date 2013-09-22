@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+
+  <body>
+    <h1>Sync Task Partioning Pattern</h1>
+    <label>Num Objs: </label><input type=number name="numObjs" size="10"></input></label><br>
+    <button type="button" id="b" onclick="run()">Run</button><br>
+    <progress value="0" style="width:400px"></progress>
+    <div id="container">
+
+    </div>
+
+    <script>
+      'use strict';
+      
+      var TOTAL_ITEMS = 5001;
+      var CHUNK_SIZE = 5;
+      var numItems;
+      var progress = document.querySelector('progress');
+      var div = document.getElementById('container');
+
+      function run() {
+        window.console.log('Running');
+        numItems = document.querySelector('input[name="numObjs"]').value || TOTAL_ITEMS;
+        progress.value = 0;
+        progress.max = numItems;
+        div.innerHTML = '';
+        doTheWork(0);
+      }
+
+      function doTheWork(from) {
+        for(var j = from; j < from + CHUNK_SIZE && j < numItems; j++) {
+          var p = document.createElement('p');
+          p.textContent = 'This text: ' + j;
+          div.appendChild(p);
+          progress.value++;
+        }
+
+        if(j < numItems) {
+          window.setTimeout(function() { 
+                            doTheWork(from + CHUNK_SIZE);
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
