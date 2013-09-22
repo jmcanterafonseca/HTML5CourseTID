@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      div {
+        width: 320px;
+        height: 480px;
+      }
+      #div1 {
+        background-color: red;
+        z-index: 100;
+        position: absolute;
+        top:0;
+        left:0;
+        transition: transform 0.5s ease-in-out;
+        -webkit-transition: -webkit-transform 0.5s ease-in-out;
+      }
+
+      #div1:hover {
+        -webkit-transform: scale(1.5);
+        background-color: green;
+      }
+
+    </style>
+
+    <script>
+      function transitionEnd(e) {
+        var target = e.target;
+
+        window.console.log('Transition ended');
+        target.removeEventListener('transitionEnd', transitionEnd);
+        target.classList.remove('moveToLeft');
+        target.classList.add('hidden');
+      }
+    </script>
+  </head>
+
+  <body>
+     <div id="div1">
+    </div>
+  </body>
+
+</html>

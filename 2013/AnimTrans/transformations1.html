@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      div {
+        width: 320px;
+        height: 480px;
+      }
+      #div1 {
+        background-color: red;
+        z-index: 100;
+        position: absolute;
+        top:0;
+        left:0;
+      }
+      #div2 {
+        background-color: green;
+        z-index: 200;
+        position: absolute;
+        left:321px;
+        top: 0;
+        -webkit-transition: -webkit-transform 2s ease-in;
+        transition: transform 2s ease-in;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #section3 {
+        position: absolute;
+        top:481px;
+        left:0;
+      }
+
+      .moveToLeft {
+        transform: translateX(-320px);
+        -webkit-transform: translateX(-320px);
+      }
+
+    </style>
+
+    <script>
+      function transitionEnd(e) {
+        var target = e.target;
+
+        window.console.log('Transition ended');
+        target.removeEventListener('transitionEnd', transitionEnd);
+        target.classList.remove('moveToLeft');
+        target.classList.add('hidden');
+      }
+
+      function transform() {
+        var div2 = document.querySelector('#div2');
+        div2.classList.remove('hidden');
+        div2.classList.add('moveToLeft');
+
+        div2.addEventListener('transitionend', transitionEnd);
+      }
+    </script>
+  </head>
+
+  <body>
+     <div id="div1">
+    </div>
+
+    <div id="div2" class="hidden"></div>
+
+    <div id="section3">
+      <button type="button" onclick="transform()">Launch Transformation</button>
+    </div>
+  </body>
+
+</html>

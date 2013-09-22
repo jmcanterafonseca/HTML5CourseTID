@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      div {
+        width: 320px;
+        height: 480px;
+        position: absolute;
+        top:0;
+        left:0;
+      }
+      #div1 {
+        background-color: red;
+        z-index: 100;
+      }
+      #div2 {
+        background-color: green;
+        opacity: 0;
+        z-index: 200;
+        transition: opacity linear 1s;
+      }
+
+      #section3 {
+        position: absolute;
+        top:481px;
+        left:0;
+      }
+    </style>
+
+    <script>
+      function trans() {
+        var div2 = document.querySelector('#div2');
+        div2.style.opacity = 1;
+        div2.addEventListener('transitionend', function tend() {
+          window.console.log('Transition ended');
+          div2.removeEventListener('transitionend', tend);
+          window.setTimeout(function() { div2.style.opacity = 0; }, 500);
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+     <div id="div1">
+    </div>
+
+    <div id="div2"></div>
+
+    <div id="section3">
+      <button type="button" onclick="trans()">Launch Transition</button>
+    </div>
+  </body>
+
+</html>

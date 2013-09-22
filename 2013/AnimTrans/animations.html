@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      div {
+        width: 320px;
+        height: 480px;
+      }
+      #div1 {
+        background-color: red;
+        z-index: 100;
+        position: absolute;
+        top:0;
+        left:0;
+      }
+      #div2 {
+        background-color: green;
+        z-index: 200;
+        position: absolute;
+        left:321px;
+        top: 0;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #section3 {
+        position: absolute;
+        top:481px;
+        left:0;
+      }
+
+      .moveToLeft {
+        -webkit-animation-name: moveToLeftAnim;
+        -webkit-animation-duration: 1s;
+        animation-name: moveToLeftAnim;
+        animation-duration: 1s;
+      }
+
+      @-webkit-keyframes moveToLeftAnim {
+        from {
+          left: 321px;
+        }
+        25% {
+          left: 120px;
+        }
+        50% {
+          60px;
+        }
+        75% {
+          10px;
+        }
+        to {
+          left: 0;
+        }
+      }
+
+      @keyframes moveToLeftAnim {
+        from {
+          left: 321px;
+        }
+        to {
+          left: 0;
+        }
+      }
+    </style>
+
+    <script>
+      function animationStart(e) {
+        var target = e.target;
+        window.console.log('Animation Started');
+        target.removeEventListener('animationstart', animationStart);
+        target.removeEventListener('webkitAnimationStart', animationStart);
+      }
+
+      function animationEnd(e) {
+        var target = e.target;
+
+        window.console.log('Animation ended');
+        target.removeEventListener('animationend', animationEnd);
+        target.removeEventListener('webkitAnimationEnd', animationEnd);
+        target.classList.remove('moveToLeft');
+        target.classList.add('hidden');
+      }
+
+      function anim() {
+        var div2 = document.querySelector('#div2');
+        div2.classList.remove('hidden');
+        div2.classList.add('moveToLeft');
+
+        div2.addEventListener('webkitAnimationStart', animationStart);
+        div2.addEventListener('animationstart', animationStart);
+
+        div2.addEventListener('webkitAnimationEnd', animationEnd);
+        div2.addEventListener('animationend', animationEnd);
+      }
+    </script>
+  </head>
+
+  <body>
+     <div id="div1">
+    </div>
+
+    <div id="div2" class="hidden"></div>
+
+    <div id="section3">
+      <button type="button" onclick="anim()">Launch Animation</button>
+    </div>
+  </body>
+
+</html>
