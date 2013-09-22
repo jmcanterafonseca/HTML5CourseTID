@@ -1,4 +1,4 @@
-TID HTML5 Course 2013
+# TID HTML5 Course 2013 #
 
 ## Part I ##
 
@@ -43,25 +43,36 @@ TID HTML5 Course 2013
 ## Part 2 ##
 
 ### Javascript basics ###
-
-*
-*
+* [Strings](http://jsfiddle.net/jmcanterafonseca/a9A8B/11/)
+* [Arrays](http://jsfiddle.net/jmcanterafonseca/xgdJA/17/)
+* [Dates](http://jsfiddle.net/jmcanterafonseca/pMKWw/22/)
+* [Objects](http://jsfiddle.net/jmcanterafonseca/FSkev/18/)
+* [Functions](http://jsfiddle.net/jmcanterafonseca/hzNS6/21/)
+* [Regular Expressions](http://jsfiddle.net/jmcanterafonseca/J4X2v/21/)
+* [Falsy & Truthy Values](http://jsfiddle.net/jmcanterafonseca/jnELz/12/)
+* [Advanced Object Creation](http://jsfiddle.net/jmcanterafonseca/X4PCj/35/)
 
 ### indexedDB ###
 * [Basic Example](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/indexedDB2013/indexed_db.html)
 
 ### Javascript Patterns ###
-* [Module]
-* [Promise]
-* [Object Executor]
+* [Module](http://jsfiddle.net/jmcanterafonseca/Tg9AG/10/)
+* [Promise](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/Promise/promise.html)
+* [Object Executor](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/ObjectExecutor/objexec.html)
 * [Sync Task Partitioning](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/SyncTaskPartitioning/synctaskpar.html)
 * [Lazy Loading](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/indexedDB2013/indexed_db.html)
 
 ### Web Workers ###
+* [Basic Example](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/Workers/web_worker.html)
 
 ### Web Socket ###
+* [Basic Example](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/websocket/websocket.html)
 
-### Animations & Transitions ###
+### Animations, Transitions & Transformations ###
+* [Basic Transition](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/AnimTrans/transitions.html)
+* [Basic Animation](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/AnimTrans/animations.html)
+* [Transformation 1](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/AnimTrans/transformations1.html)
+* [Transformation 2](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/AnimTrans/transformations2.html)
 
 ### Exercices ###
 
