@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <script>
+      var loaded = false;
+
+      function loadScript() {
+        var ele = document.createElement('script');
+        ele.src = 'promise.js?t=' + Date.now();
+        ele.onload = function() {
+          loaded = true;
+          var ev = new CustomEvent('script_loaded');
+          document.dispatchEvent(ev);
+        }
+        document.head.appendChild(ele);
+      }
+
+      function doRun(target) {
+        if(target === 'b1') {
+          doRun1();
+        }
+        else if(target === 'b2') {
+            doRun2();
+        }
+        else if(target === 'b3') {
+          doRun3();
+        }
+      }
+
+      var resource = 'http://jsbin.com/canvas/73/source';
+      var resource2 = 'http://jsbin.com/canvas/74/source';
+      var resource3 = 'http://jsbin.com/canvas/75/source';
+
+      function doRun1() {
+        Rest.load(resource + '?t=' + Date.now()).done(function(response) {
+          window.console.log('Response: ', response);
+        });
+      }
+
+      function doRun2() {
+        Rest.load(resource + '?t=' + Date.now()).then(function(response) {
+          window.console.log('Another Response: ', response);
+          return Rest.load(resource2 + '?t=' + Date.now());
+        }).done(function(response) {
+          window.console.log('And now done', response);
+        });
+      }
+
+      function doRun3() {
+        Rest.load(resource + '?t=' + Date.now()).then(function(response) {
+          window.console.log('Third Response', response);
+          return Rest.load(resource2 + '?t=' + Date.now());
+        }).then(function(response) {
+          window.console.log('Second of the third response', response);
+          return Rest.load(resource3 + '?t=' + Date.now());
+        }).done(function(response) {
+          window.console.log('And now done', response);
+        });
+      }
+
+      function run(e) {
+        if(loaded) {
+          doRun(e.target.id);
+        }
+        else {
+          document.addEventListener('script_loaded', function scrl() {
+            document.removeEventListener('script_loaded', scrl);
+            doRun(e.target.id);
+          });
+        }
+      }
+    </script>
+    <script>loadScript();</script>
+  </head>
+
+  <body>
+    <h1>Promise Pattern</h1>
+
+    <button id="b1" type=button onclick="run(event)">Run 1</button>
+    <button id="b2" type=button onclick="run(event)">Run 2</button>
+    <button id="b3" type=button onclick="run(event)">Run 3</button>
+  </body>
+</html>
