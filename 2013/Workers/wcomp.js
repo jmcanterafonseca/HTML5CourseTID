@@ -13,7 +13,7 @@ self.onmessage = function(m) {
 function compute() {
 	var num_times = 0;
 	do {
-		for(var i = 0; i < 1000000; i++) {
+		for(var i = 0; i < 90000000; i++) {
 			var a = 1234;
 		}
 		num_times++;
