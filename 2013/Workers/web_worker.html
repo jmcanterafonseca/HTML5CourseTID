@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang=ES>
+<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<title>Web Workers Example</title>
+		<script>
+			function startComputation() {
+				if(worker) {
+					var canvas = document.getElementById('mycanvas');
+					var ctx = canvas.getContext('2d');
+					ctx.clearRect(0,0,100*5,300);
+					worker.postMessage({type:'start',data:null});
+				}
+				else {
+						alert('Probably workers are not supported');
+				}
+			}
+
+			function handle_message(e) {
+				if(e.data.type == 'alert') {
+					alert(e.data.data);
+				}
+				else if(e.data.type == 'progress') {
+						computationDone(e.data.data);
+				}
+			}
+
+			function computationDone(data) {
+				// alert('Computation: ' + data);
+				var percentage = data;
+				var canvas = document.getElementById('mycanvas');
+
+				var ctx = canvas.getContext('2d');
+				ctx.fillStyle = "rgb(200,0,0)";
+				// This should be optimized to paint only the increment
+				ctx.fillRect((percentage - 1)*4 + 1,0,4,100);
+
+				document.getElementById('count').textContent = percentage + "%";
+			}
+
+			function stopWorker() {
+				worker.terminate();
+				worker = new Worker('wcomp.js');
+				// Handler for the messages received from the worker
+				worker.onmessage = handle_message;
+			}
+		</script>
+</head>
+
+<body>
+	<div>
+		<canvas id="mycanvas" width="500" height="200"></canvas>
+	</div>
+
+	<span id="count"></span>
+
+	<hr>
+
+	<input type=button value="Start Computation" onclick="startComputation()">
+	<input type=button value="Stop Computation" onclick="stopWorker()">
+<script>
+	var worker = new Worker('wcomp.js');
+	// Handler for the messages received from the worker
+	worker.onmessage = handle_message;
+</script>
+
+</body>
+
+</html>
