@@ -7,6 +7,8 @@
         <title>Web Socket Example</title>
 
         <script>
+            'use strict';
+            
             var ws;
 
             if(window.MozWebSocket) {
@@ -37,7 +39,7 @@
             }
 
             function setupWS() {
-                ws = new WebSocket('ws://' + localhost + ':' + '8081');
+                ws = new WebSocket('ws://' + 'localhost' + ':' + '8081');
 
                 ws.onopen = function() {
                     window.console.log('WS has been opened');
