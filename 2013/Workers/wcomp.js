@@ -1,9 +1,9 @@
 var has_to_finish = false;
 
 // Handler for the messages sent to the worker
-postMessage({type:'alert',data:'Worker created'});
+self.postMessage({type:'alert',data:'Worker created'});
 
-onmessage = function(m) {
+self.onmessage = function(m) {
 	if(m.data.type == 'start')  {
 		has_to_finish = false;
 		compute();

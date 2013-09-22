@@ -2,7 +2,6 @@
 <html lang=ES>
 <head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 		<title>Web Workers Example</title>
 		<script>
 			function startComputation() {
@@ -13,13 +12,13 @@
 					worker.postMessage({type:'start',data:null});
 				}
 				else {
-						alert('Probably workers are not supported');
+						window.console.log('Probably workers are not supported');
 				}
 			}
 
 			function handle_message(e) {
 				if(e.data.type == 'alert') {
-					alert(e.data.data);
+					window.console.log(e.data.data);
 				}
 				else if(e.data.type == 'progress') {
 						computationDone(e.data.data);
