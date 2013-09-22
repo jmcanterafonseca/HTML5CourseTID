@@ -1,3 +1,5 @@
+'use strict';
+
 // Promise pattern
 
 // A promise can save us from callback nesting which can be really painful
