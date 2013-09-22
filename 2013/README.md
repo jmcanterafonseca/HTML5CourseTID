@@ -48,14 +48,22 @@ TID HTML5 Course 2013
 *
 
 ### indexedDB ###
+* [Basic Example](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/indexedDB2013/indexed_db.html)
 
 ### Javascript Patterns ###
+* [Module]
+* [Promise]
+* [Object Executor]
+* [Sync Task Partitioning](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/SyncTaskPartitioning/synctaskpar.html)
+* [Lazy Loading](http://jmcanterafonseca.github.io/HTML5CourseTID/2013/indexedDB2013/indexed_db.html)
 
 ### Web Workers ###
 
 ### Web Socket ###
 
 ### Animations & Transitions ###
+
+### Exercices ###
 
 ## Part 3 ##
 
