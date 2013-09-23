@@ -21,12 +21,12 @@
         position: absolute;
         left: 321px;
         top: 0;
-        -webkit-transition: all 2s ease-in;
-        transition: all 2s ease-in;
+        -webkit-transition: -webkit-transform 2s ease-in;
+        transition: transform 2s ease-in;
       }
 
       .hidden {
-        display: none;
+        visibility: hidden;
       }
 
       #section3 {
@@ -47,7 +47,7 @@
         var target = e.target;
 
         window.console.log('Transition ended');
-        target.removeEventListener('transitionEnd', transitionEnd);
+        target.removeEventListener('transitionend', transitionEnd);
         target.classList.remove('moveToLeft');
         target.classList.add('hidden');
       }
