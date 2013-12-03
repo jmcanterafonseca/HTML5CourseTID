@@ -1,4 +1,5 @@
-Universidad de Valladolid. Master "Desarrollo de Aplicaciones Móviles"
+Universidad de Valladolid.
+Master "Desarrollo de Aplicaciones Móviles"
 ======================================================================
 
 Ejercicio 1. Imágenes. Mensajería
