@@ -64,21 +64,22 @@ var DatabaseMod = {
 
   openDB: function() {
     // Opening a Database
-    var req = window.indexedDB.open('Database 6', 3.0);
+    var req = window.indexedDB.open('Database 7', 4.0);
+    var self = this;
 
     // Invoked when DB needs upgrade (or does not exist yet)
     req.onupgradeneeded = function(e) {
       window.console.log('Upgrade needed');
       this._database = e.target.result;
 
-     this._database.createObjectStore(this._STORE_NAME, {keyPath: 'ssn'});
+      this._database.createObjectStore(this._STORE_NAME, {keyPath: 'ssn'});
       window.console.log('Upgrade done');
     }.bind(this)
 
     req.onsuccess = function(e) {
       debug('Database opened successfully');
-      this._database = e.target.result;
-    }.bind(this)
+      self._database = e.target.result;
+    }
 
     req.onerror = function(e) {
       debug('Error: ', req.error.name);
