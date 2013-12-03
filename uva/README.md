@@ -3,8 +3,7 @@ Universidad de Valladolid.
 Master "Desarrollo de Aplicaciones Móviles"
 -------------------------------------------
 
-Ejercicio 1. Imágenes. Mensajería
----------------------------------
+### Ejercicio 1. Imágenes. Mensajería
 
 Realizar una aplicación en FirefoxOS que permita al usuario seleccionar una imagen (procedente de la galería, cámara, etc.) y
 una vez seleccionada realizar un "crop" de la misma. Una vez recortada la imagen deberá ser de nuevo guardada en la SDCard.
@@ -18,8 +17,7 @@ Referencias:
 * https://developer.mozilla.org/en-US/docs/WebAPI/WebSMS/Introduction_to_Mobile_Message_API
 
 
-Ejercicio 2. Contactos. Alarmas.
---------------------------------
+### Ejercicio 2. Contactos. Alarmas.
 
 Realizar una aplicación en FirefoxOS que
 
@@ -37,8 +35,7 @@ Referencias:
 * https://developer.mozilla.org/en/docs/WebAPI/Alarm
 * https://developer.mozilla.org/en/docs/Web/API/notification
 
-Ejercicio 3. Sensores.
-----------------------
+### Ejercicio 3. Sensores.
 
 Realizar una aplicación que :
 
