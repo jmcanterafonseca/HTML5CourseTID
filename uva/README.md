@@ -1,3 +1,6 @@
+Universidad de Valladolid. Master "Desarrollo de Aplicaciones Móviles"
+======================================================================
+
 Ejercicio 1. Imágenes. Mensajería
 ---------------------------------
 
@@ -46,21 +49,24 @@ la aplicación podrá vibrar de distintas formas, reproducir distintos sonidos, 
 C/ Pueda enviar una notificación al usuario (textual, auditiva, vibración) cuando el nivel de batería alcanza un cierto umbral configurable
 
 Nota: La obtención de la información de geocodificacion inversa deberá hacerse mediante llamada HTTP directa y no
-mediante el API de recubrimiento proporcionado por Google.
+mediante el API de recubrimiento proporcionado por Google. (systemXHR)
 
 Referencias:
 
-https://developer.mozilla.org/es/docs/WebAPI/Using_geolocation
-https://developers.google.com/maps/documentation/geocoding/?hl=es
-https://developer.mozilla.org/en-US/docs/Web/Reference/Events/devicemotion
-https://developer.mozilla.org/en-US/docs/Web/Reference/Events/deviceorientation?redirectlocale=en-US&redirectslug=DOM%2FMozilla_event_reference%2Fdeviceorientation
-https://developer.mozilla.org/en-US/docs/Web/API/Navigator.vibrate
-https://developer.mozilla.org/en-US/docs/Web/API/Navigator.battery
+* https://developer.mozilla.org/es/docs/WebAPI/Using_geolocation
+* https://developers.google.com/maps/documentation/geocoding/?hl=es
+* https://developer.mozilla.org/en-US/docs/Web/Reference/Events/devicemotion
+* https://developer.mozilla.org/en-US/docs/Web/Reference/Events/deviceorientation?redirectlocale=en-US&redirectslug=DOM%2FMozilla_event_reference%2Fdeviceorientation
+* https://developer.mozilla.org/en-US/docs/WebAPI/Proximity
+* https://developer.mozilla.org/en-US/docs/Web/API/Navigator.vibrate
+* https://developer.mozilla.org/en-US/docs/Web/API/Navigator.battery
+* https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Non-standard_properties
 
 General References:
 
-http://buildingfirefoxos.com/
-https://developer.mozilla.org/en-US/Firefox_OS/Security/Application_security
+* http://buildingfirefoxos.com/
+* https://developer.mozilla.org/en-US/Firefox_OS/Security/Application_security
+* https://developer.mozilla.org/en-US/Apps/Developing/App_permissions?redirectlocale=en-US&redirectslug=Web%2FApps%2FApp_permissions
 
 Notas:
 
