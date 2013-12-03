@@ -6,7 +6,7 @@ Master "Desarrollo de Aplicaciones Móviles"
 ### Ejercicio 1. Imágenes. Mensajería
 
 Realizar una aplicación en FirefoxOS que permita al usuario seleccionar una imagen (procedente de la galería, cámara, etc.) y
-una vez seleccionada realizar un "crop" de la misma. Una vez recortada la imagen deberá ser de nuevo guardada en la SDCard.
+una vez seleccionada convertirla a Blanco y Negro. Una vez realizado el tratamiento la imagen deberá ser de nuevo guardada en la SDCard.
 Finalmente deberá poder enviarse por MMS.
 
 Referencias:
