@@ -1,0 +1,1 @@
+MyContactsModule.start();

@@ -7,26 +7,39 @@
     <link rel="stylesheet" href="shared/style_unstable/lists.css">
     <link rel="stylesheet" href="style/courseappuva.css">
     <script defer src="js/courseappuva.js"></script>
+    <script defer src="js/courseappuva_init.js"></script>
   </head>
 
   <body>
-    <section role="region">
-      <header>
-        <h1>My Contacts App</h1>
-      </header>
+    <section id="list">
+      <section role="region">
+        <header>
+          <h1>My Contacts App</h1>
+        </header>
+      </section>
+
+      <section data-type="list">
+        <ul id="contacts-list">
+          <!--
+          <li data-template data-id="#id#">
+            <a href="#">
+              <p>#givenName.0# <strong>#familyName.0#</strong></p>
+              <p>#org.0#</p>
+            </a>
+          </li>
+          -->
+        </ul>
+      </section>
     </section>
 
-    <section data-type="list">
-      <ul id="contacts-list">
-        <!--
-        <li data-template data-id="#id#">
-          <a href="#">
-            <p>#givenName.0# <strong>#familyName.0#</strong></p>
-            <p>#org.0#</p>
-          </a>
-        </li>
-        -->
-      </ul>
+    <section id="detail">
+      <section role="region">
+        <header>
+          <button id="back"><span class="icon icon-back">back</span></button>
+          <h1></h1>
+        </header>
+      </section>
     </section>
+
   </body>
 </html>
