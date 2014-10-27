@@ -1,6 +1,6 @@
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/worker.js', {
-    scope: 'a/*'
+    scope: '/myapp/'
   }).then(function(sw) {
       alert('SW registered');
   }).catch(function(err) {
