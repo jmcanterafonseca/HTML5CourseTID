@@ -17,5 +17,5 @@ this.addEventListener('fetch', function(event) {
     return new Response("Hello world!");
   });
 
-  event.respondWith(cachedResponse);
+  event.respondWith(new Response("Hello world!"));
 });
