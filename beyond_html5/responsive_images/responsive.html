@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="http://scottjehl.github.io/picturefill/dist/picturefill.js"></script>
+  </head>
+
+  <body style="background-color: red">
+    <div>
+      <img src="back.png" srcset="back@1.5x.png 1.5x, back@2x.png 2x, back@2.25x.png 2.25x">
+
+      <picture>
+        <source srcset="back.png" media="(max-width: 400px)">
+        <source srcset="close@1.5x.png 1.5x, close@2x.png 2x, close@2.25x.png 2.25x" media="(min-width: 400px)">
+        <img src="back.png">
+      </picture>
+      <br>
+
+      <img sizes="100vw" srcset="PH_TreeForest@1.5x.jpg 480w, PH_TreeForest@2x.jpg 540w, PH_TreeForest@2.25x.jpg 720w"
+       src="PH_TreeForest.jpg">
+    </div>
+
+    <div>
+      <picture>
+        <source srcset="http://scottjehl.github.io/picturefill/examples/images/extralarge.jpg" media="(min-width: 1000px)">
+        <source srcset="http://scottjehl.github.io/picturefill/examples/images/large.jpg" media="(min-width: 800px)">
+        <source srcset="http://scottjehl.github.io/picturefill/examples/images/medium.jpg">
+        <img src="http://scottjehl.github.io/picturefill/examples/images/medium.jpg"
+             alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+      </picture>
+    </div>
+
+  </body>
+</html>
