@@ -3,7 +3,7 @@
 document.getElementById('register').addEventListener('click', registerSW);
 
 function registerSW() {
-  if ('serviceWorker' in navigator) {
+  if (navigator.serviceWorker) {
     navigator.serviceWorker.register('worker.js', {
       scope: 'myapp/'
     }).then(function(sw) {
@@ -11,5 +11,8 @@ function registerSW() {
     }).catch(function(err) {
         alert('Registration failed: ' + err.name);
     });
+  }
+  else {
+    alert('Service Worker interfaces not even present');
   }
 }
