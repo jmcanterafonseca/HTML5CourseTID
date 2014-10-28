@@ -2,16 +2,11 @@
 
 console.log('SW started');
 
-var caches = caches;
-
-if (true || !caches) {
-  console.log('caches object is not available');
-  importScripts('vendor/serviceworker-cache-polyfill.js');
-  caches = cachesPolyfill;
-  console.log('caches object: ', caches);
-}
+importScripts('vendor/serviceworker-cache-polyfill.js');
 
 self.addEventListener('install', function(event) {
+  var caches = cachesPolyfill;
+
   var cacheName = 'myapp-static-v8';
 
   event.waitUntil(caches.delete(cacheName).then(function() {
@@ -32,6 +27,8 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+  var caches = cachesPolyfill;
+
   console.log("Caught a fetch!");
 
   var request = event.request;
