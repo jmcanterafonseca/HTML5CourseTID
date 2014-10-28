@@ -35,6 +35,15 @@ self.addEventListener('fetch', function(event) {
 
   var url = request.url;
 
+  if (navigator.onLine) {
+    console.log('Navigator on line responding with fresh data');
+    event.respondWith(fetch(request));
+
+    return;
+  }
+
+  console.log('Returning cached data');
+
   if (url.indexOf('.jpg') !== -1) {
     var resource = url.substring(url.lastIndexOf('/'));
     event.respondWith(caches.match('images' + resource).then(function(response) {
@@ -43,6 +52,9 @@ self.addEventListener('fetch', function(event) {
     return;
   }
 
+  event.respondWith(new Response('Do not know how to tell you'));
+
+  /*
   fetch(request).then(function(response) {
     if(response.status === 200) {
       event.respondWith(response);
@@ -55,4 +67,5 @@ self.addEventListener('fetch', function(event) {
       event.respondWith(
               new Response('You are offline'));
   });
+  */
 });
