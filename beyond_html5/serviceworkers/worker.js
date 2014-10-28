@@ -19,7 +19,7 @@ this.addEventListener('activate', function(event) {
 this.addEventListener('fetch', function(event) {
   console.log("Caught a fetch!");
 
-  var cachedResponse = caches.match(event.request).catch(function() {
+  var cachedResponse = cachesPolyfill.match(event.request).catch(function() {
     return new Response("Hello world!");
   });
 

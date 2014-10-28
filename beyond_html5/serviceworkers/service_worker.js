@@ -4,7 +4,8 @@ document.getElementById('register').addEventListener('click', registerSW);
 
 function registerSW() {
   if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('worker.js', {
+    var t = Date.now();
+    navigator.serviceWorker.register('worker.js?t=' + t, {
       scope: 'myapp/'
     }).then(function(sw) {
         alert('SW registered');
