@@ -7,11 +7,13 @@ console.log('SW started');
 this.addEventListener('install', function(event) {
   var caches = cachesPolyfill;
 
-  event.waitUntil(caches.clear().then(function() {
-    caches.open('myapp-static-v4').then(function(cache) {
+  event.waitUntil(caches.delete('myapp-static-v8').then(function() {
+    return caches.open().then(function(cache) {
       console.log('Adding to the cache');
       return cache.add('imagesxxx/');
-  })}));
+    });
+  }));
+
   console.log('Service Worker have been installed');
 });
 
