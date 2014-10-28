@@ -27,14 +27,15 @@ this.addEventListener('fetch', function(event) {
   }
 
   fetch(request).then(function(response) {
-    event.respondWith(response);
+    if(response.status === '200') {
+      event.respondWith(response);
+    }
+    else {
+      new Response('Resource not available');
+    }
   }, function(err) {
       console.error('Error while fetching resource', err);
       event.respondWith(
-              new Response('You are offline or the resource is not available'));
-  }).catch(function() {
-      event.respondWith(
-              new Response('You are offline or the resource is not available'));
+              new Response('You are offline'));
   });
-
 });
