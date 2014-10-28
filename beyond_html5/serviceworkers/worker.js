@@ -2,11 +2,13 @@
 
 console.log('SW started');
 
-if (true || !this.caches) {
+var caches = caches;
+
+if (true || !caches) {
   console.log('caches object is not available');
   importScripts('vendor/serviceworker-cache-polyfill.js');
-  this.caches = this.cachesPolyfill;
-  console.log('caches object: ', this.caches);
+  caches = cachesPolyfill;
+  console.log('caches object: ', caches);
 }
 
 self.addEventListener('install', function(event) {
