@@ -4,7 +4,7 @@ importScripts('vendor/serviceworker-cache-polyfill.js');
 
 console.log('SW started');
 
-this.addEventListener('install', function(event) {
+self.addEventListener('install', function(event) {
   var caches = cachesPolyfill;
 
   var cacheName = 'myapp-static-v8';
@@ -22,11 +22,11 @@ this.addEventListener('install', function(event) {
   console.log('Service Worker have been installed');
 });
 
-this.addEventListener('activate', function(event) {
+self.addEventListener('activate', function(event) {
   console.log('Service Worker activated');
 });
 
-this.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function(event) {
   var caches = cachesPolyfill;
 
   console.log("Caught a fetch!");
