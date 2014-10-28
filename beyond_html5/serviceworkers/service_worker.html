@@ -4,9 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <script defer src="service_worker.js"></script>
-    <script defer>
-      document.querySelector('a').href = 'myapp/b.html' + '?t=' + Date.now();
-    </script>
+
   </head>
 
   <body>
@@ -14,6 +12,10 @@
     <br>
     <br>
     <a href="">Click Here</a>
+
+    <script>
+      document.querySelector('a').href = 'myapp/b.html' + '?t=' + Date.now();
+    </script>
 
     <p style="color: red"></p>
   </body>
