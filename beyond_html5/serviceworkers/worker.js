@@ -37,7 +37,9 @@ this.addEventListener('fetch', function(event) {
 
   if (url.indexOf('.jpg') !== -1) {
     var resource = url.substring(url.lastIndexOf('/'));
-    event.respondWith(caches.match('images' + resource));
+    event.respondWith(caches.match('images' + resource).then(function(response) {
+      return response || new Response('Image not available');
+    }));
     return;
   }
 
