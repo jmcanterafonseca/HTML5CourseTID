@@ -4,8 +4,10 @@ importScripts('vendor/serviceworker-cache-polyfill.js');
 
 console.log('SW started');
 
+caches = cachesPolyfill;
+
 this.addEventListener('install', function(event) {
-  event.waitUntil(cachesPolyfill.open('myapp-static-v2').then(function(cache) {
+  event.waitUntil(caches.open('myapp-static-v2').then(function(cache) {
     console.log('Adding to the cache');
     return cache.add('images/star-wars-logo.jpg');
   }));
@@ -22,7 +24,7 @@ this.addEventListener('fetch', function(event) {
   var request = event.request;
 
   if (request.url.indexOf('star-wars-logo.jpg') !== -1) {
-    event.respondWith(cachesPolyfill.match('images/star-wars-logo.jpg'));
+    event.respondWith(caches.match('images/star-wars-logo.jpg'));
     return;
   }
 
