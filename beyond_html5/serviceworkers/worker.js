@@ -7,8 +7,10 @@ console.log('SW started');
 this.addEventListener('install', function(event) {
   var caches = cachesPolyfill;
 
-  event.waitUntil(caches.delete('myapp-static-v8').then(function() {
-    return caches.open().then(function(cache) {
+  var cacheName = 'myapp-static-v8';
+
+  event.waitUntil(caches.delete(cacheName).then(function() {
+    return caches.open(cacheName).then(function(cache) {
       console.log('Adding to the cache');
       return cache.add('imagesxxx/');
     });
