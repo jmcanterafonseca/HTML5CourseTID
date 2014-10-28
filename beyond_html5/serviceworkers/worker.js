@@ -25,8 +25,11 @@ this.addEventListener('fetch', function(event) {
 
   var request = event.request;
 
-  if (request.url.indexOf('star-wars-logo.jpg') !== -1) {
-    event.respondWith(caches.match('images/star-wars-logo.jpg'));
+  var url = request.url;
+
+  if (url.indexOf('.jpg') !== -1) {
+    var resource = url.substring(url.lastIndexOf('/'));
+    event.respondWith(caches.match('images' + resource));
     return;
   }
 
