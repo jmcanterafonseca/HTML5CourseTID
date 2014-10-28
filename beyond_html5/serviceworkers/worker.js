@@ -9,7 +9,9 @@ function getCaches() {
     return caches;
   }
 
-  importScripts('vendor/serviceworker-cache-polyfill.js');
+  if (!cachesPolyfill) {
+    importScripts('vendor/serviceworker-cache-polyfill.js');
+  }
   return cachesPolyfill;
 }
 
