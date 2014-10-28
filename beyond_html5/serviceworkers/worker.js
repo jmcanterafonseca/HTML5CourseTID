@@ -4,9 +4,9 @@ importScripts('vendor/serviceworker-cache-polyfill.js');
 
 console.log('SW started');
 
-caches = cachesPolyfill;
-
 this.addEventListener('install', function(event) {
+  var caches = cachesPolyfill;
+
   event.waitUntil(caches.open('myapp-static-v2').then(function(cache) {
     console.log('Adding to the cache');
     return cache.add('images/star-wars-logo.jpg');
@@ -19,6 +19,8 @@ this.addEventListener('activate', function(event) {
 });
 
 this.addEventListener('fetch', function(event) {
+  var caches = cachesPolyfill;
+
   console.log("Caught a fetch!");
 
   var request = event.request;
