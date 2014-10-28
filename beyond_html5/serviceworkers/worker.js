@@ -12,7 +12,10 @@ this.addEventListener('install', function(event) {
   event.waitUntil(caches.delete(cacheName).then(function() {
     return caches.open(cacheName).then(function(cache) {
       console.log('Adding to the cache');
-      return cache.add('images/');
+      return cache.addAll([
+        'images/star-wars-logo.jpg',
+        'images/telefonica-logo.jpg'
+      ]);
     });
   }));
 
