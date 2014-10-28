@@ -5,7 +5,7 @@ console.log('SW started');
 console.log(navigator.userAgent);
 
 function getCaches() {
-  if (caches && navigator.indexOf('Chrome') === -1) {
+  if (caches && navigator.userAgent.indexOf('Chrome') === -1) {
     return caches;
   }
 
