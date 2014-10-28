@@ -7,9 +7,9 @@ console.log('SW started');
 this.addEventListener('install', function(event) {
   var caches = cachesPolyfill;
 
-  event.waitUntil(caches.open('myapp-static-v2').then(function(cache) {
+  event.waitUntil(caches.open('myapp-static-v3').then(function(cache) {
     console.log('Adding to the cache');
-    return cache.add('images/star-wars-logo.jpg');
+    return cache.add('images/');
   }));
   console.log('Service Worker have been installed');
 });
