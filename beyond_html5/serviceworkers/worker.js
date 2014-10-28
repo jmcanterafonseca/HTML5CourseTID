@@ -1,11 +1,14 @@
 'use strict';
 
-importScripts('vendor/serviceworker-cache-polyfill.js');
-
 console.log('SW started');
 
+if (!caches) {
+  console.log('caches object is not available');
+  importScripts('vendor/serviceworker-cache-polyfill.js');
+}
+
 self.addEventListener('install', function(event) {
-  var caches = cachesPolyfill;
+  var caches = caches || cachesPolyfill;
 
   var cacheName = 'myapp-static-v8';
 
@@ -27,7 +30,7 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  var caches = cachesPolyfill;
+  var caches = caches || cachesPolyfill;
 
   console.log("Caught a fetch!");
 
