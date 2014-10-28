@@ -5,14 +5,14 @@ console.log('SW started');
 console.log(navigator.userAgent);
 
 function getCaches() {
-  if (caches && navigator.userAgent.indexOf('Chrome') === -1) {
-    return caches;
+  if (self.caches && navigator.userAgent.indexOf('Chrome') === -1) {
+    return self.caches;
   }
 
-  if (!cachesPolyfill) {
+  if (!self.cachesPolyfill) {
     importScripts('vendor/serviceworker-cache-polyfill.js');
   }
-  return cachesPolyfill;
+  return self.cachesPolyfill;
 }
 
 self.addEventListener('install', function(event) {
