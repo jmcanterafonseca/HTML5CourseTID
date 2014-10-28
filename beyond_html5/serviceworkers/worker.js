@@ -12,7 +12,7 @@ this.addEventListener('install', function(event) {
   event.waitUntil(caches.delete(cacheName).then(function() {
     return caches.open(cacheName).then(function(cache) {
       console.log('Adding to the cache');
-      return cache.add('imagesxxx/');
+      return cache.add('images/*');
     });
   }));
 
