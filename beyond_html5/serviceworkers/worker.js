@@ -6,6 +6,7 @@ if (true || !this.caches) {
   console.log('caches object is not available');
   importScripts('vendor/serviceworker-cache-polyfill.js');
   this.caches = this.cachesPolyfill;
+  console.log('caches object: ', this.caches);
 }
 
 self.addEventListener('install', function(event) {
