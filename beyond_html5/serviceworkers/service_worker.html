@@ -4,13 +4,16 @@
   <head>
     <meta charset="UTF-8">
     <script defer src="service_worker.js"></script>
+    <script defer>
+      document.querySelector('a').href = 'myapp/b.html' + '?t=' + Date.now();
+    </script>
   </head>
 
   <body>
     <button id="register" type=button>Register</button>
     <br>
     <br>
-    <a href="myapp/b.html">Click Here</a>
+    <a>Click Here</a>
 
     <p style="color: red"></p>
   </body>

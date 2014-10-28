@@ -22,11 +22,15 @@ this.addEventListener('fetch', function(event) {
   var request = event.request;
 
   if (request.url.indexOf('star-wars-logo.jpg') !== -1) {
-    event.respondWith(cachesPolyfill.match(
-                        'images/star-wars-logo.jpg').then(function(response) {
-      return response;
-    }));
+    event.respondWith(cachesPolyfill.match('images/star-wars-logo.jpg'));
+    return;
   }
 
-  event.respondWith(new Response('Hello World'))
+  fetch(request).then(function(response) {
+    event.respondWith(response);
+  }).catch(function() {
+      event.respondWith(
+              new Response('You are offline or the resource is not available'));
+  });
+
 });
