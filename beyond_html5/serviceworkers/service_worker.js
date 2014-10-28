@@ -7,7 +7,7 @@ function showMsg(msg) {
 }
 
 function registerSW() {
-  showMsg('');
+  showMsg('Registering ...');
 
   if (navigator.serviceWorker) {
     var t = Date.now();
