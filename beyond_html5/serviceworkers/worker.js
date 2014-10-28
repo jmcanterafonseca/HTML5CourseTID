@@ -27,11 +27,11 @@ this.addEventListener('fetch', function(event) {
   }
 
   fetch(request).then(function(response) {
-    if(response.status === '200') {
+    if(response.status === 200) {
       event.respondWith(response);
     }
     else {
-      new Response('Resource not available');
+      event.respondWith(new Response('Resource not available'));
     }
   }, function(err) {
       console.error('Error while fetching resource', err);
