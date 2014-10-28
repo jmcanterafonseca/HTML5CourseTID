@@ -2,7 +2,7 @@
 
 console.log('SW started');
 
-if (!this.caches) {
+if (true || !this.caches) {
   console.log('caches object is not available');
   importScripts('vendor/serviceworker-cache-polyfill.js');
   this.caches = this.cachesPolyfill;
