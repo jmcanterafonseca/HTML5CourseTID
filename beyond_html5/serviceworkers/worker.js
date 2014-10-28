@@ -2,10 +2,17 @@
 
 console.log('SW started');
 
-importScripts('vendor/serviceworker-cache-polyfill.js');
+function getCaches() {
+  if (caches && !window.chrome) {
+    return caches;
+  }
+
+  importScripts('vendor/serviceworker-cache-polyfill.js');
+  return cachesPolyfill;
+}
 
 self.addEventListener('install', function(event) {
-  var caches = cachesPolyfill;
+  var caches = getCaches();
 
   var cacheName = 'myapp-static-v8';
 
@@ -27,7 +34,7 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  var caches = cachesPolyfill;
+  var caches = getCaches();
 
   console.log("Caught a fetch!");
 
