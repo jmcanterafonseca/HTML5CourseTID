@@ -64,19 +64,4 @@ self.addEventListener('fetch', function(event) {
   }
 
   event.respondWith(new Response('Do not know how to tell you'));
-
-  /*
-  fetch(request).then(function(response) {
-    if(response.status === 200) {
-      event.respondWith(response);
-    }
-    else {
-      event.respondWith(new Response('Resource not available'));
-    }
-  }, function(err) {
-      console.error('Error while fetching resource', err);
-      event.respondWith(
-              new Response('You are offline'));
-  });
-  */
 });

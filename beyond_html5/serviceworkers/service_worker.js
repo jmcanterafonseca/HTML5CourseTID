@@ -10,8 +10,7 @@ function registerSW() {
   showMsg('Registering ...');
 
   if (navigator.serviceWorker) {
-    var t = Date.now();
-    navigator.serviceWorker.register('worker.js?t=' + t, {
+    navigator.serviceWorker.register('worker.js', {
       scope: 'myapp/'
     }).then(function(sw) {
         showMsg('SW registered');
