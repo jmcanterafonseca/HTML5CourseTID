@@ -25,6 +25,8 @@
       function printDimensions() {
         var innerDimensions = window.innerWidth + 'x' + window.innerHeight;
         document.querySelector('#innerWidth').textContent = 'Dimensions: ' + innerDimensions;
+        var targetImg = document.querySelector('#target');
+        document.querySelector('#selected').textContent = 'Selected: ' + targetImg.currentSrc;
       }
     </script>
   </head>
@@ -34,9 +36,10 @@
       <source media="(min-width: 650px)" srcset="kitten-large.png">
       <source media="(min-width: 465px)" srcset="kitten-medium.png">
       <!-- img tag for browsers that do not support picture element -->
-      <img src="kitten-small.png" alt="a cute kitten">
+      <img id="target" src="kitten-small.png" alt="a cute kitten">
     </picture>
 
     <p id="innerWidth"></p>
+    <p id="selected"></p>
   </body>
 </html>
