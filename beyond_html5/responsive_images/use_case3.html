@@ -16,13 +16,16 @@
     </style>
 
     <script>
-      window.addEventListener('load', function() {
+      window.addEventListener('load', printData);
+      window.addEventListener('resize', printData);
+
+      function printData() {
         var selected = document.querySelector('img').currentSrc;
         document.querySelector('p#selection').textContent = 'Selected: ' + selected;
         var innerDimensions = window.innerWidth + 'x' + window.innerHeight;
         document.querySelector('#dpi').textContent = 'DPI: ' + window.devicePixelRatio;
         document.querySelector('#innerWidth').textContent = 'Dimensions: ' + innerDimensions;
-      });
+      }
     </script>
   </head>
 
