@@ -3,9 +3,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <!--
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
-    -->
     <title>DPI-based selection</title>
 
     <style>
@@ -25,9 +23,11 @@
     <script>
       window.addEventListener('load', function() {
         var selected = document.querySelector('img').currentSrc;
-        document.querySelector('p').textContent = 'Selected: ' + selected;
+        document.querySelector('p#selection').textContent = 'Selected: ' + selected;
+        var innerDimensions = window.innerWidth + 'x' + window.innerHeight;
+        document.querySelector('#dpi').textContent = 'DPI: ' + window.devicePixelRatio;
+        document.querySelector('#innerWidth').textContent = 'Dimensions: ' + innerDimensions;
       });
-      alert(window.devicePixelRatio);
     </script>
   </head>
 
@@ -40,6 +40,8 @@
       alt="alternative text">
     </header>
 
-    <p></p>
+    <p id="selection"></p>
+    <p id="dpi"></p>
+    <p id="innerWidth"></p>
   </body>
 </html>
