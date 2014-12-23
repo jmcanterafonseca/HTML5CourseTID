@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <title>DPI-based selection</title>
+
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <script>
+      window.addEventListener('load', function() {
+        var selected = document.querySelector('img').currentSrc;
+        document.querySelector('p#selection').textContent = 'Selected: ' + selected;
+        var innerDimensions = window.innerWidth + 'x' + window.innerHeight;
+        document.querySelector('#dpi').textContent = 'DPI: ' + window.devicePixelRatio;
+        document.querySelector('#innerWidth').textContent = 'Dimensions: ' + innerDimensions;
+      });
+    </script>
+  </head>
+
+  <body>
+   <img src="lighthouse-200.jpg" sizes="50vw"
+         srcset="lighthouse-100.jpg 100w, lighthouse-200.jpg 200w,
+                 lighthouse-400.jpg 400w, lighthouse-800.jpg 800w,
+                 lighthouse-1000.jpg 1000w, lighthouse-1400.jpg 1400w,
+                 lighthouse-1800.jpg 1800w">
+
+    <p id="selection"></p>
+    <p id="dpi"></p>
+    <p id="innerWidth"></p>
+  </body>
+</html>
