@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <title>DPI-based selection</title>
+
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+      }
+      header {
+        width: 100%;
+        height: 100px;
+        background-color: orange;
+      }
+    </style>
+
+    <script>
+      window.addEventListener('load', function() {
+        var selected = document.querySelector('img').currentSrc;
+        document.querySelector('p').textContent = 'Selected: ' + selected;
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <img srcset="close@1.5x.png 1.5x, close@2x.png 2x, close@2.25x.png 2.25x" alt="alternative text">
+    </header>
+
+    <p></p>
+  </body>
+</html>
