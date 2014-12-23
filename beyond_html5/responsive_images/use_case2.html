@@ -17,10 +17,13 @@
     </style>
 
     <script>
-      window.addEventListener('load', function() {
+      window.addEventListener('load', printDimensions);
+      window.addEventListener('resize', printDimensions);
+
+      function printDimensions() {
         var innerDimensions = window.innerWidth + 'x' + window.innerHeight;
         document.querySelector('#innerWidth').textContent = 'Dimensions: ' + innerDimensions;
-      });
+      }
     </script>
   </head>
 
