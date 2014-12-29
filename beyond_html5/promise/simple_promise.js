@@ -5,6 +5,8 @@ function error(err) {
 }
 
 function doIt() {
+  clear();
+
   var addressURL = serviceURL + '?' +
                   'address=1600+Amphitheatre+Parkway,+Mountain+View,+CA';
 
@@ -14,6 +16,8 @@ function doIt() {
 }
 
 function doMultiple() {
+  clear();
+
   var operations = [];
   var op1url = serviceURL + '?latlng=40.714224,-73.961452';
   operations.push(Module.get(op1url));
@@ -27,9 +31,11 @@ function doMultiple() {
 }
 
 function doOneThenAnother() {
+  clear();
+
   var op1url = serviceURL + '?latlng=40.714224,-73.961452';
   Module.get(op1url).then(function success(data1) {
-    console.log('Result 1:', data1);
+    log('Result 1:', data1);
     var op2url = serviceURL + '?latlng=40,4';
     return Module.get(op2url);
   }, error).then(function success(data2) {
@@ -38,6 +44,8 @@ function doOneThenAnother() {
 }
 
 function doManySequential() {
+  clear();
+
   var list = [serviceURL + '?latlng=40.714224,-73.961452',
               serviceURL + '?latlng=40,4',
               serviceURL + '?latlng=35.567,-74.987'];
@@ -48,12 +56,14 @@ function doManySequential() {
     sequence = sequence.then(function() {
       return Module.get(aURL);
     }).then(function(data) {
-        console.log('Data: ', data);
+        log('Data: ', data);
     });
   });
 }
 
 function doManySequential2() {
+  clear();
+  
   var list = [serviceURL + '?latlng=40.714224,-73.961452',
               serviceURL + '?latlng=40,4',
               serviceURL + '?latlng=35.567,-74.987'];
@@ -62,7 +72,7 @@ function doManySequential2() {
     return sequence.then(function() {
       return Module.get(urlToLoad);
     }).then(function(data) {
-      console.log('Data: ', data);
+      log('Data: ', data);
     });
   }, Promise.resolve());
 }

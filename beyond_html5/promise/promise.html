@@ -15,6 +15,10 @@
         document.getElementById('result').innerHTML += ('<br>' + str);
       }
 
+      function clear() {
+        document.getElementById('result').innerHTML = '';
+      }
+
       function error(msg) {
         document.getElementById('result').innerHTML += ('<br>' +
                                 '<span class="error">' + msg + '</span>');
