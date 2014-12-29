@@ -42,6 +42,30 @@ function doPromiseAll() {
   }, error);
 }
 
+function doPromiseRace() {
+  clear();
+
+  var coordinates = [
+                     '?latlng=40.416646, -3.703818',
+                     '?latlng=38.921667, 1.293333'
+                    ];
+
+  var operations = coordinates.map(function(aCoordinate) {
+    return Module.get(serviceURL + aCoordinate);
+  });
+
+  operations.push(delay(4000));
+
+  Promise.race(operations).then(function success(response) {
+    if (response) {
+      log('First Response: ', response.results[0].formatted_address);
+    }
+    else {
+      log('The remote operations took more than 4 seconds');
+    }
+  }, error);
+}
+
 function doPromiseChain() {
   clear();
 
