@@ -32,7 +32,17 @@ function doNoRejectFunction() {
   });
 }
 
-function doCatchFunction() {
+function doCatchFunction1() {
+  clear();
+
+  rejectMe().then(() => {
+    error('It should not be called');
+  }).catch((e) => {
+      error('Catched: ', e.name);
+  });
+}
+
+function doCatchFunction2() {
   clear();
 
   resolveMe().then(() => {
