@@ -19,7 +19,7 @@ function doPromiseAll() {
   clear();
 
   var operations = [];
-  var op1url = serviceURL + '?latlng=40.714224,-73.961452';
+  var op1url = serviceURL + '?latlng=40.416646, -3.703818';
   operations.push(Module.get(op1url));
   var op2url = serviceURL + '?latlng=40,4';
   operations.push(Module.get(op2url));
