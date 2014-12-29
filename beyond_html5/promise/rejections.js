@@ -15,7 +15,7 @@ function resolveMe() {
 function doSimpleReject() {
   clear();
 
-  brokenFunction().then(() => {
+  rejectMe().then(() => {
     error('It should not be called');
   }, (e) => {
       log('Rejected: ', e.name);
@@ -33,8 +33,8 @@ function doNoRejectFunction() {
 function doCatchFunction() {
   clear();
 
-  brokenFunction().then(() => {
-    error('It should not be called');
+  resolveMe().then(() => {
+    brokenFunction();
   }).catch((e) => {
       error('Catched: ', e.name);
   });
