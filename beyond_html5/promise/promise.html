@@ -7,8 +7,12 @@
     <script src="simple_promise.js"></script>
 
     <script>
-      function log(msg) {
-        document.getElementById('result').innerHTML += ('<br>' + msg);
+      function log() {
+        var str = '';
+        for(var j = 0; j < arguments.length; j++) {
+          str += (arguments[j] + ' ');
+        }
+        document.getElementById('result').innerHTML += ('<br>' + str);
       }
 
       function error(msg) {
