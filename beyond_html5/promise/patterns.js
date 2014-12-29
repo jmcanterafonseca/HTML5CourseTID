@@ -29,8 +29,8 @@ function TimerTask(delay) {
 }
 
 TimerTask.prototype.run = function() {
-  return new Promise(function(resolve, reject) {
-    window.setTimeout(resolve, delay);
+  return new Promise((resolve, reject) => {
+    window.setTimeout(resolve, this.delay);
   });
 }
 
