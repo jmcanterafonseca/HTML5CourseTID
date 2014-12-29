@@ -10,7 +10,7 @@ function doSimpleReject() {
   rejectMe().then(() => {
     error('It should not be called');
   }, (e) => {
-      log('Rejected: ', e.name);
+      error('Rejected: ', e.name);
   });
 }
 
