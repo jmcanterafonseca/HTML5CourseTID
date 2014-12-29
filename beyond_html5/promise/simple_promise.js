@@ -4,6 +4,12 @@ function error(err) {
   error('Error: ', err.name);
 }
 
+function delay(timeout) {
+  return new Promise(function(resolve, reject) {
+    window.setTimeout(resolve, timeout);
+  });
+}
+
 function doIt() {
   clear();
 
@@ -41,10 +47,11 @@ function doPromiseChain() {
 
   Module.get(op1url).then(function success(data1) {
     log('Result 1:', data1.results[0].formatted_address);
-
+    return delay(2000);
+  }, error).then(() => {
     return Module.get(op2url);
-  }, error).then(function success(data2) {
-    log('Result 2:', data2.results[0].formatted_address);
+  }).then(function success(data2) {
+      log('Result 2:', data2.results[0].formatted_address);
   }, error);
 }
 
