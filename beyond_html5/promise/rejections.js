@@ -5,7 +5,9 @@ function rejectMe() {
 }
 
 function brokenFunction() {
-  throw 'broken';
+  throw {
+    name: 'AppIsBroken'
+  };
 }
 
 function resolveMe() {
