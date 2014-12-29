@@ -21,7 +21,7 @@ function doPromiseAll() {
   var operations = [];
   var op1url = serviceURL + '?latlng=40.416646, -3.703818';
   operations.push(Module.get(op1url));
-  var op2url = serviceURL + '?latlng=40,4';
+  var op2url = serviceURL + '?latlng=38.921667, 1.293333';
   operations.push(Module.get(op2url));
 
   Promise.all(operations).then(function success(responses) {
@@ -42,3 +42,4 @@ function doPromiseChain() {
     log('Result 2:', data2.results[0].formatted_address);
   }, error);
 }
+
