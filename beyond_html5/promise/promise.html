@@ -3,25 +3,33 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <script src="promise.js"></script>
+    <script src="url_fetch.js"></script>
+    <script src="simple_promise.js"></script>
+
+    <script>
+      function log(msg) {
+        document.getElementById('result').innerHTML += ('<br>' + msg);
+      }
+
+      function error(msg) {
+        document.getElementById('result').innerHTML += ('<br>' +
+                                '<span class="error">' + msg + '</span>');
+      }
+    </script>
+
+    <style>
+      .error {
+        color: red;
+      }
+    </style>
   </head>
 
   <body>
     <h2>Promise</h2>
 
-    <button type=button onclick="doIt()">Run!</button>
+    <button type=button onclick="doIt()">Run Promise!</button>
     <button type=button onclick="doMultiple()">Run Parallel</button>
     <button type=button onclick="doOneThenAnother()">Run Sequential</button>
-    <button type=button onclick="doManySequential()">Run Many Sequential</button>
-    <button type=button onclick="doManySequential2()">Run Many Sequential 2</button>
-    <br>
-    <button type=button onclick="doReject()">Reject</button>
-    <button type=button onclick="doRace()">Race</button>
-    <br>
-    <button type=button onclick="doTest()">Test!</button>
-    <br>
-    <button type=button onclick="doTest21()">Test21!</button>
-    <br>
-    <button type=button onclick="doTest31()">Test31!</button>
+    <p id="result"></p>
   </body>
 </html>
