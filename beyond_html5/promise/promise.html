@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <script src="url_fetch.js"></script>
     <script src="simple_promise.js"></script>
+    <script src="rejections.js"></script>
 
     <script>
       function log() {
@@ -20,7 +21,7 @@
       }
 
       function error(msg) {
-        document.getElementById('result').innerHTML += ('<br>' +
+        document.getElementById('result').innerHTML += ('<br><br>' +
                                 '<span class="error">' + msg + '</span>');
       }
     </script>
@@ -33,11 +34,19 @@
   </head>
 
   <body>
-    <h2>Promise</h2>
+    <h2>Promises</h2>
 
+    <h3>Basic Examples </h3>
     <button type=button onclick="doIt()">Run Promise!</button>
     <button type=button onclick="doPromiseChain()">Run Promise chain</button>
     <button type=button onclick="doPromiseAll()">Run Promise.all</button>
+
+    <h3>Handling Rejections</h3>
+
+    <button type=button onclick="executeSimpleReject()">Simple Reject</button>
+    <button type=button onclick="noRejectFunction()">No Reject Handler</button>
+    <button type=button onclick="catchFunction()">Catch function</button>
+
 
     <p id="result"></p>
   </body>

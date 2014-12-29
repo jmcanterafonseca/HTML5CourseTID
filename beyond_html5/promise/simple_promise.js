@@ -4,6 +4,7 @@ function error(err) {
   error('Error: ', err.name);
 }
 
+// Introduces a delay of 'timeout' miliseconds
 function delay(timeout) {
   return new Promise(function(resolve, reject) {
     window.setTimeout(resolve, timeout);
