@@ -25,8 +25,8 @@ function doPromiseAll() {
   operations.push(Module.get(op2url));
 
   Promise.all(operations).then(function success(results) {
-    log('Result 1:', results[0]);
-    log('Result 2:', results[1]);
+    log('Result 1:', results[0][0].long_name);
+    log('Result 2:', results[1][0].long_name);
   }, error);
 }
 
@@ -35,10 +35,10 @@ function doPromiseChain() {
 
   var op1url = serviceURL + '?latlng=39.714224,-72.961452';
   Module.get(op1url).then(function success(data1) {
-    log('Result 1:', data1);
+    log('Result 1:', data1[0].long_name);
     var op2url = serviceURL + '?latlng=40,4';
     return Module.get(op2url);
   }, error).then(function success(data2) {
-    log('Result 2:', data2);
+    log('Result 2:', data2[0].long_name);
   }, error);
 }
