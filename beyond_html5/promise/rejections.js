@@ -51,3 +51,15 @@ function doCatchFunction2() {
       error('Catched: ', e.name);
   });
 }
+
+function doCatchFunctionChain() {
+  clear();
+
+  resolveMe().then(() => {
+    return resolveMe();
+  }).then(() => {
+      return rejectMe();
+  }).catch((e) => {
+      error('Catched: ', e.name);
+  });
+}
