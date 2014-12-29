@@ -2,7 +2,7 @@
 
 var Module = (function() {
   function retrieveResource(url) {
-    console.log('Retrieving resource');
+    console.log('Retrieving resource: ', url);
 
     if (!url) {
       return Promise.reject({
