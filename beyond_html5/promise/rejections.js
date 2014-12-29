@@ -5,6 +5,8 @@ function rejectedPromise() {
 }
 
 function executeSimpleReject() {
+  clear();
+
   rejectedPromise.then(() => {
     error('It should not be called');
   }, (e) => {
