@@ -35,7 +35,7 @@ function doNoRejectFunction() {
 function doCatchFunction1() {
   clear();
 
-  rejectMe().then(() => {
+  brokenFunction().then(() => {
     error('It should not be called');
   }).catch((e) => {
       error('Catched: ', e.name);
