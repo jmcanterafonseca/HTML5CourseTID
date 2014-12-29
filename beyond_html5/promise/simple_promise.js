@@ -11,7 +11,7 @@ function doIt() {
                   'address=1600+Amphitheatre+Parkway,+Mountain+View,+CA';
 
   Module.get(addressURL).then(function success(data) {
-    log('Data: ', data);
+    log('Data: ', JSON.stringify(data));
   }, error);
 }
 
@@ -35,7 +35,7 @@ function doPromiseChain() {
 
   var op1url = serviceURL + '?latlng=39.714224,-72.961452';
   Module.get(op1url).then(function success(data1) {
-    log('Result 1:', data1[0]);
+    log('Result 1:', data1[0].long_name);
     var op2url = serviceURL + '?latlng=40,4';
     return Module.get(op2url);
   }, error).then(function success(data2) {

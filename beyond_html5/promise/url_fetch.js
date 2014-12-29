@@ -14,10 +14,11 @@ var Module = (function() {
       var request = new XMLHttpRequest();
 
       request.open('GET', url);
+      request.responseType = 'json';
 
       request.onload = function() {
         console.log('Loaded!');
-        resolve(request.responseText);
+        resolve(request.response);
       }
 
       request.onerror = function() {
