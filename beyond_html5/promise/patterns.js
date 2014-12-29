@@ -20,7 +20,7 @@ function FetchTask(url) {
   this.url = url;
 }
 
-FecthTask.prototype.run = function() {
+FetchTask.prototype.run = function() {
   return Module.get(this.url);
 }
 
