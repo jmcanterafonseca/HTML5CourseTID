@@ -37,9 +37,11 @@ function doPromiseChain() {
   clear();
 
   var op1url = serviceURL + '?latlng=39.842222, 3.133611';
+  var op2url = serviceURL + '?latlng=41.651944, -4.728333';
+
   Module.get(op1url).then(function success(data1) {
     log('Result 1:', data1.results[0].formatted_address);
-    var op2url = serviceURL + '?latlng=41.651944, -4.728333';
+
     return Module.get(op2url);
   }, error).then(function success(data2) {
     log('Result 2:', data2.results[0].formatted_address);
