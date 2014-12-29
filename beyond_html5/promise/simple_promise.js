@@ -18,11 +18,14 @@ function doIt() {
 function doPromiseAll() {
   clear();
 
-  var operations = [];
-  var op1url = serviceURL + '?latlng=40.416646, -3.703818';
-  operations.push(Module.get(op1url));
-  var op2url = serviceURL + '?latlng=38.921667, 1.293333';
-  operations.push(Module.get(op2url));
+  var coordinates = [
+                     '?latlng=40.416646, -3.703818',
+                     '?latlng=38.921667, 1.293333'
+                    ];
+
+  var operations = coordinates.map(function(aCoordinate) {
+    return Module.get(aCoordinate);
+  });
 
   Promise.all(operations).then(function success(responses) {
     log('Result 1:', responses[0].results[0].formatted_address);
