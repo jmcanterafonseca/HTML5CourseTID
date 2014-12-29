@@ -25,8 +25,8 @@ function doPromiseAll() {
   operations.push(Module.get(op2url));
 
   Promise.all(operations).then(function success(results) {
-    log('Result 1:', results[0].results.address_components[0].long_name);
-    log('Result 2:', results[1].results.address_components[0].long_name);
+    log('Result 1:', results[0].results[0].address_components[0].long_name);
+    log('Result 2:', results[1].results[0].address_components[0].long_name);
   }, error);
 }
 
