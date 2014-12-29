@@ -21,3 +21,13 @@ function doNoRejectFunction() {
     error('It should not be called');
   });
 }
+
+function doCatchFunction() {
+  clear();
+
+  rejectMe().then(() => {
+    error('It should not be called');
+  }).catch((e) => {
+      error('Catched: ', e.name);
+  });
+}
