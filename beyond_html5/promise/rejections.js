@@ -1,4 +1,4 @@
-function rejectedPromise() {
+function rejectMe() {
   return Promise.reject({
     name: 'RejectByDefinition'
   });
@@ -7,7 +7,7 @@ function rejectedPromise() {
 function executeSimpleReject() {
   clear();
 
-  rejectedPromise.then(() => {
+  rejectMe().then(() => {
     error('It should not be called');
   }, (e) => {
       log('Rejected: ', e.name);
