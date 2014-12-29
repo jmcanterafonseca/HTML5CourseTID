@@ -24,7 +24,7 @@ function doPromiseAll() {
                     ];
 
   var operations = coordinates.map(function(aCoordinate) {
-    return Module.get(aCoordinate);
+    return Module.get(serviceURL + aCoordinate);
   });
 
   Promise.all(operations).then(function success(responses) {
