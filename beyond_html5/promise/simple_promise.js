@@ -15,7 +15,7 @@ function doIt() {
   }, error);
 }
 
-function doMultiple() {
+function doPromiseAll() {
   clear();
 
   var operations = [];
@@ -30,7 +30,7 @@ function doMultiple() {
   }, error);
 }
 
-function doOneThenAnother() {
+function doPromiseChain() {
   clear();
 
   var op1url = serviceURL + '?latlng=39.714224,-72.961452';
@@ -41,38 +41,4 @@ function doOneThenAnother() {
   }, error).then(function success(data2) {
     log('Result 2:', data2);
   }, error);
-}
-
-function doManySequential() {
-  clear();
-
-  var list = [serviceURL + '?latlng=40.714224,-73.961452',
-              serviceURL + '?latlng=40,4',
-              serviceURL + '?latlng=35.567,-74.987'];
-
-  var sequence = Promise.resolve();
-
-  list.forEach(function(aURL) {
-    sequence = sequence.then(function() {
-      return Module.get(aURL);
-    }).then(function(data) {
-        log('Data: ', data);
-    });
-  });
-}
-
-function doManySequential2() {
-  clear();
-
-  var list = [serviceURL + '?latlng=40.714224,-73.961452',
-              serviceURL + '?latlng=40,4',
-              serviceURL + '?latlng=35.567,-74.987'];
-
-  list.reduce(function(sequence, urlToLoad) {
-    return sequence.then(function() {
-      return Module.get(urlToLoad);
-    }).then(function(data) {
-      log('Data: ', data);
-    });
-  }, Promise.resolve());
 }
