@@ -33,6 +33,8 @@ function doPromiseAll() {
     return Module.get(serviceURL + aCoordinate);
   });
 
+  operations.push(delay(4000));
+
   Promise.all(operations).then(function success(responses) {
     log('Result 1:', responses[0].results[0].formatted_address);
     log('Result 2:', responses[1].results[0].formatted_address);
@@ -47,11 +49,10 @@ function doPromiseChain() {
 
   Module.get(op1url).then(function success(data1) {
     log('Result 1:', data1.results[0].formatted_address);
-    return delay(2000);
+    return delay(4000);
   }, error).then(() => {
     return Module.get(op2url);
   }).then(function success(data2) {
       log('Result 2:', data2.results[0].formatted_address);
   }, error);
 }
-
