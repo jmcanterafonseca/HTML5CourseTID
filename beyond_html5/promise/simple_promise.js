@@ -33,7 +33,7 @@ function doMultiple() {
 function doOneThenAnother() {
   clear();
 
-  var op1url = serviceURL + '?latlng=40.714224,-73.961452';
+  var op1url = serviceURL + '?latlng=39.714224,-72.961452';
   Module.get(op1url).then(function success(data1) {
     log('Result 1:', data1);
     var op2url = serviceURL + '?latlng=40,4';
@@ -63,7 +63,7 @@ function doManySequential() {
 
 function doManySequential2() {
   clear();
-  
+
   var list = [serviceURL + '?latlng=40.714224,-73.961452',
               serviceURL + '?latlng=40,4',
               serviceURL + '?latlng=35.567,-74.987'];
