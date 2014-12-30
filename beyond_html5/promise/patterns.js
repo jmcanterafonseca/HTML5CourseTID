@@ -16,24 +16,23 @@ Promise.sequential = function(runnables) {
 }
 
 Promise.all2 = function(futures) {
-  var allPromise = new Promise(function(resolve, reject) {
-     Promise.all(futures).then(resolve.bind(null, futures.length), reject);
-  });
-
-  return aGen(futures, allPromise);
+  return {
+    all: Promise.all(futures),
+    futures: aGen(futures)
+  }
 }
 
-function* aGen(futures, allPromise, futureHandler) {
+function* aGen(futures, futureHandler) {
   for(var j = 0; j < futures.length; j++) {
     var newP = new Promise(function(index, resolve, reject) {
       futures[index].then(function(res) {
-        futureHandler.oncompleted(index, res);
+        futureHandler && futureHandler.oncompleted(index, res);
         resolve({
           subject: index,
           result: res
         });
       }, function(err) {
-          futureHandler.onerror(index, err);
+          futureHandler && futureHandler.onerror(index, err);
           reject({
             subject: index,
             error: err
@@ -42,10 +41,6 @@ function* aGen(futures, allPromise, futureHandler) {
     }.bind(null, j));
 
     yield newP;
-  }
-
-  if (allPromise) {
-    yield allPromise;
   }
 }
 
@@ -90,7 +85,7 @@ Promise.all3 = function(futures) {
 
   return {
     all: allPromise,
-    futures: aGen(futures, null, futureHandler)
+    futures: aGen(futures, futureHandler)
   }
 }
 
@@ -136,30 +131,6 @@ function doManySequential() {
   });
 }
 
-// After five seconds the list of URLs are fetched
-function doManySequential2() {
-  clear();
-
-  var list = [serviceURL + '?latlng=40.416646, -3.703818',
-              serviceURL + '?latlng=38.921667, 1.293333',
-              serviceURL + '?latlng=39.842222, 3.133611'];
-
-  var runnables = list.map(function(item) {
-    return new FetchTask(item);
-  });
-
-  var aux = [
-              new TimerTask(5000),
-            ];
-  var runnablesList = aux.concat(runnables);
-
-  Promise.sequential(runnablesList).then(function(dataList) {
-    log('Results: ', dataList[1].results[0].formatted_address);
-    log('Results: ', dataList[2].results[0].formatted_address);
-    log('Results: ', dataList[3].results[0].formatted_address);
-  });
-}
-
 // Improves Promise.all by reporting the individual results
 function doPromiseAllImproved1() {
   clear();
@@ -172,14 +143,15 @@ function doPromiseAllImproved1() {
     t2.run()
   ];
 
-  for(var p of Promise.all2(promises)) {
+  var executionData = Promise.all2(promises);
+
+  executionData.all.then(function(results) {
+    log('Promise.all finished');
+  });
+
+  for(var p of executionData.futures) {
     p.then(function(r) {
-      if (promiseIndex === promises.length) {
-        log('All is done!!!');
-      }
-      else {
-        log('Done!!', r.subject, r.result);
-      }
+      log('Done!!', r.subject, r.result);
     });
   }
 }
