@@ -1,3 +1,4 @@
+// Run the passed runnables sequentially
 Promise.sequential = function(runnables) {
   return new Promise(function(resolve, reject) {
     var results = [];
@@ -15,6 +16,8 @@ Promise.sequential = function(runnables) {
   });
 }
 
+// Improves Promise.all by reporting the individual results as soon as they
+// are ready
 Promise.all2 = function(futures) {
   return {
     all: Promise.all(futures),
@@ -22,6 +25,7 @@ Promise.all2 = function(futures) {
   }
 }
 
+// auxiliary generator from Promise.all2 and Promise.all3
 function* aGen(futures, futureHandler) {
   for(var j = 0; j < futures.length; j++) {
     var newP = new Promise(function(index, resolve, reject) {
@@ -44,6 +48,7 @@ function* aGen(futures, futureHandler) {
   }
 }
 
+// Executes all the futures regardless the error conditions
 Promise.all3 = function(futures) {
   var futureHandler = {
     numResponses: 0,
@@ -63,7 +68,7 @@ Promise.all3 = function(futures) {
       this._doResolve();
     },
 
-    _doResolve() {
+    _doResolve: function() {
       if (this.numResponses === this.totalCalls &&
           typeof this.resolutionFunction === 'function') {
         window.setTimeout(this.resolutionFunction, 0, {
@@ -89,109 +94,109 @@ Promise.all3 = function(futures) {
   }
 }
 
-function FetchTask(url) {
-  this.url = url;
-}
+// Promise.parallel executes the list of runnables in batches which are
+// transparent to the developer
+Promise.parallel = function(runnables, batchSize) {
+  var batchSize = batchSize || 2;
+  var futureHandler = {
+    numResponses: 0,
+    errors: [],
+    results: [],
+    totalCalls: runnables.length,
+    promiseResolvers: [],
+    nextToRun: batchSize,
 
-FetchTask.prototype.run = function() {
-  return Module.get(this.url);
-}
+    oncompleted: function(index, result) {
+      this.results[index] = result;
+      this.numResponses++;
+      this._doResolve();
+    },
+    onerror: function(index, err) {
+      this.results[index] = null;
+      this.errors[index] = err;
+      this.numResponses++;
+      this._doResolve();
+    },
 
-function TimerTask(duration) {
-  this.duration = duration;
-}
+    _doResolve: function() {
+      if (this.numResponses === this.totalCalls &&
+          typeof this.resolutionFunction === 'function') {
+        window.setTimeout(this.resolutionFunction, 0, {
+          errors: this.errors,
+          results: this.results
+        });
+        return;
+      }
+      var nextToRun = this.nextToRun++;
+      if (nextToRun >= runnables.length) {
+        return;
+      }
+      console.log('Next to run: ', nextToRun);
 
-TimerTask.prototype.run = function() {
-  return new Promise(function(resolve, reject) {
-    window.setTimeout(resolve.bind(null, this.duration), this.duration);
-  }.bind(this));
-}
+      runnables[nextToRun].run().then(function(idx, result) {
+        this.promiseResolvers[idx].resolve({
+          subject: idx,
+          result: result
+        });
+        this.oncompleted(idx, result);
+      }.bind(this, nextToRun), function(idx, err) {
+        this.promiseResolvers[idx].reject({
+          subject: idx,
+          error: err
+        });
+        this.onerror(idx, err);
+      }.bind(this, nextToRun));
+    },
 
-// After five seconds the list of URLs are fetched
-function doManySequential() {
-  clear();
+    set resolver(r) {
+      this.resolutionFunction = r;
+      // this._doResolve();
+    },
 
-  var list = [serviceURL + '?latlng=40.416646, -3.703818',
-              serviceURL + '?latlng=38.921667, 1.293333',
-              serviceURL + '?latlng=39.842222, 3.133611'];
+    setPromiseResolver(index, resolve, reject) {
+      this.promiseResolvers[index] = {
+        resolve: resolve,
+        reject: reject
+      };
+    }
+  };
 
-  var runnables = list.map(function(item) {
-    return new FetchTask(item);
+  var allPromise = new Promise(function(resolve, reject) {
+    futureHandler.resolver = resolve;
   });
 
-  var aux = [
-              new TimerTask(5000),
-            ];
-  var runnablesList = aux.concat(runnables);
-
-  Promise.sequential(runnablesList).then(function(dataList) {
-    log('Results: ', dataList[1].results[0].formatted_address);
-    log('Results: ', dataList[2].results[0].formatted_address);
-    log('Results: ', dataList[3].results[0].formatted_address);
-  });
-}
-
-// Improves Promise.all by reporting the individual results
-function doPromiseAllImproved1() {
-  clear();
-
-  var t1 = new TimerTask(4000);
-  var t2 = new TimerTask(1000);
-
-  var promises = [
-    t1.run(),
-    t2.run()
-  ];
-
-  var executionData = Promise.all2(promises);
-
-  executionData.all.then(function(results) {
-    log('Promise.all finished');
-  });
-
-  for(var p of executionData.futures) {
-    p.then(function(r) {
-      log('Done!!', r.subject, r.result);
-    });
+  return {
+    all: allPromise,
+    futures: parallelGen(runnables, batchSize, futureHandler)
   }
 }
 
-// Executes all the futures regardless the error conditions
-function doPromiseAllImproved2() {
-  clear();
+function* parallelGen(runnables, batchSize, futureHandler) {
+  // Initially only the
+  for(var j = 0; j < batchSize; j++) {
+    var newPromise = new Promise(function(index, resolve, reject) {
+      runnables[j].run().then(function(result) {
+        resolve({
+          subject: index,
+          result: result
+        });
+        futureHandler.oncompleted(index, result);
+      }, function(err) {
+          reject({
+            subject: index,
+            error: err
+          })
+      });
+    }.bind(null, j));
 
-  var t1 = new TimerTask(4000);
-  var t2 = new TimerTask(1000);
+    yield newPromise;
+  }
 
-  var promises = [
-    t1.run(),
-    t2.run(),
-    Promise.reject({
-      name: 'RejectedByDefinition'
-    })
-  ];
+  for(var v = batchSize; v < runnables.length; v++) {
+    var promise = new Promise(function(index, resolve, reject) {
+      futureHandler.setPromiseResolver(index, resolve, reject);
+    }.bind(null, v));
 
-  var executionData = Promise.all3(promises);
-
-  executionData.all.then(function(data) {
-    // Code executed when all the futures have finished
-    log('*** Everything finished ***');
-
-    data.results.forEach(function(aResult, index) {
-      if (aResult) {
-        log('Result: ', index, aResult);
-      }
-      else {
-        error('Error: ', index, data.errors[index].name);
-      }
-    });
-  });
-
-  for(var p of executionData.futures) {
-    p.then(function(r) {
-      log('Done!!', r.subject, r.result);
-    }, function rejected(r) {
-        error('Error: ', r.subject, r.error.name);
-    });
+    yield promise;
   }
 }

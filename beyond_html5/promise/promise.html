@@ -7,6 +7,7 @@
     <script src="simple_promise.js"></script>
     <script src="rejections.js"></script>
     <script src="patterns.js"></script>
+    <script src="promise_runner.js"></script>
 
     <script>
       function log() {
@@ -60,7 +61,7 @@
     <button type=button onclick="doManySequential()">Run Promise.sequential</button>
     <button type=button onclick="doPromiseAllImproved1()">Run Promise.all2</button>
     <button type=button onclick="doPromiseAllImproved2()">Run Promise.all3</button>
-    <button type=button onclick="doPromiseAllImproved1()">Run Promise.all4</button>
+    <button type=button onclick="doPromiseParallel()">Run Promise.parallel</button>
 
     <p id="result"></p>
   </body>
