@@ -80,7 +80,8 @@ Promise.all3 = function(futures) {
 // transparent to the developer
 Promise.parallel = function(runnables, batchSize) {
   const DEFAULT_BATCH_SIZE = 2;
-  var batchSize = batchSize || DEFAULT_BATCH_SIZE;
+  var batchSize = Math.min(batchSize || DEFAULT_BATCH_SIZE, runnables.length);
+  alert(batchSize);
 
   var futureHandler = {
     numResponses: 0,
@@ -176,7 +177,7 @@ Promise.parallel = function(runnables, batchSize) {
 
 // Auxiliary generator for Promise.parallel
 function* parallelGen(runnables, batchSize, futureHandler) {
-  // Initially only the
+  // Initially only the the first batch is launched
   for(var j = 0; j < batchSize; j++) {
     var newPromise = new Promise(function(index, resolve, reject) {
       runnables[j].run().then(function(result) {
