@@ -130,7 +130,7 @@ function doPromiseParallel() {
   ];
 
   // Executes in batches of 2
-  var executionData = Promise.parallel(runnables, Number.MAX_VALUE);
+  var executionData = Promise.parallel(runnables);
 
   executionData.all.then(function(data) {
     // Code executed when all the futures have finished

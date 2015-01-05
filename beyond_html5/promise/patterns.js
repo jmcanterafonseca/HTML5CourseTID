@@ -81,7 +81,6 @@ Promise.all3 = function(futures) {
 Promise.parallel = function(runnables, batchSize) {
   const DEFAULT_BATCH_SIZE = 2;
   var batchSize = Math.min(batchSize || DEFAULT_BATCH_SIZE, runnables.length);
-  alert(batchSize);
 
   var futureHandler = {
     numResponses: 0,
