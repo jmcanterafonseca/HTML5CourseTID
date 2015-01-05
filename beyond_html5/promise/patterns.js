@@ -1,21 +1,3 @@
-// Run the passed runnables sequentially
-Promise.sequential = function(runnables) {
-  return new Promise(function(resolve, reject) {
-    var results = [];
-
-    runnables.reduce(function(sequence, aRunnable) {
-      return sequence.then(function() {
-        return aRunnable.run();
-      }).then(function(data) {
-          results.push(data);
-          if (results.length === runnables.length) {
-            resolve(results);
-          }
-      });
-    }, Promise.resolve());
-  });
-}
-
 // Improves Promise.all by reporting the individual results as soon as they
 // are ready
 Promise.all2 = function(futures) {
@@ -97,7 +79,9 @@ Promise.all3 = function(futures) {
 // Promise.parallel executes the list of runnables in batches which are
 // transparent to the developer
 Promise.parallel = function(runnables, batchSize) {
-  var batchSize = batchSize || 2;
+  const DEFAULT_BATCH_SIZE = 2;
+  var batchSize = batchSize || DEFAULT_BATCH_SIZE;
+
   var futureHandler = {
     numResponses: 0,
     errors: [],
@@ -118,15 +102,19 @@ Promise.parallel = function(runnables, batchSize) {
       this._doResolve();
     },
 
-    _doResolve: function() {
+    _checkFinish() {
       if (this.numResponses === this.totalCalls &&
           typeof this.resolutionFunction === 'function') {
         window.setTimeout(this.resolutionFunction, 0, {
           errors: this.errors,
           results: this.results
         });
-        return;
       }
+    },
+
+    _doResolve: function() {
+      this._checkFinish();
+
       var nextToRun = this.nextToRun++;
       if (nextToRun >= runnables.length) {
         return;
@@ -134,13 +122,15 @@ Promise.parallel = function(runnables, batchSize) {
       console.log('Next to run: ', nextToRun);
 
       runnables[nextToRun].run().then(function(idx, result) {
-        this.promiseResolvers[idx].resolve({
+        var resolver = this.promiseResolvers[idx];
+        resolver && resolver.resolve({
           subject: idx,
           result: result
         });
         this.oncompleted(idx, result);
       }.bind(this, nextToRun), function(idx, err) {
-        this.promiseResolvers[idx].reject({
+        var resolver = this.promiseResolvers[idx];
+        resolver && resolver.reject({
           subject: idx,
           error: err
         });
@@ -150,10 +140,23 @@ Promise.parallel = function(runnables, batchSize) {
 
     set resolver(r) {
       this.resolutionFunction = r;
-      // this._doResolve();
+      // Check if by the time we have the resolver everything was resolved
+      this._checkFinish();
     },
 
     setPromiseResolver(index, resolve, reject) {
+      // If by the time we call this function the corresponding promise was
+      // already resolved, then call directly resolve or reject
+      if (typeof this.results[index] !== 'undefined') {
+        resolve(this.results[index]);
+        return;
+      }
+
+      if (typeof this.errors[index] !== 'undefined') {
+        reject(this.errors[index]);
+        return;
+      }
+
       this.promiseResolvers[index] = {
         resolve: resolve,
         reject: reject
@@ -171,6 +174,7 @@ Promise.parallel = function(runnables, batchSize) {
   }
 }
 
+// Auxiliary generator for Promise.parallel
 function* parallelGen(runnables, batchSize, futureHandler) {
   // Initially only the
   for(var j = 0; j < batchSize; j++) {
@@ -199,4 +203,26 @@ function* parallelGen(runnables, batchSize, futureHandler) {
 
     yield promise;
   }
+}
+
+// Run the passed runnables sequentially
+Promise.sequential = function(runnables) {
+  return new Promise(function(resolve, reject) {
+    var results = [];
+
+    runnables.reduce(function(sequence, aRunnable) {
+      return sequence.then(function() {
+        return aRunnable.run();
+      }).then(function(data) {
+          results.push(data);
+          if (results.length === runnables.length) {
+            resolve(results);
+          }
+      });
+    }, Promise.resolve());
+  });
+}
+
+Promise.sequential2 = function(runnables) {
+  return Promise.parallel(runnables, 1);
 }

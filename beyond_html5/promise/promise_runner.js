@@ -110,6 +110,8 @@ function doPromiseAllImproved2() {
 }
 
 function doPromiseParallel() {
+  clear();
+
   var list = [serviceURL + '?latlng=40.416646, -3.703818',
               serviceURL + '?latlng=38.921667, 1.293333',
               serviceURL + '?latlng=39.842222, 3.133611'];
@@ -119,8 +121,8 @@ function doPromiseParallel() {
   });
 
   var runnables = [
-    new TimerTask(4000),
-    new TimerTask(1000),
+    new TimerTask(10000),
+    new TimerTask(20000),
     aux[0],
     new TimerTask(1000),
     aux[1],
@@ -128,7 +130,7 @@ function doPromiseParallel() {
   ];
 
   // Executes in batches of 2
-  var executionData = Promise.parallel(runnables);
+  var executionData = Promise.parallel(runnables,2);
 
   executionData.all.then(function(data) {
     // Code executed when all the futures have finished
@@ -145,17 +147,51 @@ function doPromiseParallel() {
     });
   });
 
-  var resultHandler = function(r) {
-    if (typeof r.result === 'object') {
-      log('Done!!', r.subject, r.result.results[0].formatted_address);
-      return;
-    }
-    log('Done!!', r.subject, r.result);
-  }
-
   for(var p of executionData.futures) {
     p.then(resultHandler, function rejected(r) {
         error('Error: ', r.subject, r.error.name);
+    });
+  }
+}
+
+var resultHandler = function(r) {
+  if (typeof r.result === 'object') {
+    log('Done!!', r.subject, r.result.results[0].formatted_address);
+    return;
+  }
+  log('Done!!', r.subject, r.result);
+}
+
+// After five seconds the list of URLs are fetched
+function doManySequential2() {
+  clear();
+
+  var list = [serviceURL + '?latlng=40.416646, -3.703818',
+              serviceURL + '?latlng=38.921667, 1.293333',
+              serviceURL + '?latlng=39.842222, 3.133611'];
+
+  var runnables = list.map(function(item) {
+    return new FetchTask(item);
+  });
+
+  var aux = [
+              new TimerTask(5000),
+              new TimerTask(3000),
+              new TimerTask(5000)
+            ];
+  var runnablesList = aux.concat(runnables);
+
+  var executionData = Promise.sequential2(runnablesList);
+
+  executionData.all.then(function(dataList) {
+    log('Results: ', dataList.results[3].results[0].formatted_address);
+    log('Results: ', dataList.results[4].results[0].formatted_address);
+    log('Results: ', dataList.results[5].results[0].formatted_address);
+  });
+
+  for(var p of executionData.futures) {
+    p.then(resultHandler, function rejected(r) {
+      error('Error: ', r.subject, r.error.name);
     });
   }
 }
