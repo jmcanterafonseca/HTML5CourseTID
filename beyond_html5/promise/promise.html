@@ -3,25 +3,67 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <script src="promise.js"></script>
+    <script src="url_fetch.js"></script>
+    <script src="simple_promise.js"></script>
+    <script src="rejections.js"></script>
+    <script src="patterns.js"></script>
+    <script src="promise_runner.js"></script>
+
+    <script>
+      function log() {
+        var str = '';
+        for(var j = 0; j < arguments.length; j++) {
+          str += (arguments[j] + ' ');
+        }
+        document.getElementById('result').innerHTML += ('<br><br>' + str);
+      }
+
+      function clear() {
+        document.getElementById('result').innerHTML = '';
+      }
+
+      function error(msg) {
+        var str = '';
+        for(var j = 0; j < arguments.length; j++) {
+          str += (arguments[j] + ' ');
+        }
+        document.getElementById('result').innerHTML += ('<br><br>' +
+                                '<span class="error">' + str + '</span>');
+      }
+    </script>
+
+    <style>
+      .error {
+        color: red;
+      }
+    </style>
   </head>
 
   <body>
-    <h2>Promise</h2>
+    <h2>Promises</h2>
 
-    <button type=button onclick="doIt()">Run!</button>
-    <button type=button onclick="doMultiple()">Run Parallel</button>
-    <button type=button onclick="doOneThenAnother()">Run Sequential</button>
-    <button type=button onclick="doManySequential()">Run Many Sequential</button>
-    <button type=button onclick="doManySequential2()">Run Many Sequential 2</button>
-    <br>
-    <button type=button onclick="doReject()">Reject</button>
-    <button type=button onclick="doRace()">Race</button>
-    <br>
-    <button type=button onclick="doTest()">Test!</button>
-    <br>
-    <button type=button onclick="doTest21()">Test21!</button>
-    <br>
-    <button type=button onclick="doTest31()">Test31!</button>
+    <h3>Basic Examples </h3>
+    <button type=button onclick="doIt()">Run Promise!</button>
+    <button type=button onclick="doPromiseChain()">Run Promise chain</button>
+    <button type=button onclick="doPromiseAll()">Run Promise.all</button>
+    <button type=button onclick="doPromiseRace()">Run Promise.race</button>
+
+    <h3>Handling Rejections</h3>
+
+    <button type=button onclick="doSimpleReject()">Simple Reject</button>
+    <button type=button onclick="doNoRejectFunction()">No Reject Handler</button>
+    <button type=button onclick="doCatchFunction1()">Catch function 1 </button>
+    <button type=button onclick="doCatchFunction2()">Catch function 2</button>
+    <button type=button onclick="doCatchFunctionChain()">Catch promise chain</button>
+
+    <h3>Design Patterns</h3>
+
+    <button type=button onclick="doManySequential()">Run Promise.sequential</button>
+    <button type=button onclick="doPromiseAllImproved1()">Run Promise.all2</button>
+    <button type=button onclick="doPromiseAllImproved2()">Run Promise.all3</button>
+    <button type=button onclick="doPromiseParallel()">Run Promise.parallel</button>
+
+    <button type=button onclick="doManySequential2()">Run Promise.sequential2</button>
+    <p id="result"></p>
   </body>
 </html>

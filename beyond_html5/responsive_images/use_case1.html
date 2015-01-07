@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <title>DPI-based selection</title>
+
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        width: 100%;
+        height: 100px;
+        background-color: orange;
+      }
+
+      button {
+        background: transparent;
+        outline: none;
+        border: none;
+      }
+
+      h1 {
+        text-align: center;
+        position: relative;
+        top: -20px;
+      }
+    </style>
+
+    <script>
+      window.addEventListener('load', function() {
+        var selected = document.querySelector('img').currentSrc;
+        document.querySelector('p#selection').textContent = 'Selected: ' + selected;
+        var innerDimensions = window.innerWidth + 'x' + window.innerHeight;
+        document.querySelector('#dpi').textContent = 'DPI: ' + window.devicePixelRatio;
+        document.querySelector('#innerWidth').textContent = 'Dimensions: ' + innerDimensions;
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <button type="button">
+        <img srcset="close.png 1x,
+                    close@1.5x.png 1.5x,
+                    close@2x.png 2x,
+                    close@2.25x.png 2.25x"
+        alt="alternative text">
+      </button>
+      <h1>My App</h1>
+    </header>
+
+    <p id="selection"></p>
+    <p id="dpi"></p>
+    <p id="innerWidth"></p>
+  </body>
+</html>

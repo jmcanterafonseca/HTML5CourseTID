@@ -3,10 +3,20 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <script src="service_worker.js"></script>
+    <script defer src="service_worker.js"></script>
+
   </head>
 
   <body>
-    <a href="/a/b.html">Click Here</a>
+    <button id="register" type=button>Register</button>
+    <br>
+    <br>
+    <a href="">Click Here</a>
+
+    <script>
+      document.querySelector('a').href = 'myapp/b.html' + '?t=' + Date.now();
+    </script>
+
+    <p style="color: red"></p>
   </body>
 </html>
