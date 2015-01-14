@@ -11,11 +11,13 @@
 
     </x-list>
 
-    <template id="list-template">
+    <template id="x-list-template">
       <section data-type="list">
         <header>List</header>
         <ul>
-          <li><strong>Element 1</strong></li>
+          <template>
+            <li><a href="#"><strong>Element 1</strong></a></li>
+          </template>
         </ul>
       </section>
     </template>
@@ -26,6 +28,12 @@
     Object.defineProperty(xListProto, 'selectedItem', {
       'get': function() {
         return '1'
+      }
+    });
+
+    Object.defineProperty(xListProto, 'ref', {
+      'set': function() {
+
       }
     });
 
