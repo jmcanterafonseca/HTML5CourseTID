@@ -16,11 +16,7 @@
 
     <template id="x-list-template">
       <link rel="stylesheet" href="lists.css">
-      <style>
-        li > * {
-          pointer-events: none;
-        }
-      </style>
+
       <section data-type="list">
         <header>List</header>
         <ul>
@@ -63,7 +59,8 @@
           shadow.innerHTML += ('<style>' + xhr.responseText + '</style>');
 
           shadow.querySelector('ul').addEventListener('click', function(e) {
-            component.selectedItem = e.target.id;
+            var id = e.target.id || e.target.parentNode.id;
+            component.selectedItem = id;
           });
         }
 
