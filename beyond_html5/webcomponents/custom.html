@@ -43,7 +43,7 @@
     });
 
     xListProto.createdCallback = function() {
-      var shadow = component.createShadowRoot();
+      var shadow = this.createShadowRoot();
 
       var listTemplate = document.getElementById('x-list-template');
       var node = document.importNode(listTemplate.content, true);
