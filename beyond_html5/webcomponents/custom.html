@@ -35,7 +35,6 @@
 
     Object.defineProperty(xListProto, 'ref', {
       set: function(data) {
-        alert(this.shadowRoot);
         data.forEach(function(aItem) {
           var container = this.shadowRoot.querySelector('ul');
           Templates.apply(container, aItem);
@@ -92,6 +91,7 @@
       }
     ];
 
+    alert(window.Templates);
     document.getElementById('my-list').ref = dataList;
   </script>
 </html>
