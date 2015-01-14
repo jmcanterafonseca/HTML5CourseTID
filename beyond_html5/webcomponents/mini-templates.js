@@ -12,7 +12,7 @@ function templateReplace(data) {
 
 var Templates = {
   append: function(container, data) {
-    var template =  container.querySelector('template');
+    var template =  container.querySelector('::content > template');
     // This is a document fragment
     var templateFragment = template.content;
 
