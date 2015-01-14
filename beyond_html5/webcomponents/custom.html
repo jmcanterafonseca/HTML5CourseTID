@@ -15,6 +15,7 @@
     </x-list>
 
     <template id="x-list-template">
+      <link rel="stylesheet" href="lists.css">
       <section data-type="list">
         <header>List</header>
         <ul>
@@ -42,31 +43,35 @@
     });
 
     xListProto.createdCallback = function() {
-      var xhr = new XMLHttpRequest();
+      var shadow = component.createShadowRoot();
 
-      xhr.open('GET', 'lists.css');
+      var listTemplate = document.getElementById('x-list-template');
+      var node = document.importNode(listTemplate.content, true);
+      shadow.appendChild(node);
 
+      var link = shadow.querySelector('link');
       var component = this;
 
-      xhr.onload = function() {
-        var shadow = component.createShadowRoot();
+      if (link) {
+        var resource = link.href;
+        var xhr = new XMLHttpRequest();
 
-        shadow.innerHTML = '<style>' + xhr.responseText + '</style>';
+        xhr.open('GET', resource);
 
-        var listTemplate = document.getElementById('x-list-template');
-        var node = document.importNode(listTemplate.content, true);
-        shadow.appendChild(node);
+        xhr.onload = function() {
+          shadow.innerHTML += ('<style>' + xhr.responseText + '</style>');
 
-        shadow.querySelector('ul').addEventListener('click', function() {
-          console.log('clicked!!!');
-        });
+          shadow.querySelector('ul').addEventListener('click', function() {
+            console.log('clicked!!!');
+          });
+        }
+
+        xhr.onerror = function() {
+          alert('error');
+        }
+
+        xhr.send(null);
       }
-
-      xhr.onerror = function() {
-        alert('error');
-      }
-
-      xhr.send(null);
     };
 
     var XList = document.registerElement('x-list', {
