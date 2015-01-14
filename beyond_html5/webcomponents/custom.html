@@ -31,10 +31,12 @@
     xListProto.createdCallback = function() {
       var xhr = new XMLHttpRequest();
 
-      xhr.open('GET', 'list.css');
+      xhr.open('GET', 'lists.css');
+
+      var component = this;
 
       xhr.onload = function() {
-        var shadow = this.createShadowRoot();
+        var shadow = component.createShadowRoot();
 
         shadow.innerHTML = '<style>' + xhr.responseText + '</style>';
 
