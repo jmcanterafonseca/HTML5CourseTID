@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Custom elements</title>
+  </head>
+
+  <body>
+    <x-list id="my-list">
+
+    </x-list>
+
+    <template id="list-template">
+      <section data-type="list">
+        <ul>
+          <li>Element 1</li>
+        </ul>
+      </section>
+    </template>
+  </body>
+
+  <script>
+    var xListProto = Object.create(HTMLElement.prototype);
+    Object.defineProperty(xListProto, 'selectedItem', {
+      'get': function() {
+        return '1'
+      }
+    });
+
+    xListProto.createdCallback = function() {
+      var xhr = new XMLHttpRequest();
+
+      xhr.open('GET', 'list.css');
+
+      xhr.onload = function() {
+        var shadow = this.createShadowRoot();
+
+        shadow.innerHTML = '<style>' + xhr.responseText + '</style>';
+
+        var listTemplate = document.getElementById('list-template');
+        var node = document.importNode(listTemplate.content, true);
+        shadow.appendChild(node);
+      }
+
+      xhr.onerror = function() {
+        alert('error');
+      }
+
+      xhr.send(null);
+    };
+
+    var XList = document.registerElement('x-list', {
+      prototype: xListProto
+    });
+  </script>
+</html>

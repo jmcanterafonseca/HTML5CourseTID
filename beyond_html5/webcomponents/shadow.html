@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Shadow DOM Examples</title>
+    <style>
+      div {
+        color: green;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="my-host-element">Content Overwritten</div>
+
+    <div id="my-host-element2">
+      Original Content
+    </div>
+
+    <div id="my-host-element3">
+    </div>
+
+    <div id="my-host-element4">
+    </div>
+
+    <template id="my-template">
+      <style>
+        span {
+          color: red;
+          font-family: fantasy;
+          font-size: large;
+        }
+      </style>
+      <span><content></content></span>
+    </template>
+
+    <template id="my-template2">
+      <shadow></shadow>
+    </template>
+
+    <div id="host"><span>This text is displayed in green</span></div>
+
+    <button type=button>My Button</button>
+
+    <template id="button-style">
+      <style>
+        :host {
+          text-transform: uppercase;
+          opacity: 0.4;
+          transition: opacity 420ms ease-in-out;
+        }
+        :host(:hover) {
+          opacity: 1;
+        }
+        :host(:active) {
+          position: relative;
+          top: 3px;
+          left: 3px;
+        }
+      </style>
+      <content></content>
+    </template>
+
+    <div id="events-demo"></div>
+
+    <p id="log"></p>
+
+    <template id="events-template">
+      <label>Age: <input type=text size=10></label>
+    </template>
+
+    <script>
+      var eventsDiv = document.getElementById('events-demo');
+      eventsDiv.addEventListener('focus', function(e) {
+        document.querySelector('p').textContent = 'Focus!!!' + ' ' +
+                                                        e.path[0].tagName;
+      });
+
+      eventsDiv.addEventListener('blur', function(e) {
+        document.querySelector('p').textContent = '';
+      });
+
+      var templateContent = document.getElementById('events-template').content;
+      eventsDiv.createShadowRoot().appendChild(
+                                    document.importNode(templateContent, true));
+    </script>
+
+    <script>
+      var shadow = document.querySelector('button').createShadowRoot();
+      var node = document.importNode(
+                    document.getElementById('button-style').content, true);
+      shadow.appendChild(node);
+    </script>
+
+    <script>
+      var hostElement = document.getElementById('my-host-element');
+      var shadowRoot = hostElement.createShadowRoot();
+
+      var span = document.createElement('span');
+      span.textContent = 'Shadow DOM Example';
+      shadowRoot.appendChild(span);
+
+      var hostElement2 = document.getElementById('my-host-element2');
+      var shadowRoot2 = hostElement2.createShadowRoot();
+
+      var template = document.getElementById('my-template');
+      // Copy the <template>
+      var clone = document.importNode(template.content, true);
+      // Append template to the Shadow Root
+      shadowRoot2.appendChild(clone);
+
+      document.getElementById('my-host-element2').textContent = 'New Content';
+    </script>
+
+    <script>
+      var hostElement3 = document.getElementById('my-host-element3');
+      var shadowRoot31 = hostElement3.createShadowRoot();
+      shadowRoot31.appendChild(document.createTextNode('First shadow root'));
+
+      var shadowRoot32 = hostElement3.createShadowRoot();
+      shadowRoot32.appendChild(document.createTextNode('Second shadow root'));
+    </script>
+
+    <script>
+      var hostElement4 = document.getElementById('my-host-element3');
+      var shadowRoot41 = hostElement3.createShadowRoot();
+      shadowRoot41.innerHTML = '<b>Hello from shadow Root1</b>';
+
+      var template = document.getElementById('my-template2');
+      // Copy the <template>
+      var clone = document.importNode(template.content, true);
+
+      var shadowRoot42 = hostElement4.createShadowRoot();
+      // Append template to the Shadow Root
+      shadowRoot42.appendChild(clone);
+    </script>
+
+  </body>
+</html>
