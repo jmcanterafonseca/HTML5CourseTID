@@ -37,7 +37,7 @@
       set: function(data) {
         data.forEach(function(aItem) {
           var container = this.shadowRoot.querySelector('ul');
-          Templates.apply(container, aItem);
+          Templates.append(container, aItem);
         }, this);
       }
     });
