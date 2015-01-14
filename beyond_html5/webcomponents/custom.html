@@ -35,6 +35,7 @@
 
     Object.defineProperty(xListProto, 'ref', {
       set: function(data) {
+        alert(this.shadowRoot);
         data.forEach((aItem) => {
           var container = this.shadowRoot.querySelector('ul');
           Templates.apply(container, aItem);
