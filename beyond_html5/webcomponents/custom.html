@@ -27,12 +27,8 @@
 
   <script>
     var xListProto = Object.create(HTMLElement.prototype);
-    Object.defineProperty(xListProto, 'selectedItem', {
-      'get': function() {
-        return '1'
-      }
-    });
 
+    // Setting the data
     Object.defineProperty(xListProto, 'ref', {
       set: function(data) {
         data.forEach(function(aItem) {
@@ -61,8 +57,8 @@
         xhr.onload = function() {
           shadow.innerHTML += ('<style>' + xhr.responseText + '</style>');
 
-          shadow.querySelector('ul').addEventListener('click', function() {
-            console.log('clicked!!!');
+          shadow.querySelector('ul').addEventListener('click', function(e) {
+            component.selectedItem = e.target.id;
           });
         }
 
@@ -91,6 +87,11 @@
       }
     ];
 
-    document.getElementById('my-list').ref = dataList;
+    var myList = document.getElementById('my-list');
+    myList.ref = dataList;
+
+    myList.addEventListener('click', function(e) {
+      console.log('Element clicked: ', e.target.selectedItem);
+    });
   </script>
 </html>
