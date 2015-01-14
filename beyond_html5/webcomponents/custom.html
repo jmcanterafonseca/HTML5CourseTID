@@ -49,7 +49,7 @@
 
         shadow.innerHTML = '<style>' + xhr.responseText + '</style>';
 
-        var listTemplate = document.getElementById('list-template');
+        var listTemplate = document.getElementById('x-list-template');
         var node = document.importNode(listTemplate.content, true);
         shadow.appendChild(node);
       }
