@@ -58,6 +58,7 @@
           shadow.innerHTML += ('<style>' + xhr.responseText + '</style>');
 
           shadow.querySelector('ul').addEventListener('click', function(e) {
+            alert(e.target.id);
             component.selectedItem = e.target.id;
           });
         }
