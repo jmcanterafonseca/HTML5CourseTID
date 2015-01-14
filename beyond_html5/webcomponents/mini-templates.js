@@ -28,6 +28,22 @@ var Templates = {
 
     newElem.innerHTML = ninner;
 
+    var attrs = newElem.attributes;
+
+    var total = attrs.length;
+    for (var c = 0; c < total; c++) {
+      var val = attrs[c].value;
+      var nval = val.replace(pattern, replaceFunction);
+
+      newElem.setAttribute(attrs[c].name, nval);
+    }
+
+    if (!newElem.id) {
+      if (data.id) {
+        newElem.id = data.id;
+      }
+    }
+
     container.appendChild(newElem);
   }
 }
