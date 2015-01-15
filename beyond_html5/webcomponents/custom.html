@@ -42,15 +42,25 @@
     });
 
     xListProto.append = function(item) {
-
+      this.shadowRoot.querySelector('ul').append(item);
     };
 
-    xListProto.item = function(index) {
+    xListProto.item = function(indexOrId) {
+      var selector;
+      if (typeof indexOrId === 'string') {
+        selector = '#' + indexOrId;
+      }
+      else {
+        selector = 'li:nth-child(' + indexOrId + ')';
+      }
 
+      return this.shadowRoot.querySelector('ul').querySelector(selector);
     };
 
-    xListProto.remove = function(id) {
+    xListProto.remove = function(indexOrId) {
+      var item = this.item(indexOrId);
 
+      this.shadowRoot.querySelector('ul').removeChild(item);
     };
 
     xListProto.createdCallback = function() {
@@ -109,5 +119,11 @@
     myList.addEventListener('click', function(e) {
       console.log('Element clicked: ', e.target.selectedItem);
     });
+
+    var li = document.createElement('li');
+    li.id = 'ln';
+    li.textContent = 'Appended Text Content';
+
+    myList.append(li);
   </script>
 </html>
