@@ -14,6 +14,8 @@
       </template>
     </x-list>
 
+    <button type=button onclick="removeLast()">Remove Last</button>
+
     <template id="x-list-template">
       <link rel="stylesheet" href="lists.css">
 
@@ -32,17 +34,29 @@
     // Setting the data
     Object.defineProperty(xListProto, 'ref', {
       set: function(data) {
+        // Resetting current data
+        container.innerHTML = '';
+
         data.forEach(function(aItem) {
           var container = this.shadowRoot.querySelector('ul');
           var template = container.
                           querySelector('content').getDistributedNodes()[1];
           Templates.append(container, aItem, template);
         }, this);
+
+        this.numItems = data.length;
       }
     });
 
-    xListProto.append = function(item) {
-      this.shadowRoot.querySelector('ul').appendChild(item);
+    xListProto.append = function(itemData) {
+      var container = this.shadowRoot.querySelector('ul');
+      var template = container.
+                          querySelector('content').getDistributedNodes()[1];
+
+      Templates.append(container, itemData, template);
+
+      this.numItems = this.numItems || 0;
+      this.numItems++;
     };
 
     xListProto.item = function(indexOrId) {
@@ -60,7 +74,18 @@
     xListProto.remove = function(indexOrId) {
       var item = this.item(indexOrId);
 
+      if (!item) {
+        return;
+      }
+
       this.shadowRoot.querySelector('ul').removeChild(item);
+
+      this.numItems--;
+    };
+
+    xListProto.clear = function() {
+      this.shadowRoot.querySelector('ul').innerHTML = '';
+      this.numItems = 0;
     };
 
     xListProto.createdCallback = function() {
@@ -120,10 +145,15 @@
       console.log('Element clicked: ', e.target.selectedItem);
     });
 
-    var li = document.createElement('li');
-    li.id = 'ln';
-    li.textContent = 'Appended Text Content';
+    myList.append({
+      id: 'newId',
+      text: 'Appended Text'
+    });
+  </script>
 
-    myList.append(li);
+  <script>
+    function removeLast() {
+      myList.removeItem(myList.)
+    }
   </script>
 </html>
