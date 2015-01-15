@@ -34,13 +34,13 @@
     // Setting the data
     Object.defineProperty(xListProto, 'ref', {
       set: function(data) {
+        this.clear();
+
         var container = this.shadowRoot.querySelector('ul');
-        // Resetting current data
-        container.innerHTML = '';
+        var template = container.
+                          querySelector('content').getDistributedNodes()[1];
 
         data.forEach(function(aItem) {
-          var template = container.
-                          querySelector('content').getDistributedNodes()[1];
           Templates.append(container, aItem, template);
         }, this);
 
@@ -84,7 +84,7 @@
     };
 
     xListProto.clear = function() {
-      this.shadowRoot.querySelector('ul').innerHTML = '';
+      this.shadowRoot.querySelector('ul').innerHTML = '<content></content>';
       this.numItems = 0;
     };
 
