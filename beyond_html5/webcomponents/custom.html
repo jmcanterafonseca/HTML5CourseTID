@@ -42,7 +42,7 @@
     });
 
     xListProto.append = function(item) {
-      this.shadowRoot.querySelector('ul').append(item);
+      this.shadowRoot.querySelector('ul').appendChild(item);
     };
 
     xListProto.item = function(indexOrId) {
