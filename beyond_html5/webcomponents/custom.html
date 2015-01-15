@@ -34,11 +34,11 @@
     // Setting the data
     Object.defineProperty(xListProto, 'ref', {
       set: function(data) {
+        var container = this.shadowRoot.querySelector('ul');
         // Resetting current data
         container.innerHTML = '';
 
         data.forEach(function(aItem) {
-          var container = this.shadowRoot.querySelector('ul');
           var template = container.
                           querySelector('content').getDistributedNodes()[1];
           Templates.append(container, aItem, template);
