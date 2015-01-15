@@ -11,8 +11,8 @@ function templateReplace(data) {
 }
 
 var Templates = {
-  append: function(container, data) {
-    var template =  container.querySelector('content').getDistributedNodes()[1];
+  append: function(container, data, template) {
+    template = template || container.querySelector('template');
     // This is a document fragment
     var templateFragment = template.content;
 

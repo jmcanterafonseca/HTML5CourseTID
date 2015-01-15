@@ -34,10 +34,24 @@
       set: function(data) {
         data.forEach(function(aItem) {
           var container = this.shadowRoot.querySelector('ul');
-          Templates.append(container, aItem);
+          var template = container.
+                          querySelector('content').getDistributedNodes()[1];
+          Templates.append(container, aItem, template);
         }, this);
       }
     });
+
+    xListProto.append = function(item) {
+
+    };
+
+    XListProto.item = function(index) {
+
+    };
+
+    xListProto.remove = function(id) {
+
+    };
 
     xListProto.createdCallback = function() {
       var shadow = this.createShadowRoot();
