@@ -65,7 +65,7 @@
         selector = '#' + indexOrId;
       }
       else {
-        selector = 'li:nth-child(0n + ' + indexOrId + ')';
+        selector = 'li:nth-child(' + (indexOrId + 1) + ')';
       }
 
       return this.shadowRoot.querySelector('ul').querySelector(selector);
