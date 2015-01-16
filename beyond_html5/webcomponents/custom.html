@@ -97,14 +97,13 @@
       var node = document.importNode(listTemplate.content, true);
       shadow.appendChild(node);
 
-      var link = shadow.querySelector('link');
       var component = this;
-
       shadow.querySelector('ul').addEventListener('click', function(e) {
         var id = e.target.id || e.target.parentNode.id;
         component.selectedItem = id;
       });
 
+      var link = shadow.querySelector('link');
       if (link) {
         var resource = link.href;
         var xhr = new XMLHttpRequest();
