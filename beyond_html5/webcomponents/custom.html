@@ -4,8 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Custom elements</title>
-    <script defer src="mini-templates.js"></script>
-    <script defer src="x-list.js"></script>
+    <link rel="import" href="x-list.html">
   </head>
 
   <body>
@@ -18,17 +17,6 @@
     <button type=button onclick="loadData()">Load Data</button>
     <button type=button onclick="appendData()">Append Data</button>
     <button type=button onclick="removeLast()">Remove Last</button>
-
-    <template id="x-list-template">
-      <link rel="stylesheet" href="lists.css">
-
-      <section data-type="list">
-        <header>List</header>
-        <ul>
-          <content></content>
-        </ul>
-      </section>
-    </template>
   </body>
 
   <script>
