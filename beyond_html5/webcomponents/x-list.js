@@ -2,6 +2,8 @@
 
 var xListProto = Object.create(HTMLElement.prototype);
 
+xListProto.document = document.currentScript.ownerDocument;
+
 // Setting the data
 Object.defineProperty(xListProto, 'ref', {
   set: function(data) {
@@ -62,8 +64,8 @@ xListProto.clear = function() {
 xListProto.createdCallback = function() {
   var shadow = this.createShadowRoot();
 
-  var listTemplate = document.getElementById('x-list-template');
-  var node = document.importNode(listTemplate.content, true);
+  var listTemplate = this.document.getElementById('x-list-template');
+  var node = this.document.importNode(listTemplate.content, true);
   shadow.appendChild(node);
 
   var component = this;
