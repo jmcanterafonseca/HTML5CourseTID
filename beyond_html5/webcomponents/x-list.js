@@ -69,13 +69,6 @@ xListProto.createdCallback = function() {
   shadow.appendChild(node);
 
   var component = this;
-  console.log(shadow.querySelector('ul'));
-  shadow.querySelector('ul').addEventListener('click', function(e) {
-    console.log('clicked!!!!!');
-    var id = e.target.id || e.target.parentNode.id;
-    component.selectedItem = id;
-    console.log('Clicked: ', id);
-  });
 
   var link = shadow.querySelector('link');
   if (link) {
@@ -86,6 +79,12 @@ xListProto.createdCallback = function() {
 
     xhr.onload = function() {
       shadow.innerHTML += ('<style>' + xhr.responseText + '</style>');
+      
+      shadow.querySelector('ul').addEventListener('click', function(e) {
+        var id = e.target.id || e.target.parentNode.id;
+        component.selectedItem = id;
+        console.log('Clicked: ', id);
+      });
     }
 
     xhr.onerror = function() {
