@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Custom elements</title>
+    <script defer src="mini-templates.js"></script>
+    <script defer src="x-list.js"></script>
+  </head>
+
+  <body>
+    <x-list id="my-list">
+      <template>
+        <li><a href="#"><strong>#text#</strong></a></li>
+      </template>
+    </x-list>
+
+    <button type=button onclick="loadData()">Load Data</button>
+    <button type=button onclick="appendData()">Append Data</button>
+    <button type=button onclick="removeLast()">Remove Last</button>
+
+    <template id="x-list-template">
+      <link rel="stylesheet" href="lists.css">
+
+      <section data-type="list">
+        <header>List</header>
+        <ul>
+          <content></content>
+        </ul>
+      </section>
+    </template>
+  </body>
+
+  <script>
+
+  </script>
+
+  <script>
+    var myList = document.getElementById('my-list');
+
+    myList.addEventListener('click', function(e) {
+      console.log('Element clicked: ', e.target.selectedItem);
+    });
+
+    var nextId = 3;
+
+    function loadData() {
+      var dataList = [
+        {
+          id: 'l1',
+          text: 'Text of element 1'
+        },
+        {
+          id: 'l2',
+          text: 'Text of element 2'
+        }
+      ];
+      myList.ref = dataList;
+    }
+
+    function appendData() {
+      myList.append({
+        id: 'l' + nextId,
+        text: 'Appended Text: ' + nextId++
+      });
+    }
+
+    function removeLast() {
+      console.log('Num Items: ', myList.numItems);
+      myList.remove(myList.numItems);
+    }
+  </script>
+</html>
