@@ -96,6 +96,6 @@ xListProto.createdCallback = function() {
   }
 };
 
-var XList = xListProto.document.registerElement('x-list', {
+var XList = document.registerElement('x-list', {
   prototype: xListProto
 });
