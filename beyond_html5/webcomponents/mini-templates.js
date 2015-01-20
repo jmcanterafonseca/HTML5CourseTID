@@ -11,15 +11,13 @@ function templateReplace(data) {
 }
 
 var Templates = {
-  document: document.currentScript.ownerDocument,
-
   append: function(container, data, template) {
     template = template || container.querySelector('template');
     // This is a document fragment
     var templateFragment = template.content;
 
     // We import the root element and then clone
-    var newElem = this.document.importNode(
+    var newElem = document.importNode(
                 templateFragment.firstElementChild, true);
     var inner = newElem.innerHTML;
 

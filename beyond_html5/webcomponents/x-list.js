@@ -65,7 +65,7 @@ xListProto.createdCallback = function() {
   var shadow = this.createShadowRoot();
 
   var listTemplate = this.document.getElementById('x-list-template');
-  var node = this.document.importNode(listTemplate.content, true);
+  var node = document.importNode(listTemplate.content, true);
   shadow.appendChild(node);
 
   var component = this;
