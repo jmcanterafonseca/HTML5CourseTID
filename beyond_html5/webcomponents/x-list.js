@@ -69,6 +69,7 @@ xListProto.createdCallback = function() {
   shadow.appendChild(node);
 
   var component = this;
+  console.log(shadow.querySelector('ul'));
   shadow.querySelector('ul').addEventListener('click', function(e) {
     console.log('clicked!!!!!');
     var id = e.target.id || e.target.parentNode.id;
