@@ -39,6 +39,7 @@
     var myList = document.getElementById('my-list');
 
     myList.addEventListener('click', function(e) {
+      console.log(e.target.tagName);
       console.log('Element clicked: ', e.target.selectedItem);
     });
 
