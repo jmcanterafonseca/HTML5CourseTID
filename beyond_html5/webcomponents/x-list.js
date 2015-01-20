@@ -70,6 +70,7 @@ xListProto.createdCallback = function() {
 
   var component = this;
   shadow.querySelector('ul').addEventListener('click', function(e) {
+    console.log('clicked!!!!!');
     var id = e.target.id || e.target.parentNode.id;
     component.selectedItem = id;
     console.log('Clicked: ', id);
