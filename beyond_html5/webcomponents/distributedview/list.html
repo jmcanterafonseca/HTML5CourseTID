@@ -5,11 +5,11 @@
       <button id="settings-button" data-icon="settings" data-l10n-id="settingsButton"></button>
     </header>
     <section class="view-body">
-      <section data-type="list" class="notes">
-        <header class="hidden">Today</header>
-        <ul id="notes-list">
-        </ul>
-      </section>
+      <x-list id="my-list">
+        <template>
+          <li><a href="#"><strong>#text#</strong></a></li>
+        </template>
+      </x-list>
     </section>
     <div role="toolbar">
       <button data-icon="sync" id="sync-data-button">Sync Data</button>
