@@ -15,7 +15,7 @@ dViewProto.load = function() {
   return new Promise(function(resolve, reject) {
     // Only load one time
     if (component.isLoaded === true) {
-      return Promise.resolve(targetElement.firstChildElement);
+      return Promise.resolve(targetElement.firstElementChild);
     }
 
     // First it is needed to get the corresponding HTML Import
@@ -24,7 +24,7 @@ dViewProto.load = function() {
     var link = document.getElementById(importId);
     var importedDocument = link.import;
 
-    var template = importedDocument.firstChildElement;
+    var template = importedDocument.firstElementChild;
 
     var viewContent = document.importNode(template.content, true);
 
