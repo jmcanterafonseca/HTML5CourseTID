@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
 
+    <link rel="stylesheet" href="bbs/headers.css">
+    <link rel="stylesheet" href="bbs/buttons.css">
     <link rel="stylesheet" href="style.css">
 
     <link rel="import" id="import-notes-list-view" href="list.html">
@@ -15,12 +17,15 @@
   </head>
 
   <body role="application" class="theme-productivity">
+    <button type=button onclick="loadView1()">Load first view</button>
+    <button type=button onclick="loadView2()">Load second view</button>
+
     <!-- This is a distributed view to be loaded dynamically on demand -->
-    <section is="d-view" id="notes-list-view" role="region" class="view view-visible">
+    <section is="d-view" id="notes-list-view" role="region" class="view">
     </section>
 
     <!-- This is a distributed view to be loaded dynamically on demand -->
-    <section is="d-view" id="notes-form-view" role="region" class="view view-hidden theme-productivity">
+    <section is="d-view" id="notes-form-view" role="region" class="view">
     </section>
   </body>
 </html>
