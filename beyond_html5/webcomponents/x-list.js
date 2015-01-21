@@ -68,6 +68,11 @@ xListProto.createdCallback = function() {
   var node = document.importNode(listTemplate.content, true);
   shadow.appendChild(node);
 
+  shadow.querySelector('ul').addEventListener('click', function(e) {
+    var id = e.target.id || e.target.parentNode.id;
+    component.selectedItem = id;
+  });
+
   var component = this;
 
   var link = shadow.querySelector('link');
@@ -82,13 +87,6 @@ xListProto.createdCallback = function() {
       var textStyle = document.createTextNode(xhr.responseText);
       style.appendChild(textStyle);
       shadow.appendChild(style);
-      // shadow.innerHTML += ('<style>' + xhr.responseText + '</style>');
-
-      shadow.querySelector('ul').addEventListener('click', function(e) {
-        var id = e.target.id || e.target.parentNode.id;
-        component.selectedItem = id;
-        console.log('Clicked: ', id);
-      });
     }
 
     xhr.onerror = function() {
