@@ -15,7 +15,7 @@ dViewProto.load = function() {
   return new Promise(function(resolve, reject) {
     // Only load one time
     if (component.isLoaded === true) {
-      resolve(targetElement.firstElementChild);
+      resolve();
       return;
     }
 
@@ -33,6 +33,6 @@ dViewProto.load = function() {
     component.appendChild(viewContent);
     component.isLoaded = true;
 
-    resolve(component.firstElementChild);
+    resolve();
   });
 }

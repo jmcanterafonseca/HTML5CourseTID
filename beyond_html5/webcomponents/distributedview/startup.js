@@ -1,8 +1,9 @@
 'use strict';
 
 function loadView1() {
-  document.getElementById('notes-list-view').load().then((node) => {
-    node.querySelector('[data-type="list"] header').textContent = 'This is my list!';
+  var view = document.getElementById('notes-list-view');
+  view.load().then(() => {
+    view.querySelector('[data-type="list"] header').textContent = 'This is my list!';
   });
 }
 
