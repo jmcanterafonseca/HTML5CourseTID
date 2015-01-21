@@ -33,6 +33,6 @@ dViewProto.load = function() {
     component.appendChild(viewContent);
     component.isLoaded = true;
 
-    resolve(viewContent);
+    resolve(component.firstElementChild);
   });
 }
