@@ -1,6 +1,6 @@
 'use strict';
 
-var dViewProto = Object.create(HTMLSectionElement.prototype);
+var dViewProto = Object.create(HTMLElement.prototype);
 
 document.registerElement('d-view', {
   prototype: dViewProto,
