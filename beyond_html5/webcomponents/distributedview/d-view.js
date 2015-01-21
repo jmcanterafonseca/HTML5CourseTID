@@ -10,14 +10,16 @@ document.registerElement('d-view', {
 
 // Loads the corresponding view identified by id
 dViewProto.load = function() {
-  return new Promise((resolve, reject) => {
+  var component = this;
+
+  return new Promise(function(resolve, reject) {
     // Only load one time
-    if (this.isLoaded === true) {
+    if (component.isLoaded === true) {
       return Promise.resolve(targetElement.firstChildElement);
     }
 
     // First it is needed to get the corresponding HTML Import
-    var importId = 'import' + '-' + this.id;
+    var importId = 'import' + '-' + component.id;
 
     var link = document.getElementById(importId);
     var importedDocument = link.import;
@@ -27,8 +29,8 @@ dViewProto.load = function() {
     var viewContent = document.importNode(template.content, true);
 
     // Now we insert the node
-    this.appendChild(viewContent);
-    this.isLoaded = true;
+    component.appendChild(viewContent);
+    component.isLoaded = true;
 
     return Promise.resolve(viewContent);
   });
