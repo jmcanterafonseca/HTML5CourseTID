@@ -1,0 +1,20 @@
+<template>
+    <header id="notes-list-header">
+      <h1 id="app-title" data-l10n-id="Notes">Cloud Notes</h1>
+      <button id="add-note-button" data-icon="add" data-l10n-id="addButton"></button>
+      <button id="settings-button" data-icon="settings" data-l10n-id="settingsButton"></button>
+    </header>
+    <section class="view-body">
+      <section data-type="list" class="notes">
+        <header class="hidden">Today</header>
+        <ul id="notes-list">
+        </ul>
+      </section>
+    </section>
+    <div role="toolbar">
+      <button data-icon="sync" id="sync-data-button">Sync Data</button>
+      <button data-icon="reload" id="reload-button">Reload Data</button>
+      <button data-icon="delete" id="clear-button">Clear Notes</button>
+      <button data-icon="contacts" id="logout-button">Logout</button>
+    </div>
+</template>

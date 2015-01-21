@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="import" id="import-notes-list-view" href="list.html">
+    <link rel="import" id="import-notes-form-view" href="form.html">
+
+    <script defer src="d-view.js"></script>
+    <script defer src="startup.js"></script>
+  </head>
+
+  <body role="application" class="theme-productivity">
+    <!-- This is a distributed view to be loaded dynamically on demand -->
+    <section is="d-view" id="notes-list-view" role="region" class="view view-visible">
+    </section>
+
+    <!-- This is a distributed view to be loaded dynamically on demand -->
+    <section is="d-view" id="notes-form-view" role="region" class="view view-hidden theme-productivity">
+    </section>
+  </body>
+</html>

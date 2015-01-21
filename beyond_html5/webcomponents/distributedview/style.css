@@ -1,0 +1,198 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#notes-list > li > * {
+  pointer-events: none;
+}
+
+#notes-list {
+  height: 100%;
+  width: calc(100% + 1.5rem);
+  overflow-y: auto;
+}
+
+.view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.view-hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.view-visible {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.view-body {
+  width: 100%;
+  height: 100%;
+}
+
+#settings-content {
+  margin: 2rem;
+  width: calc(100% - 4rem);
+  height: calc(100% - 4rem);
+}
+
+label {
+  font-size: larger;
+}
+
+form#note-data-form {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  margin-botton: 0rem;
+}
+
+textarea[name="text-data"] {
+  height: 19rem !important;
+  max-height: 19rem !important;
+}
+
+#notes-form-view[data-mode="edit"] button#delete-button {
+  visibility: visible;
+}
+
+#notes-form-view[data-mode="add"] button#delete-button {
+  visibility: hidden;
+}
+
+.hidden, .hide {
+  display: none;
+}
+
+section.notes {
+  width: 100%;
+  height: 100%;
+}
+
+section.notes li * {
+  font-style: normal !important;
+}
+
+section.notes li {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+ul#attachments-list > li {
+  display: inline-block;
+  width: 10rem;
+  height: 10rem;
+}
+
+ul#attachments-list > li > img {
+  width: 100%;
+  height: 100%;
+  border: solid 1px red;
+}
+
+.view-attachment {
+  background:
+    url(/shared/style/confirm/images/ui/pattern.png) repeat left top,
+    url(/shared/style/confirm/images/ui/gradient.png) no-repeat left top / 100% 100%;
+}
+
+#img-container {
+  width: 100%;
+  height: -moz-calc(100% - 9rem);
+}
+
+#img-container  img {
+  display: block;
+  margin: auto;
+  position: relative;
+}
+
+#text-data {
+  height: 16rem;
+  max-height: 16rem;
+  margin-bottom: 0rem;
+}
+
+div[role="toolbar"] {
+  position: absolute;
+  bottom: 0;
+}
+
+.separator {
+  width: 65%;
+}
+
+.vis-hidden {
+  visibility: hidden;
+}
+
+i[data-icon="attachment"] {
+  margin-right: 2rem;
+}
+
+.note-body {
+  padding-left: 1rem;
+  font-style: italic;
+}
+
+.spinning::before {
+  animation: spinning 2s infinite linear;
+}
+
+@keyframes spinning {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.2s forwards;
+}
+
+.fade-out {
+  animation: fade-out 0.2s forwards;
+}
+
+@keyframes fade-in {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fade-out {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+gaia-header button[disabled="disabled"] {
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+div[role="toolbar"] button[disabled="disabled"] {
+  background-color: rgba(0,0,0,0.05);
+  color: #c7c7c7;
+  pointer-events: none;
+}
+
+@media (max-height: 480px) {
+  textarea[name="text-data"] {
+    height: 10rem !important;
+  }
+}
