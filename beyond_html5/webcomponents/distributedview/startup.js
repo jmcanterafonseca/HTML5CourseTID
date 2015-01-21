@@ -2,7 +2,7 @@
 
 function loadView1() {
   document.getElementById('notes-list-view').load().then((node) => {
-    node.querySelector('header').textContent = 'This is my list!';
+    node.querySelector('[data-type="list"] header').textContent = 'This is my list!';
   });
 }
 
