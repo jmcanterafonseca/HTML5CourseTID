@@ -78,8 +78,12 @@ xListProto.createdCallback = function() {
     xhr.open('GET', resource);
 
     xhr.onload = function() {
-      shadow.innerHTML += ('<style>' + xhr.responseText + '</style>');
-      
+      var style = document.createElement('style');
+      var textStyle = document.createTextNode(xhr.responseText);
+      style.appendChild(textStyle);
+      shadow.appendChild(style);
+      // shadow.innerHTML += ('<style>' + xhr.responseText + '</style>');
+
       shadow.querySelector('ul').addEventListener('click', function(e) {
         var id = e.target.id || e.target.parentNode.id;
         component.selectedItem = id;
