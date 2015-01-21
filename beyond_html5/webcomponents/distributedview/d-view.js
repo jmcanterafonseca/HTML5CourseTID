@@ -15,7 +15,8 @@ dViewProto.load = function() {
   return new Promise(function(resolve, reject) {
     // Only load one time
     if (component.isLoaded === true) {
-      return Promise.resolve(targetElement.firstElementChild);
+      resolve(targetElement.firstElementChild);
+      return;
     }
 
     // First it is needed to get the corresponding HTML Import
@@ -32,6 +33,6 @@ dViewProto.load = function() {
     component.appendChild(viewContent);
     component.isLoaded = true;
 
-    return Promise.resolve(viewContent);
+    resolve(viewContent);
   });
 }
