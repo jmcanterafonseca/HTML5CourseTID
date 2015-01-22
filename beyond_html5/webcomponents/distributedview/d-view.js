@@ -25,7 +25,7 @@ dViewProto.load = function() {
     var link = document.getElementById(importId);
     var importedDocument = link.import;
 
-    var template = importedDocument.querySelector('template');
+    var template = importedDocument.querySelector('x-body > template');
 
     var viewContent = document.importNode(template.content, true);
 
