@@ -46,7 +46,7 @@ dViewProto.load = function() {
     component._numScriptsLoaded = 0;
     component._numScripts = scripts.length;
 
-    for(var j = 0; j < scripts.length; j++) {
+    for (var j = 0; j < scripts.length; j++) {
       scripts.item(j).addEventListener('load', scriptLoaded);
     }
 
