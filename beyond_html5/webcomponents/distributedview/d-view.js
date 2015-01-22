@@ -8,6 +8,8 @@ document.registerElement('d-view', {
 });
 
 dViewProto._scriptLoaded = function(resolve, e) {
+  console.log('Script loaded: ', e.target.src);
+  
   this._numScriptsLoaded++;
   if (this._numScriptsLoaded === this._numScripts) {
     resolve();
