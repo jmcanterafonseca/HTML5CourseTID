@@ -7,6 +7,12 @@ document.registerElement('d-view', {
   extends: 'section'
 });
 
+dViewProto._scriptLoaded = function(resolve, e) {
+  this._numScriptsLoaded++;
+  if (this._numScriptsLoaded === this._numScripts) {
+    resolve();
+  }
+}
 
 // Loads the corresponding view identified by id
 dViewProto.load = function() {
@@ -32,9 +38,16 @@ dViewProto.load = function() {
 
     var headTemplate = importedDocument.querySelector('x-head > template');
     var headContent = document.importNode(headTemplate.content, true);
-    headContent.querySelector('script').addEventListener('load', function() {
-      console.log('Script loaded!!!');
-    });
+
+    var scriptLoaded = component._scriptLoaded.bind(component, resolve);
+    var scripts = headContent.querySelectorAll('script');
+    component._numScriptsLoaded = 0;
+    component._numScripts = scripts.length;
+
+    for(var j = 0; j < scripts.length; j++) {
+      scripts.item(j).addEventListener(scriptLoaded);
+    }
+
     document.head.appendChild(headContent);
 
     component.isLoaded = true;
