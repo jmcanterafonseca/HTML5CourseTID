@@ -1,30 +1,32 @@
 <template>
-    <header id="notes-form-header">
-      <h1>New Note</h1>
-      <button id="save-button" data-l10n-id="done">Done</button>
-    <header>
-    <section class="view-body">
-      <form id="note-data-form">
-        <label>Title:
-          <input type="text" size=15 name="title" x-inputmode="latin-prose" placeholder="Note Title">
-        </label>
+  <link rel="stylesheet" href="bbs/input_areas.css">
+  
+  <header id="notes-form-header">
+    <h1>New Note</h1>
+    <button id="save-button" data-l10n-id="done">Done</button>
+  <header>
+  <section class="view-body">
+    <form id="note-data-form">
+      <label>Title:
+        <input type="text" size=15 name="title" x-inputmode="latin-prose" placeholder="Note Title">
+      </label>
 
-        <label>Text:
-          <textarea id="text-data" name="text-data" x-inputmode="latin-prose" placeholder="Note Content"></textarea>
-        </label>
+      <label>Text:
+        <textarea id="text-data" name="text-data" x-inputmode="latin-prose" placeholder="Note Content"></textarea>
+      </label>
 
-        <input type="hidden" name="noteId">
-      </form>
+      <input type="hidden" name="noteId">
+    </form>
 
-      <section data-type="list" id="attachment-section" class="hidden">
-        <header>Attachments</header>
-        <ul id="attachments-list" ></ul>
-      </section>
-
-      <div role="toolbar">
-        <button data-icon="attachment" id="attach-button">Attach file...</button>
-        <span class="separator"></span>
-        <button data-icon="delete" id="delete-button">Delete note</button>
-      </div>
+    <section data-type="list" id="attachment-section" class="hidden">
+      <header>Attachments</header>
+      <ul id="attachments-list" ></ul>
     </section>
+
+    <div role="toolbar">
+      <button data-icon="attachment" id="attach-button">Attach file...</button>
+      <span class="separator"></span>
+      <button data-icon="delete" id="delete-button">Delete note</button>
+    </div>
+  </section>
 </template>
