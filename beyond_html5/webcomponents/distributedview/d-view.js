@@ -9,7 +9,7 @@ document.registerElement('d-view', {
 
 dViewProto._scriptLoaded = function(resolve, e) {
   console.log('Script loaded: ', e.target.src);
-  
+
   this._numScriptsLoaded++;
   if (this._numScriptsLoaded === this._numScripts) {
     resolve();
@@ -47,7 +47,7 @@ dViewProto.load = function() {
     component._numScripts = scripts.length;
 
     for(var j = 0; j < scripts.length; j++) {
-      scripts.item(j).addEventListener(scriptLoaded);
+      scripts.item(j).addEventListener('load', scriptLoaded);
     }
 
     document.head.appendChild(headContent);
