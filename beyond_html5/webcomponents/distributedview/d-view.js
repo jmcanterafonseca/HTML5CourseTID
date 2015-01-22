@@ -54,6 +54,8 @@ dViewProto.load = function() {
 
     component.isLoaded = true;
 
-    resolve();
+    if (scripts.length === 0) {
+      resolve();
+    }
   });
 }
