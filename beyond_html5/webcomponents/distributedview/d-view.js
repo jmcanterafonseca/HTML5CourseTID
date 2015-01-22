@@ -32,6 +32,9 @@ dViewProto.load = function() {
 
     var headTemplate = importedDocument.querySelector('x-head > template');
     var headContent = document.importNode(headTemplate.content, true);
+    headContent.querySelector('script').addEventListener('load', function() {
+      console.log('Script loaded!!!');
+    });
     document.head.appendChild(headContent);
 
     component.isLoaded = true;
