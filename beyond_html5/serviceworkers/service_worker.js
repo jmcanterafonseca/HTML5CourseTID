@@ -3,7 +3,7 @@
 document.getElementById('register').addEventListener('click', registerSW);
 
 function showMsg(msg) {
-  document.querySelector('p').textContent = msg;
+  document.querySelector('p').textContent = += msg;
 }
 
 function registerSW() {
