@@ -17,6 +17,10 @@ function registerSW() {
     }).catch(function(err) {
         showMsg('Registration failed: ' + err.name);
     });
+
+    navigator.serviceWorker.ready.then(function() {
+      showMsg('SW is now in the active state');
+    });
   }
   else {
     showMsg('Service Worker interfaces not even present');
