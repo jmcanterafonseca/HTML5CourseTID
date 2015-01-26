@@ -14,6 +14,7 @@ function registerSW() {
       scope: 'myapp/'
     }).then(function(registration) {
         showMsg('SW registered under scope: ' + registration.scope);
+        alert(registration.installing);
         if (registration.installing) {
           registration.installing.postMessage('hello!!');
         }
