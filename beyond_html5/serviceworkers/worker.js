@@ -29,12 +29,12 @@ self.addEventListener('install', function(event) {
   console.log('Service Worker have been installed');
 });
 
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', function(e) {
   console.log('Service Worker activated');
 });
 
-self.addEventListener('message', function(event) {
-  console.log('Message from a page: ', event.data);
+self.addEventListener('message', function(e) {
+  console.log('Message from a page: ', e.data);
 });
 
 self.addEventListener('fetch', function(event) {
