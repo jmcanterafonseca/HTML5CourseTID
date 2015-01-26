@@ -37,6 +37,10 @@ self.addEventListener('activate', function(event) {
   console.log('Service Worker activated');
 });
 
+self.addEventListener('message', function(event) {
+  console.log('Message from my page: ', event.source);
+});
+
 self.addEventListener('fetch', function(event) {
   var caches = getCaches();
 
