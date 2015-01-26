@@ -12,8 +12,8 @@ function registerSW() {
   if (navigator.serviceWorker) {
     navigator.serviceWorker.register('worker.js', {
       scope: 'myapp/'
-    }).then(function(sw) {
-        showMsg('SW registered');
+    }).then(function(registration) {
+        showMsg('SW registered under scope: ' + registration.scope);
     }).catch(function(err) {
         showMsg('Registration failed: ' + err.name);
     });
