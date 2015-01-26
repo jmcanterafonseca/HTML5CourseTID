@@ -9,8 +9,8 @@
     <p style="color: red"></p>
     <script>
       document.querySelector('p').textContent =
-        'Document controlled by a SW with scope: ' + 
-        navigator.serviceWorker.controller.scope;
+        'Document controlled by a SW with URL: ' +
+        navigator.serviceWorker.controller.scriptURL;
     </script>
   </body>
 </html>
