@@ -7,10 +7,21 @@
 
   <body>
     <p style="color: red"></p>
+    <textarea rows=10 cols=20></textarea>
+    <button type=button onclick="sendData()">Send Data</button>
     <script>
-      document.querySelector('p').textContent =
-        'Document controlled by a SW with URL: ' +
-        navigator.serviceWorker.controller.scriptURL;
+      var swController = navigator.serviceWorker.controller;
+      if (swController) {
+        document.querySelector('p').textContent =
+        'Document controlled by a SW with URL: ' + swController.scriptURL;
+      }
+
+      function sendData() {
+        if (swController) {
+          var data = document.querySelector('textarea').value;
+          swController.postMessage(data);
+        }
+      }
     </script>
   </body>
 </html>
