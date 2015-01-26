@@ -1,9 +1,5 @@
 'use strict';
 
-console.log('SW started');
-
-console.log(navigator.userAgent);
-
 function getCaches() {
   if (self.caches && navigator.userAgent.indexOf('Chrome') === -1) {
     return self.caches;
