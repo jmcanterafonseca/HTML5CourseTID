@@ -34,7 +34,8 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('message', function(event) {
-  console.log('Message from a page: ', event.origin);
+  console.log('Message from a page: ');
+  console.log(event.origin);
 });
 
 self.addEventListener('fetch', function(event) {
