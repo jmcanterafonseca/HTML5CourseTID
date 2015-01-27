@@ -144,7 +144,7 @@ Promise.parallel = function(runnables, batchSize) {
       this._checkFinish();
     },
 
-    setPromiseResolver(index, resolve, reject) {
+    setPromiseResolver: function(index, resolve, reject) {
       // If by the time we call this function the corresponding promise was
       // already resolved, then call directly resolve or reject
       if (typeof this.results[index] !== 'undefined') {
