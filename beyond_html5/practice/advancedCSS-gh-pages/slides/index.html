@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Advanced CSS</title>
+  <link rel="stylesheet" href="style/style.css">
+  <script defer src="js/script.js"></script>
+</head>
+
+<body data-slide="1">
+
+<ol>
+<!-- ------------------ INTRO ------------------ -->
+
+  <li class="slide intro">
+    <header class="header">
+      <h1>Advanced CSS</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="content">
+      <p>by <strong>Arnau March</strong></p>
+      <p>UX/UI developer</p>
+      <p>Twitter/github <strong>@rnowm</strong></p>
+    </div>
+    <footer>
+      <p>Slides and exercices:</p>
+      <p>
+        <a href="http://rnowm.github.io/advancedCSS/slides/">
+          http://rnowm.github.io/advancedCSS/slides/
+        </a>
+      </p>
+      <p>
+        <a href="https://github.com/rnowm/advancedCSS">
+          https://github.com/rnowm/advancedCSS
+        </a>
+      </p>
+    </footer>
+  </li>
+
+<!-- ------------------ Flexbox ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Flexbox</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <ul class="demo demo-1">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </section>
+
+      <code>
+        <style contenteditable="" spellcheck="false">
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+  <li>Item 4</li>
+</ul>
+        </style>
+      </code>
+    </div>
+  </li>
+
+
+<!-- ------------------ OVERVIEW ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Overview</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <ul class="demo demo-1">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </section>
+
+      <code>
+        <style contenteditable="" spellcheck="false">
+.demo-1 {
+  //display: flex;
+  //flex-direction: column;
+}
+
+.demo-1 li {
+  //flex: 1;
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ ORDER ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Order</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <ul class="demo demo-2">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-2 {
+  display: flex;
+  flex-direction: column;
+  //flex-direction: column-reverse;
+  //flex-direction: row-reverse;
+}
+
+.demo-2 li:nth-child(1) {
+  //order: 1;
+}
+.demo-2 li:nth-child(2) {
+  //order: 2;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ WRAP ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Wrap</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <ul class="demo demo-3">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-3 {
+  display: flex;
+  flex-wrap: no-wrap;
+  //flex-wrap: wrap;
+  //flex-wrap: wrap-reverse;
+}
+
+.demo-3 li {
+  width: 300px;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ CONTAINER ALIGNMENT ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Container Alignment</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <ul class="demo demo-4 heights">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-4 {
+  height: 400px;
+  display: flex;
+  justify-content: flex-start;
+  //justify-content: center;
+  //justify-content: flex-end;
+  //justify-content: space-around;
+  //justify-content: space-between;
+
+  align-items: flex-start;
+  //align-items: center;
+  //align-items: flex-end;
+  //align-items: baseline;
+
+  //flex-direction: column;
+
+  flex-wrap: wrap;
+  align-content: flex-start;
+  //align-content: center;
+  //align-content: flex-end;
+  //align-content: space-around;
+  //align-content: space-between;
+}
+
+.demo-4 li {
+  //width: 200px;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ ITEM ALIGNMENT ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Item Alignment</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <ul class="demo demo-5 centered">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-5 {
+  height: 400px;
+  display: flex;
+  //flex-direction: column;
+}
+
+.demo-5 li:nth-child(2){
+  align-self: flex-start;
+  //align-self: center;
+  //align-self: flex-end;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ DIMENSIONS (GROW) ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Dimensions (Grow) </h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <ul class="demo demo-6">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-6 {
+  height: 400px;
+  display: flex;
+  //flex-direction: column;
+}
+
+.demo-6 li {
+  //flex: 1;
+}
+
+.demo-6 li:nth-child(2){
+  //flex: 1;
+}
+
+.demo-6 li:nth-child(3){
+  //flex: 2;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ DIMENSIONS (BASIS) ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Dimensions (Basis) </h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <ul class="demo demo-6">
+          <li>Item 1</li>
+          <li>Laaaaaaaaaaaaarge Item</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-6 {
+  height: 400px;
+  display: flex;
+  //flex-direction: column;
+}
+
+.demo-6 li {
+  flex: 1;
+  //flex: 1 auto;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ LAYOUT (DESKTOP) ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Layout (Desktop) </h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <div class="demo-7">
+          <header>header</header>
+          <section>
+            <aside>menu</aside>
+            <article>content</article>
+          </section>
+          <footer>footer</footer>
+        </div>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-7 {
+  border: 2px dashed black;
+  box-sizing: border-box;
+  height: 100%;
+  color: #fff;
+  //display: flex;
+  //flex-direction: column;
+}
+
+.demo-7 section {
+  //flex: 1;
+  //display: flex;
+}
+
+.demo-7 article {
+  background: grey;
+  //flex: 1;
+}
+
+.demo-7 aside {
+  background: green;
+  //order: 1;
+}
+
+.demo-7 header {
+  background: red;
+}
+
+.demo-7 footer {
+  background: blue;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ LAYOUT (MOBILE) ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Layout (Mobile) </h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <div class="demo-8">
+          <header>header</header>
+          <section>
+            <aside>menu</aside>
+            <article>content</article>
+          </section>
+          <footer>footer</footer>
+        </div>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-8 {
+  border: 2px dashed black;
+  box-sizing: border-box;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-8 section {
+  flex: 1;
+  display: flex;
+  //flex-direction: column;
+}
+
+.demo-8 article {
+  background: grey;
+  flex: 1;
+}
+
+.demo-8 aside {
+  background: green;
+}
+
+.demo-8 header {
+  background: red;
+}
+
+.demo-8 footer {
+  background: blue;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ POSITION STICKY ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Position: sticky</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <div class="demo-9 demo-mobile">
+          <header>Contacts list</header>
+          <section>
+            <div>
+              <header>A</header>
+              <ul>
+                <li>Agnes Mcdonell</li>
+                <li>Agustin Rameriz</li>
+                <li>Altagracia Chirico</li>
+                <li>Annmarie Tacey</li>
+              </ul>
+            </div>
+            <div>
+              <header>B</header>
+              <ul>
+                <li>Bennett Shade</li>
+                <li>Bennie Soules</li>
+                <li>Bethann Vanburen</li>
+                <li>Britni Cimino</li>
+              </ul>
+            </div>
+            <div>
+              <header>C</header>
+              <ul>
+                <li>Celestine Clauss</li>
+                <li>Clementina Kagawa</li>
+              </ul>
+            </div>
+            <div>
+              <header>D</header>
+              <ul>
+                <li>Demetrius Eggleston</li>
+                <li>Detra Keener</li>
+              </ul>
+            </div>
+            <div>
+              <header>E</header>
+              <ul>
+                <li>Evangeline Monn</li>
+              </ul>
+            </div>
+            <div>
+              <header>G</header>
+              <ul>
+                <li>Gladis Rundle</li>
+              </ul>
+            </div>
+            <div>
+              <header>H</header>
+              <ul>
+                <li>Hae Ballweg</li>
+              </ul>
+            </div>
+            <div>
+              <header>I</header>
+              <ul>
+                <li>Isabella Sears</li>
+                <li>Isidra Mixson</li>
+              </ul>
+            </div>
+            <div>
+              <header>J</header>
+              <ul>
+                <li>Janee Mcnichols</li>
+                <li>Janeth Oliva</li>
+                <li>Jesusita Semien</li>
+                <li>Julienne Elling</li>
+              </ul>
+            </div>
+            <div>
+              <header>K</header>
+              <ul>
+                <li>Karry Dorton</li>
+                <li>Keneth Womer</li>
+              </ul>
+            </div>
+            <div>
+              <header>L</header>
+              <ul>
+                <li>Lakiesha Lazar</li>
+                <li>Ludivina Gibbs</li>
+              </ul>
+            </div>
+            <div>
+              <header>M</header>
+              <ul>
+                <li>Magaly Mckechnie</li>
+                <li>Maryetta Rook</li>
+                <li>May Fegan</li>
+                <li>Mike Awong</li>
+              </ul>
+            </div>
+            <div>
+              <header>N</header>
+              <ul>
+                <li>Nu Burbage</li>
+              </ul>
+            </div>
+            <div>
+              <header>R</header>
+              <ul>
+                <li>Rana Rieger</li>
+                <li>Rochell Chancey</li>
+                <li>Rosalina Ellwood</li>
+                <li>Rosina Prindle</li>
+                <li>Rufus Demeo</li>
+                <li>Ruthe Bitner</li>
+              </ul>
+            </div>
+            <div>
+              <header>T</header>
+              <ul>
+                <li>Tamara Cromley</li>
+                <li>Terry Medders</li>
+                <li>Tonia North</li>
+                <li>Trudie Cuyler</li>
+              </ul>
+            </div>
+            <div>
+              <header>V</header>
+              <ul>
+                <li>Vern Weatherspoon</li>
+                <li>Vicki Pettit</li>
+              </ul>
+            </div>
+            <div>
+              <header>W</header>
+              <ul>
+                <li>Whitley Walquist</li>
+                <li>Willia Davies</li>
+              </ul>
+            </div>
+            <div>
+          </section>
+        </div>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-9 section header {
+  //position: sticky;
+  //top: 0;
+  //background: white;
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ BLEND MODES ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Blend modes</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <div class="demo-10 blend">
+        </div>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+.demo-10 {
+  background-color: #ebde20;
+  //background-blend-mode: normal;
+  //background-blend-mode: multiply;
+  //background-blend-mode: screen;
+  //background-blend-mode: overlay;
+  //background-blend-mode: darken;
+  //background-blend-mode: lighten;
+  //background-blend-mode: color-dodge;
+  //background-blend-mode: color-burn;
+  //background-blend-mode: hard-light;
+  //background-blend-mode: soft-light;
+  //background-blend-mode: difference;
+  //background-blend-mode: exclusion;
+  //background-blend-mode: hue;
+  //background-blend-mode: saturation;
+  //background-blend-mode: color;
+  //background-blend-mode: luminosity;
+}
+        </style>
+      </code>
+    </div>
+    <footer>
+      demo tool: <a href="http://codepen.io/adobe/pen/FeiCp">
+        http://codepen.io/adobe/pen/FeiCp
+      </a>
+    </footer>
+  </li>
+
+<!-- ------------------ CSS VARIABLES ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>CSS Variables</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content">
+        <ul class="demo demo-11">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+:root {
+  --color-1: blue;
+  --color-2: yellow;
+}
+
+.demo-11 li {
+  background-color: var(--color-1);
+  color: var(--color-2);
+}
+
+.demo-11 li:nth-child(1),
+.demo-11 li:nth-child(2) {
+  background-color: var(--color-2);
+  color: var(--color-1);
+}
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ RESPONSIVE IMAGES ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Responsive images</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content image">
+        <img src="images/skogafoss.jpg"
+             srcset="images/skogafoss@2x 2x">
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+<img src="images/skogafoss.jpg"
+     srcset="images/skogafoss@2x 2x">
+        </style>
+      </code>
+    </div>
+  </li>
+
+<!-- ------------------ RESPONSIVE IMAGES ------------------ -->
+
+  <li class="slide">
+    <header class="header">
+      <button class="prev">◀</button>
+      <h1>Responsive images</h1>
+      <button class="next">▶</button>
+    </header>
+    <div class="wrapper">
+      <section class="content image">
+        <picture>
+          <source media="(min-width: 1100px)" srcset="images/kitten-large.png">
+          <source media="(min-width: 800px)" srcset="images/kitten-medium.png">
+          <!-- img tag for browsers that do not support picture element -->
+          <img src="images/kitten-small.png" alt="a cute kitten">
+        </picture>
+      </section>
+
+      <code>
+        <style class="editable" contenteditable="" spellcheck="false">
+<picture>
+  <source media="(min-width: 600px)"
+          srcset="large.png">
+  <source media="(min-width: 400px)"
+          srcset="medium.png">
+  <img src="small.png">
+</picture>
+        </style>
+      </code>
+    </div>
+  </li>
+</ol>
+</body>
+</html>

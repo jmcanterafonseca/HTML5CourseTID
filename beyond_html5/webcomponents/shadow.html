@@ -84,6 +84,9 @@
       var templateContent = document.getElementById('events-template').content;
       eventsDiv.createShadowRoot().appendChild(
                                     document.importNode(templateContent, true));
+      eventsDiv.shadowRoot.querySelector('input').addEventListener('focus', function(e) {
+        e.stopImmediatePropagation();
+      });
     </script>
 
     <script>

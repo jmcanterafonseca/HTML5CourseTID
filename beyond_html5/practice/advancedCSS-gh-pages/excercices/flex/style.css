@@ -1,0 +1,40 @@
+html {
+  font-size: 10px;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#content li {
+  padding: 0 15px 10px;
+  height: auto;
+}
+
+#content p {
+  white-space: inherit;
+  line-height: 20px;
+}
+
+#wrapper {
+  height: 100%;
+}
+
+#content {
+  overflow: auto;
+}
+
+.footer {
+  border-top: 1px solid #e7e7e7;
+  background-color: #fff;
+  padding: 10px 15px;
+}
+
+.footer button {
+  margin: 0 0 0 15px;
+}
+.footer button:first-child {
+  margin: 0;
+}
