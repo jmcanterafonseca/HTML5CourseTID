@@ -102,7 +102,7 @@ Promise.parallel = function(runnables, batchSize) {
       this._doResolve();
     },
 
-    _checkFinish() {
+    _checkFinish: function() {
       if (this.numResponses === this.totalCalls &&
           typeof this.resolutionFunction === 'function') {
         window.setTimeout(this.resolutionFunction, 0, {
